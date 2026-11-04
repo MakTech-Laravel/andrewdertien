@@ -34,48 +34,16 @@ RUN composer install \
     --no-scripts \
     --prefer-dist
 
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc ./
-# Avoid `corepack enable` here: Node is copied into the PHP image and corepack
-# fails looking for missing yarn shims under /usr/local/bin.
-RUN npm install -g pnpm@12.11.2 \
-    && pnpm install --frozen-lockfile
+COPY package.json package-lock.json ./
+RUN npm ci
 
 COPY . .
 
 ARG VITE_APP_NAME="Quantum Pond"
-ARG VITE_ERROR_BOUNDARY_DEBUG=false
-# --- Optional: Reverb (not used currently) ---
-# ARG VITE_REVERB_APP_KEY
-# ARG VITE_REVERB_HOST
-# ARG VITE_REVERB_PORT=443
-# ARG VITE_REVERB_SCHEME=https
-# --- Removed: Firebase / PWA ---
-# ARG VITE_FIREBASE_API_KEY
-# ARG VITE_FIREBASE_AUTH_DOMAIN
-# ARG VITE_FIREBASE_PROJECT_ID
-# ARG VITE_FIREBASE_STORAGE_BUCKET
-# ARG VITE_FIREBASE_MESSAGING_SENDER_ID
-# ARG VITE_FIREBASE_APP_ID
-# ARG VITE_FIREBASE_MEASUREMENT_ID
-# ARG VITE_FIREBASE_VAPID_KEY
-
-ENV VITE_APP_NAME=${VITE_APP_NAME} \
-    VITE_ERROR_BOUNDARY_DEBUG=${VITE_ERROR_BOUNDARY_DEBUG}
-# VITE_REVERB_APP_KEY=${VITE_REVERB_APP_KEY} \
-# VITE_REVERB_HOST=${VITE_REVERB_HOST} \
-# VITE_REVERB_PORT=${VITE_REVERB_PORT} \
-# VITE_REVERB_SCHEME=${VITE_REVERB_SCHEME} \
-# VITE_FIREBASE_API_KEY=${VITE_FIREBASE_API_KEY} \
-# VITE_FIREBASE_AUTH_DOMAIN=${VITE_FIREBASE_AUTH_DOMAIN} \
-# VITE_FIREBASE_PROJECT_ID=${VITE_FIREBASE_PROJECT_ID} \
-# VITE_FIREBASE_STORAGE_BUCKET=${VITE_FIREBASE_STORAGE_BUCKET} \
-# VITE_FIREBASE_MESSAGING_SENDER_ID=${VITE_FIREBASE_MESSAGING_SENDER_ID} \
-# VITE_FIREBASE_APP_ID=${VITE_FIREBASE_APP_ID} \
-# VITE_FIREBASE_MEASUREMENT_ID=${VITE_FIREBASE_MEASUREMENT_ID} \
-# VITE_FIREBASE_VAPID_KEY=${VITE_FIREBASE_VAPID_KEY}
+ENV VITE_APP_NAME=${VITE_APP_NAME}
 
 RUN composer dump-autoload --classmap-authoritative --no-dev --no-interaction \
-    && pnpm run build
+    && npm run build
 
 FROM php:8.4-fpm-bookworm AS production
 
