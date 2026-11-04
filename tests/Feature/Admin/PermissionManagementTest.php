@@ -4,11 +4,8 @@ use App\Enums\RoleEnum;
 use App\Models\User;
 use Database\Seeders\PermissionSeeder;
 use Database\Seeders\RoleSeeder;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Inertia\Testing\AssertableInertia as Assert;
 use Maatwebsite\Excel\Facades\Excel;
-
-uses(RefreshDatabase::class);
 
 beforeEach(function () {
     $this->seed([PermissionSeeder::class, RoleSeeder::class]);
