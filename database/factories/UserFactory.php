@@ -26,6 +26,7 @@ class UserFactory extends Factory
     {
         return [
             'name' => fake()->name(),
+            'username' => fake()->unique()->bothify('member_????####'),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
@@ -43,6 +44,31 @@ class UserFactory extends Factory
     {
         return $this->state(fn (array $attributes) => [
             'email_verified_at' => null,
+        ]);
+    }
+
+    /**
+     * Fill in location and all four profile sections.
+     */
+    public function withProfile(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'location' => fake()->city(),
+            'dreams' => fake()->sentence(12),
+            'fun' => fake()->sentence(10),
+            'treats' => fake()->sentence(8),
+            'boost' => fake()->sentence(10),
+        ]);
+    }
+
+    /**
+     * An adult member who has opted in to Romantic Connections.
+     */
+    public function openToRomance(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'date_of_birth' => now()->subYears(30)->toDateString(),
+            'open_to_romance' => true,
         ]);
     }
 
