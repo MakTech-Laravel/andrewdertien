@@ -2,11 +2,6 @@
 .github
 .idea
 .vscode
-.cursor
-.agents
-.claude
-.codex
-.gemini
 .env
 .env.*
 !.env.example
@@ -14,6 +9,11 @@ node_modules
 vendor
 tests
 docs
+.cursor
+.agents
+.claude
+.codex
+.gemini
 bootstrap/cache/*
 storage/framework/cache/data/*
 storage/framework/sessions/*
@@ -26,6 +26,3 @@ coverage
 *.log
 Dockerfile*
 docker-compose*.yml
-_extract.php
-*.md
-!QUANTUM_POND_README.md
