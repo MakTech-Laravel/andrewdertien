@@ -1,28 +1,36 @@
-FROM php:8.4-fpm-bookworm AS build
+# syntax=docker/dockerfile:1.7
 
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-    $PHPIZE_DEPS \
-    git \
-    libfreetype6-dev \
-    libicu-dev \
-    libjpeg62-turbo-dev \
-    libonig-dev \
-    libpng-dev \
-    libwebp-dev \
-    libzip-dev \
-    unzip \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
-    && docker-php-ext-install -j"$(nproc)" bcmath exif gd intl mbstring pcntl pdo_mysql zip \
-    && docker-php-ext-enable opcache \
-    && rm -rf /var/lib/apt/lists/* /tmp/pear
+# -----------------------------------------------------------------------------
+# Build: PHP extensions via prebuilt installer + Node for Vite
+# (Much faster than compiling extensions from source on small VPS)
+# -----------------------------------------------------------------------------
+FROM php:8.4-cli-bookworm AS build
 
-COPY --from=composer:2 /usr/bin/composer /usr/local/bin/composer
-COPY --from=node:22-bookworm-slim /usr/local/ /usr/local/
+COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
+RUN install-php-extensions \
+    bcmath \
+    exif \
+    gd \
+    intl \
+    mbstring \
+    pcntl \
+    pdo_mysql \
+    zip \
+    @composer
 
-WORKDIR /var/www
+# Copy only Node binaries (not the whole /usr/local tree)
+COPY --from=node:22-bookworm-slim /usr/local/bin/node /usr/local/bin/node
+COPY --from=node:22-bookworm-slim /usr/local/lib/node_modules /usr/local/lib/node_modules
+RUN ln -sf /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm \
+    && ln -sf /usr/local/lib/node_modules/npm/bin/npx-cli.js /usr/local/bin/npx \
+    && npm install -g pnpm@10
 
-ENV CI=true
+WORKDIR /app
+
+ENV CI=true \
+    APP_ENV=production \
+    APP_KEY=base64:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA= \
+    VITE_APP_NAME="Quantum Pond"
 
 COPY composer.json composer.lock ./
 RUN composer install \
@@ -33,43 +41,37 @@ RUN composer install \
     --prefer-dist
 
 COPY package.json package-lock.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc ./
-RUN npm install -g pnpm@10 \
-    && pnpm install --frozen-lockfile
+RUN pnpm install --frozen-lockfile
 
 COPY . .
-
-ARG VITE_APP_NAME="Quantum Pond"
-ENV VITE_APP_NAME=${VITE_APP_NAME} \
-    APP_KEY=base64:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
 
 RUN cp .env.example .env \
     && composer dump-autoload --classmap-authoritative --no-dev --no-interaction \
     && php artisan wayfinder:generate --with-form --no-interaction \
     && pnpm run build \
-    && rm -f .env
+    && rm -f .env \
+    && rm -rf node_modules
 
+# -----------------------------------------------------------------------------
+# Runtime: PHP-FPM + nginx + supervisor
+# -----------------------------------------------------------------------------
 FROM php:8.4-fpm-bookworm AS production
 
-RUN apt-get update \
+COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
+RUN install-php-extensions bcmath exif gd intl mbstring pcntl pdo_mysql zip opcache \
+    && apt-get update \
     && apt-get install -y --no-install-recommends \
     ca-certificates \
     curl \
-    libfreetype6 \
-    libicu72 \
-    libjpeg62-turbo \
-    libonig5 \
-    libpng16-16 \
-    libwebp7 \
-    libzip4 \
     nginx \
     procps \
     supervisor \
     && rm -rf /var/lib/apt/lists/* \
     && rm -f /etc/nginx/sites-enabled/default
 
-COPY --from=build /usr/local/lib/php/extensions/ /usr/local/lib/php/extensions/
-COPY --from=build /usr/local/etc/php/conf.d/ /usr/local/etc/php/conf.d/
-COPY --from=build --chown=www-data:www-data /var/www /var/www
+WORKDIR /var/www
+
+COPY --from=build --chown=www-data:www-data /app /var/www
 
 COPY docker/php.ini /usr/local/etc/php/conf.d/99-production.ini
 COPY docker/php-fpm.conf /usr/local/etc/php-fpm.d/zz-production.conf
@@ -80,8 +82,6 @@ COPY docker/entrypoint.sh /usr/local/bin/application-entrypoint
 RUN chmod 0755 /usr/local/bin/application-entrypoint \
     && mkdir -p /run/nginx /var/log/supervisor \
     && chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
-
-WORKDIR /var/www
 
 ENV QUEUE_CONNECTION=database \
     QUEUE_NAMES=default \
