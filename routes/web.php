@@ -5,6 +5,8 @@ use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\FileUploadDemoController;
+use App\Http\Controllers\MemberDirectoryController;
+use App\Http\Controllers\MemberProfileController;
 use App\Http\Controllers\PostAttachmentController;
 use Illuminate\Foundation\Http\Middleware\HandlePrecognitiveRequests;
 use Illuminate\Support\Facades\Route;
@@ -14,7 +16,6 @@ Route::inertia('/', 'pond/welcome', [
     'canRegister' => Features::enabled(Features::registration()),
 ])->name('home');
 
-
 // Public, sample-data design previews; never expose real accounts or admin actions.
 // These routes are deliberately not connected to live giving or payment APIs.
 foreach (['dashboard', 'feed', 'explore', 'profile', 'balls', 'connections', 'messages', 'history', 'admin'] as $screen) {
@@ -23,6 +24,17 @@ foreach (['dashboard', 'feed', 'explore', 'profile', 'balls', 'connections', 'me
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::inertia('dashboard', 'pond/preview', ['view' => 'dashboard'])->name('dashboard');
+
+    // ── Member profiles ───────────────────────────────────────────────────────
+    Route::get('explore', [MemberDirectoryController::class, 'index'])->name('members.index');
+    Route::get('members/{user:username}', [MemberProfileController::class, 'show'])->name('members.show');
+
+    Route::controller(MemberProfileController::class)->prefix('my-profile')->name('member-profile.')->group(function () {
+        Route::get('/', 'edit')->name('edit');
+        Route::patch('/', 'update')->name('update');
+        Route::post('avatar', 'updateAvatar')->name('avatar.update');
+        Route::delete('avatar', 'destroyAvatar')->name('avatar.destroy');
+    });
 
     // ── Demo landing page ─────────────────────────────────────────────────────
     Route::get('/file-upload-demo', [FileUploadDemoController::class, 'index'])

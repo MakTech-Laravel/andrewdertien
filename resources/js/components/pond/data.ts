@@ -3,12 +3,16 @@ import { Cloud, Gift, Heart, Rocket, Sparkles } from 'lucide-react';
 
 export type Category = 'Dreams' | 'Fun' | 'Treats' | 'Boost';
 export type PondPost = { id: number; name: string; handle: string; initials: string; hue: string; time: string; action: string; category: Category; message: string; target: number; raised: number; amount?: number; reactions: number; comments: number; avatar?: string; };
-export const categories: { title: Category; subtitle: string; description: string; icon: LucideIcon; tone: string }[] = [
-  { title: 'Dreams', subtitle: 'Make something possible', description: 'Big ideas, little dreams, and everything worth believing in.', icon: Rocket, tone: 'lavender' },
-  { title: 'Fun', subtitle: 'Make memories together', description: 'Experiences, adventures, hobbies, and things that bring joy.', icon: Sparkles, tone: 'blue' },
-  { title: 'Treats', subtitle: 'The little joys', description: 'A coffee, a lunch, a kind surprise — small gestures matter.', icon: Gift, tone: 'peach' },
-  { title: 'Boost', subtitle: 'A little help goes a long way', description: 'Everyday essentials and practical support when it counts.', icon: Heart, tone: 'mint' },
+export type CategoryKey = 'dreams' | 'fun' | 'treats' | 'boost';
+/** Taglines and descriptions follow the client's "Member Profile Categories" brief word for word. */
+export const categories: { key: CategoryKey; title: Category; subtitle: string; description: string; placeholder: string; icon: LucideIcon; tone: string }[] = [
+  { key: 'dreams', title: 'Dreams', subtitle: 'Help me make something possible.', description: 'Dreams, goals, and aspirations, whether big or small.', placeholder: 'One of my dreams is...', icon: Rocket, tone: 'lavender' },
+  { key: 'fun', title: 'Fun', subtitle: 'Help support me in enjoying an experience.', description: 'Hobbies, interests, activities, and experiences you’d love to have.', placeholder: 'I love spending my time...', icon: Sparkles, tone: 'blue' },
+  { key: 'treats', title: 'Treats', subtitle: 'Perhaps a coffee, lunch, or something small.', description: 'Favorite little pleasures, such as coffee, a meal, or a gallon of gas.', placeholder: 'A little thing that makes my day is...', icon: Gift, tone: 'peach' },
+  { key: 'boost', title: 'Boost', subtitle: 'I get by with a little help from my friends.', description: 'Where a little help would make a difference: groceries, transportation, bills, everyday expenses.', placeholder: 'A little help with ... would mean a lot.', icon: Heart, tone: 'mint' },
 ];
+/** The fields every member profile exposes publicly (see User::toPublicProfile). */
+export type MemberProfile = { id: number; name: string; username: string | null; location: string | null; avatar_url: string | null; dreams: string | null; fun: string | null; treats: string | null; boost: string | null; open_to_romance: boolean; member_since: string };
 export const balls = [
   { value: 2, name: 'A little ripple', desc: 'A small gesture, a meaningful start.', color: '#42d9ee' },
   { value: 5, name: 'A kind thought', desc: 'Send some brightness their way.', color: '#e445c6' },
