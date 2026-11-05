@@ -112,8 +112,9 @@ ENV QUEUE_CONNECTION=database \
 
 EXPOSE 80
 
-HEALTHCHECK --interval=30s --timeout=5s --start-period=40s --retries=3 \
-    CMD ["curl", "--fail", "--silent", "--show-error", "--max-time", "5", "--output", "/dev/null", "http://127.0.0.1/up"]
+# Longer grace: Coolify waits for nginx after entrypoint artisan commands
+HEALTHCHECK --interval=15s --timeout=5s --start-period=120s --retries=10 \
+    CMD curl -fsS --max-time 5 http://127.0.0.1/up >/dev/null || exit 1
 
 ENTRYPOINT ["/usr/local/bin/application-entrypoint"]
 CMD ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
