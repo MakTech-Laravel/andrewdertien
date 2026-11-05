@@ -24,13 +24,5 @@ storage/logs/*
 public/build
 public/hot
 *.log
-_extract.php
-pnpm-lock.yaml
-pnpm-workspace.yaml
-.npmrc
+Dockerfile*
 docker-compose*.yml
-README.md
-AGENTS.md
-CLAUDE.md
-GEMINI.md
-QUANTUM_POND_README.md

@@ -1,38 +1,28 @@
-# syntax=docker/dockerfile:1.7
-# Quantum Pond — Coolify production image (npm only)
+FROM php:8.4-fpm-bookworm AS build
 
-############################
-# Stage 1: Composer vendor #
-############################
-FROM composer:2 AS vendor
+# Redis pecl + libpq-dev intentionally omitted (no Redis/Postgres currently).
+# To restore Redis: pecl install redis && docker-php-ext-enable redis
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+    $PHPIZE_DEPS \
+    git \
+    libfreetype6-dev \
+    libicu-dev \
+    libjpeg62-turbo-dev \
+    libonig-dev \
+    libpng-dev \
+    libwebp-dev \
+    libzip-dev \
+    unzip \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
+    && docker-php-ext-install -j"$(nproc)" bcmath exif gd intl mbstring pcntl pdo_mysql zip \
+    && docker-php-ext-enable opcache \
+    && rm -rf /var/lib/apt/lists/* /tmp/pear
 
-WORKDIR /app
+COPY --from=composer:2 /usr/bin/composer /usr/local/bin/composer
+COPY --from=node:22-bookworm-slim /usr/local/ /usr/local/
 
-COPY composer.json composer.lock ./
-RUN composer install \
-    --no-dev \
-    --no-interaction \
-    --no-progress \
-    --no-scripts \
-    --prefer-dist \
-    --ignore-platform-reqs
-
-############################
-# Stage 2: Frontend assets #
-############################
-FROM php:8.4-cli-bookworm AS frontend
-
-COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
-RUN install-php-extensions bcmath exif gd intl mbstring pcntl pdo_mysql zip @composer
-
-# Node 22 binaries only (avoid copying entire Node /usr/local over PHP)
-COPY --from=node:22-bookworm-slim /usr/local/bin/node /usr/local/bin/node
-COPY --from=node:22-bookworm-slim /usr/local/lib/node_modules /usr/local/lib/node_modules
-RUN ln -sf ../lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm \
-    && ln -sf ../lib/node_modules/npm/bin/npx-cli.js /usr/local/bin/npx \
-    && node -v && npm -v
-
-WORKDIR /app
+WORKDIR /var/www
 
 ENV CI=true \
     APP_ENV=production \
@@ -40,49 +30,56 @@ ENV CI=true \
     VITE_APP_NAME="Quantum Pond"
 
 COPY composer.json composer.lock ./
-COPY --from=vendor /app/vendor ./vendor
+RUN composer install \
+    --no-dev \
+    --no-interaction \
+    --no-progress \
+    --no-scripts \
+    --prefer-dist
 
 COPY package.json package-lock.json ./
 RUN npm ci
 
 COPY . .
 
-RUN cp .env.example .env \
-    && composer dump-autoload --classmap-authoritative --no-dev --no-interaction \
+ARG VITE_APP_NAME="Quantum Pond"
+ARG VITE_ERROR_BOUNDARY_DEBUG=false
+
+ENV VITE_APP_NAME=${VITE_APP_NAME} \
+    VITE_ERROR_BOUNDARY_DEBUG=${VITE_ERROR_BOUNDARY_DEBUG}
+
+RUN composer dump-autoload --classmap-authoritative --no-dev --no-interaction \
+    && cp .env.example .env \
     && php artisan wayfinder:generate --with-form --no-interaction \
     && npm run build \
     && rm -f .env \
     && rm -rf node_modules
 
-############################
-# Stage 3: Production runtime
-############################
 FROM php:8.4-fpm-bookworm AS production
 
-COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
-RUN install-php-extensions \
-    bcmath \
-    exif \
-    gd \
-    intl \
-    mbstring \
-    pcntl \
-    pdo_mysql \
-    zip \
-    opcache \
-    && apt-get update \
+# PostgreSQL apt repo + client intentionally omitted (MySQL/SQLite only).
+# To restore: install gnupg, add PGDG key/list, then install libpq5 + postgresql-client.
+RUN apt-get update \
     && apt-get install -y --no-install-recommends \
     ca-certificates \
     curl \
+    libfreetype6 \
+    libicu72 \
+    libjpeg62-turbo \
+    libonig5 \
+    libpng16-16 \
+    libwebp7 \
+    libzip4 \
+    nano \
     nginx \
     procps \
     supervisor \
     && rm -rf /var/lib/apt/lists/* \
     && rm -f /etc/nginx/sites-enabled/default
 
-WORKDIR /var/www
-
-COPY --from=frontend --chown=www-data:www-data /app /var/www
+COPY --from=build /usr/local/lib/php/extensions/ /usr/local/lib/php/extensions/
+COPY --from=build /usr/local/etc/php/conf.d/ /usr/local/etc/php/conf.d/
+COPY --from=build --chown=www-data:www-data /var/www /var/www
 
 COPY docker/php.ini /usr/local/etc/php/conf.d/99-production.ini
 COPY docker/php-fpm.conf /usr/local/etc/php-fpm.d/zz-production.conf
@@ -92,15 +89,11 @@ COPY docker/entrypoint.sh /usr/local/bin/application-entrypoint
 
 RUN chmod 0755 /usr/local/bin/application-entrypoint \
     && mkdir -p /run/nginx /var/log/supervisor \
-    /var/www/storage/framework/cache/data \
-    /var/www/storage/framework/sessions \
-    /var/www/storage/framework/testing \
-    /var/www/storage/framework/views \
-    /var/www/storage/logs \
-    /var/www/storage/app/public \
-    /var/www/bootstrap/cache \
     && chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
 
+WORKDIR /var/www
+
+# Queue uses database (Redis not installed). Horizon/Pulse not in this project.
 ENV QUEUE_CONNECTION=database \
     QUEUE_NAMES=default \
     QUEUE_SLEEP=3 \
@@ -112,9 +105,8 @@ ENV QUEUE_CONNECTION=database \
 
 EXPOSE 80
 
-# Longer grace: Coolify waits for nginx after entrypoint artisan commands
-HEALTHCHECK --interval=15s --timeout=5s --start-period=120s --retries=10 \
-    CMD curl -fsS --max-time 5 http://127.0.0.1/up >/dev/null || exit 1
+HEALTHCHECK --interval=30s --timeout=5s --start-period=30s --retries=3 \
+    CMD ["curl", "--fail", "--silent", "--show-error", "--max-time", "5", "--output", "/dev/null", "http://127.0.0.1/up"]
 
 ENTRYPOINT ["/usr/local/bin/application-entrypoint"]
 CMD ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
