@@ -27,7 +27,13 @@ WORKDIR /var/www
 ENV CI=true \
     APP_ENV=production \
     APP_KEY=base64:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA= \
-    VITE_APP_NAME="Quantum Pond"
+    VITE_APP_NAME="Quantum Pond" \
+    DB_CONNECTION=sqlite \
+    DB_DATABASE=:memory: \
+    TELESCOPE_ENABLED=false \
+    CACHE_STORE=array \
+    SESSION_DRIVER=array \
+    QUEUE_CONNECTION=sync
 
 COPY composer.json composer.lock ./
 RUN composer install \
