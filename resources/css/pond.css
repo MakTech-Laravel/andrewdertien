@@ -43,4 +43,137 @@
 .pond-member-location{display:flex;align-items:center;gap:6px;font-size:12px;color:#8b8fa5;margin-top:16px}.pond-member-actions{display:flex;flex-direction:column;gap:9px;margin-top:18px}
 .pond-person-link{display:block;color:inherit;transition:transform .15s,box-shadow .15s}.pond-person-link:hover{transform:translateY(-2px);box-shadow:0 10px 26px #2a295012}.pond-person-gradient>span{color:#fff}.pond-person-location svg{display:inline;vertical-align:-1px}
 .pond-person-teaser{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;font-weight:600!important;color:#5b5f76}
-.pond-pagination{display:flex;justify-content:space-between;align-items:center;margin-top:24px;font-size:12px;color:#8d92a6}.pond-pagination a{font-weight:800;color:#7658c8}
+.pond-pagination{display:flex;justify-content:space-between;align-items:center;margin-top:24px;font-size:12px;color:#8d92a6}.pond-pagination a{font-weight:800;color:#1f5f9a}
+
+/* ── Ask Upon A Pond landing (client direction) ─────────────────────────── */
+.askupon-home{background:#f7fbff;color:#13294b}
+.askupon-home a{text-decoration:none}
+.askupon-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;border-radius:999px;padding:12px 22px;font-weight:800;font-size:14px;border:2px solid transparent;transition:transform .18s,background .18s,box-shadow .18s,color .18s}
+.askupon-btn:hover{transform:translateY(-2px)}
+.askupon-btn-lg{padding:15px 28px;font-size:15px}
+.askupon-btn-pink{background:#f23a8c;color:#fff;box-shadow:0 12px 28px #f23a8c44}
+.askupon-btn-pink:hover{background:#db2f7b;color:#fff}
+.askupon-btn-ghost{background:transparent;color:#fff;border-color:#ffffffaa}
+.askupon-btn-ghost:hover{background:#ffffff18;color:#fff}
+.askupon-btn-navy{background:#0b3d6e;color:#fff;box-shadow:0 12px 28px #0b3d6e33}
+.askupon-btn-navy:hover{background:#083258;color:#fff}
+.askupon-brush{display:inline-block;padding:.12em .45em;background:linear-gradient(180deg,transparent 18%,#7ec8ff88 18%,#7ec8ff88 82%,transparent 82%);border-radius:8px;line-height:1.15}
+.askupon-brush-light{background:linear-gradient(180deg,transparent 18%,#9ad4ff99 18%,#9ad4ff99 82%,transparent 82%)}
+
+.askupon-hero{position:relative;overflow:hidden;color:#fff;min-height:100svh;background:#07325a;display:flex;flex-direction:column}
+.askupon-hero-sky{position:absolute;inset:0;background:
+  radial-gradient(ellipse 55% 40% at 50% 18%,#1a6cab 0%,transparent 70%),
+  linear-gradient(180deg,#0a4a7a 0%,#08325c 42%,#062744 70%,#041c33 100%)}
+.askupon-hero-grain{position:absolute;inset:0;opacity:.12;pointer-events:none;background-image:radial-gradient(#ffffff80 0.7px,transparent 0.8px);background-size:3px 3px}
+.askupon-nav{position:relative;z-index:3;max-width:1180px;width:100%;margin:0 auto;padding:22px 28px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.askupon-nav .pond-brand{color:#fff;font-size:22px}
+.askupon-nav-actions{display:flex;align-items:center;gap:18px}
+.askupon-login{color:#e8f4ff;font-weight:700;font-size:14px}
+.askupon-login:hover{color:#fff}
+.askupon-hero-main{position:relative;z-index:2;max-width:980px;width:100%;margin:0 auto;padding:18px 28px 56px;text-align:center;flex:1;display:flex;flex-direction:column;align-items:center}
+.askupon-script{font-family:'Caveat','Fraunces',cursive;font-size:clamp(52px,9vw,96px);line-height:1;font-weight:700;margin:10px 0 6px;text-shadow:0 8px 24px #02162766;animation:askuponPop .7s ease both}
+.askupon-hero-main h1{font-family:'Fraunces',Georgia,serif;font-style:italic;font-weight:700;font-size:clamp(28px,4.4vw,44px);margin:4px 0 14px;letter-spacing:-.02em}
+.askupon-hero-tag{font-family:'Fraunces',Georgia,serif;font-style:italic;font-size:clamp(16px,2vw,20px);color:#d7ecff;margin-bottom:8px}
+.askupon-pond-stage{position:relative;width:min(100%,720px);height:260px;margin:18px auto 10px}
+.askupon-pond-water{position:absolute;left:5%;right:5%;bottom:0;height:58%;border-radius:50% 50% 42% 42%/55% 55% 45% 45%;background:
+  radial-gradient(circle at 50% 0%,#ffe27a88 0 12%,transparent 28%),
+  linear-gradient(180deg,#1b6fa8 0%,#0d4e7c 55%,#08325a 100%);
+  box-shadow:inset 0 18px 40px #ffffff22,0 20px 40px #02162755}
+.askupon-pond-sun{position:absolute;left:50%;bottom:42%;transform:translateX(-50%);width:92px;height:92px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fff6b8,#ffd54a 55%,#f0a800);box-shadow:0 0 0 10px #ffd54a22,0 0 50px #ffd54a88}
+.askupon-pond-trees{position:absolute;bottom:34%;width:26%;height:42%;background:linear-gradient(180deg,#0a2b45,#061c2e);opacity:.85;clip-path:polygon(8% 100%,18% 40%,28% 70%,38% 20%,48% 60%,58% 10%,68% 55%,78% 25%,88% 100%)}
+.askupon-pond-trees-left{left:4%}.askupon-pond-trees-right{right:4%;transform:scaleX(-1)}
+.askupon-float-ball{position:absolute;object-fit:contain;filter:drop-shadow(0 10px 18px #02162788);animation:askuponBob 5.5s ease-in-out infinite}
+.askupon-float-ball.ball-a{width:78px;left:12%;bottom:28%;animation-delay:-.4s}
+.askupon-float-ball.ball-b{width:92px;left:28%;bottom:40%;animation-delay:-1.2s}
+.askupon-float-ball.ball-c{width:70px;left:46%;bottom:24%;animation-delay:-2s}
+.askupon-float-ball.ball-d{width:86px;left:58%;bottom:44%;animation-delay:-2.8s}
+.askupon-float-ball.ball-e{width:74px;left:74%;bottom:30%;animation-delay:-3.4s}
+.askupon-float-ball.ball-f{width:64px;left:38%;bottom:52%;animation-delay:-4.1s}
+.askupon-faq-strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;width:min(100%,860px);margin:22px auto 18px;border-top:1px solid #ffffff33;border-bottom:1px solid #ffffff33}
+.askupon-faq-strip>div{padding:16px 14px;text-align:center}
+.askupon-faq-strip>div+div{border-left:1px solid #ffffff33}
+.askupon-faq-strip strong{display:block;font-family:'Fraunces',Georgia,serif;font-size:14px;font-weight:700;margin-bottom:6px}
+.askupon-faq-strip em{font-family:'Fraunces',Georgia,serif;font-style:italic;color:#ffe27a;font-size:14px}
+.askupon-hero-ctas{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:8px}
+.askupon-room{display:inline-flex;align-items:center;gap:10px;margin-top:28px;color:#d7ecff;font-size:14px;font-weight:600}
+.askupon-room .pond-mark{width:28px;height:28px}
+
+.askupon-imagine{max-width:1100px;margin:0 auto;padding:88px 28px 40px;display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center}
+.askupon-imagine-copy h2{font-family:'Fraunces',Georgia,serif;font-style:italic;font-size:clamp(30px,4vw,48px);line-height:1.2;letter-spacing:-.03em;color:#0b3d6e;margin:0 0 14px}
+.askupon-imagine-copy p{font-family:'Fraunces',Georgia,serif;font-style:italic;font-size:20px;color:#4a6280;margin:0 0 22px}
+.askupon-come-in{display:inline-block;font-family:'Caveat',cursive;font-size:42px;font-weight:700;color:#fff;background:#f23a8c;padding:4px 28px 10px;border-radius:999px;transform:rotate(-2deg);box-shadow:0 14px 30px #f23a8c33;animation:askuponWiggle 4s ease-in-out infinite}
+.askupon-come-in:hover{color:#fff;transform:rotate(-2deg) translateY(-2px)}
+.askupon-pie-wrap{display:grid;place-items:center}
+.askupon-pie{position:relative;width:220px;height:160px}
+.askupon-pie-crust{position:absolute;inset:18px 10px 0;border-radius:50% 50% 42% 42%;background:radial-gradient(circle at 40% 30%,#f6c56a,#c97a28 70%);box-shadow:0 16px 30px #8a521833}
+.askupon-pie-lattice{position:absolute;inset:34px 28px 18px;background:
+  repeating-linear-gradient(45deg,transparent 0 10px,#8b451833 10px 14px),
+  repeating-linear-gradient(-45deg,transparent 0 10px,#8b451833 10px 14px);border-radius:50%}
+.askupon-pie-slice{position:absolute;right:-6px;top:34px;width:70px;height:70px;clip-path:polygon(0 20%,100% 0,70% 100%,0 80%);background:linear-gradient(135deg,#f0b24d,#b86a1e);transform:rotate(18deg);box-shadow:0 10px 18px #0002}
+
+.askupon-motto{max-width:820px;margin:0 auto;padding:30px 28px 20px;text-align:center}
+.askupon-motto h2{font-family:'Fraunces',Georgia,serif;font-style:italic;font-size:clamp(28px,4vw,42px);color:#0b3d6e;margin:0 0 16px}
+.askupon-motto p{font-size:17px;line-height:1.7;color:#4d6480;margin:0}
+
+.askupon-steps{max-width:980px;margin:0 auto;padding:30px 28px 70px;display:flex;flex-direction:column;gap:22px}
+.askupon-step{display:grid;grid-template-columns:88px 1fr;gap:18px;align-items:center;padding:18px 22px;border-radius:22px;background:#fff;border:1px solid #dce8f4;box-shadow:0 10px 28px #0b3d6e08}
+.askupon-step img{width:78px;height:78px;object-fit:contain;filter:drop-shadow(0 8px 14px #0b3d6e22)}
+.askupon-step h3{font-family:'Fraunces',Georgia,serif;font-style:italic;font-size:24px;margin:0 0 6px;color:#0b3d6e}
+.askupon-step h3 span{display:inline-block;min-width:1.5em;color:#f23a8c}
+.askupon-step p{margin:0;color:#5a6f88;font-size:15px;line-height:1.6}
+
+.askupon-ways{position:relative;overflow:hidden;color:#fff;padding:80px 28px 90px;background:
+  radial-gradient(ellipse 60% 45% at 50% 100%,#1a6cab55 0%,transparent 70%),
+  linear-gradient(180deg,#0a4a7a,#062744 70%,#041c33)}
+.askupon-ways:before{content:'';position:absolute;inset:0;opacity:.15;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E")}
+.askupon-ways-head,.askupon-ways-grid,.askupon-ways-ctas{position:relative;z-index:1;max-width:980px;margin-left:auto;margin-right:auto}
+.askupon-ways-head{text-align:center;margin-bottom:36px}
+.askupon-ways-head h2{font-family:'Fraunces',Georgia,serif;font-style:italic;font-size:clamp(28px,4vw,42px);margin:0 0 10px}
+.askupon-ways-head p{margin:0;color:#d7ecff;font-size:16px}
+.askupon-ways-grid{display:grid;grid-template-columns:1fr;gap:16px}
+.askupon-way{display:grid;grid-template-columns:72px 1fr;gap:16px;align-items:start;padding:8px 4px}
+.askupon-way img{width:68px;height:68px;object-fit:contain;filter:drop-shadow(0 8px 16px #02162766)}
+.askupon-way h3{display:inline-block;margin:0 0 6px;padding:4px 14px;border-radius:8px;font-family:'Fraunces',Georgia,serif;font-style:italic;font-size:22px;color:#10233f;background:#9ad4ff}
+.askupon-way.way-dreams h3{background:#c9b6ff}.askupon-way.way-fun h3{background:#9ad4ff}.askupon-way.way-treats h3{background:#ffc27a}.askupon-way.way-boost h3{background:#8eb6ff}.askupon-way.way-creator h3{background:#8dffb5}.askupon-way.way-flirt h3{background:#ff9ac8}
+.askupon-way strong{display:block;font-size:15px;margin-bottom:4px}
+.askupon-way p{margin:0;color:#d7ecff;font-size:14px;line-height:1.55}
+.askupon-ways-ctas{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:36px}
+
+.askupon-final{max-width:760px;margin:0 auto;padding:90px 28px;text-align:center}
+.askupon-final .pond-mark{width:64px;height:64px;margin:0 auto 16px}
+.askupon-final h2{font-family:'Fraunces',Georgia,serif;font-style:italic;font-size:clamp(30px,4vw,44px);color:#0b3d6e;margin:0 0 12px}
+.askupon-final p{color:#5a6f88;font-size:16px;margin:0 0 24px}
+
+.askupon-footer{max-width:1100px;margin:0 auto;padding:22px 28px 48px;display:flex;align-items:center;justify-content:space-between;gap:18px;border-top:1px solid #dce8f4;flex-wrap:wrap}
+.askupon-footer>span{color:#7a8aa0;font-size:12px}
+.askupon-footer>div{display:flex;gap:20px}
+.askupon-footer a:not(.pond-brand){color:#4a6280;font-size:13px;font-weight:700}
+.askupon-footer a:not(.pond-brand):hover{color:#0b3d6e}
+
+@keyframes askuponBob{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-12px) rotate(3deg)}}
+@keyframes askuponPop{from{opacity:0;transform:translateY(18px) scale(.96)}to{opacity:1;transform:none}}
+@keyframes askuponWiggle{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(1.5deg)}}
+
+@media(max-width:900px){
+  .askupon-imagine{grid-template-columns:1fr;text-align:center}
+  .askupon-pie-wrap{order:-1}
+  .askupon-faq-strip{grid-template-columns:1fr 1fr}
+  .askupon-faq-strip>div:nth-child(odd){border-left:0}
+  .askupon-faq-strip>div:nth-child(3),.askupon-faq-strip>div:nth-child(4){border-top:1px solid #ffffff33}
+  .askupon-faq-strip>div:nth-child(even){border-left:1px solid #ffffff33}
+}
+@media(max-width:640px){
+  .askupon-nav{padding:16px 18px}
+  .askupon-nav .pond-brand{font-size:17px}
+  .askupon-hero-main{padding:10px 18px 42px}
+  .askupon-pond-stage{height:210px}
+  .askupon-float-ball.ball-f,.askupon-pond-trees{display:none}
+  .askupon-faq-strip{grid-template-columns:1fr}
+  .askupon-faq-strip>div{border-left:0!important;border-top:1px solid #ffffff33}
+  .askupon-faq-strip>div:first-child{border-top:0}
+  .askupon-imagine,.askupon-motto,.askupon-steps,.askupon-ways,.askupon-final{padding-left:18px;padding-right:18px}
+  .askupon-step{grid-template-columns:64px 1fr;padding:14px}
+  .askupon-step img{width:58px;height:58px}
+  .askupon-come-in{font-size:34px}
+  .askupon-footer{padding:20px 18px 36px}
+}
