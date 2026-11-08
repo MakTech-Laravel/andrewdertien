@@ -1,7 +1,6 @@
 import { Head, Link } from '@inertiajs/react';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
-import { PondHeroScene } from '@/components/pond/pond-hero-scene';
-import { PondOrbitScene } from '@/components/pond/pond-orbit-scene';
+import { PondLandscape } from '@/components/pond/pond-landscape';
 import { Brand, PondMark } from '@/components/pond/ui';
 
 const giveWays = [
@@ -107,26 +106,11 @@ export default function Welcome() {
                         Give one to a friend, a stranger, or even a flirt!
                     </p>
 
-                    <div className="askupon-pond-stage">
-                        <PondHeroScene className="askupon-hero-three" />
-                        <div className="askupon-pond-stage-fallback" aria-hidden="true">
-                            <div className="askupon-pond-water" />
-                            <div className="askupon-pond-sun" />
-                            <div className="askupon-pond-trees askupon-pond-trees-left" />
-                            <div className="askupon-pond-trees askupon-pond-trees-right" />
-                            <img className="askupon-float-ball ball-a" src="/quantum/images/ball-100.png" alt="" />
-                            <img className="askupon-float-ball ball-b" src="/quantum/images/ball-10.png" alt="" />
-                            <img className="askupon-float-ball ball-c" src="/quantum/images/ball-50.png" alt="" />
-                            <img className="askupon-float-ball ball-d" src="/quantum/images/ball-20.png" alt="" />
-                            <img className="askupon-float-ball ball-e" src="/quantum/images/ball-5.png" alt="" />
-                            <img className="askupon-float-ball ball-f" src="/quantum/images/ball-500.png" alt="" />
-                        </div>
+                    <div className="askupon-pond-stage askupon-pond-stage-live">
+                        <PondLandscape />
                     </div>
 
-                    <p className="askupon-three-hint">
-                        <span className="askupon-hint-desktop">Move and click the pond for ripples</span>
-                        <span className="askupon-hint-mobile">Tap the pond for ripples</span>
-                    </p>
+                    <p className="askupon-three-hint">Colorful balls floating in the pond</p>
 
                     <div className="askupon-faq-strip">
                         {faqs.map((item) => (
@@ -196,8 +180,13 @@ export default function Welcome() {
             </section>
 
             <section className="askupon-ways" id="explore">
-                <div className="askupon-ways-bg" aria-hidden="true">
-                    <PondOrbitScene className="askupon-ways-three" />
+                <div className="askupon-ways-pond" aria-hidden="true">
+                    <img
+                        src="/askupon/ways-pond-realistic.jpg"
+                        alt=""
+                        className="askupon-ways-pond-img"
+                    />
+                    <div className="askupon-ways-pond-veil" />
                 </div>
                 <div className="askupon-ways-content">
                     <div className="askupon-ways-head">
@@ -207,7 +196,10 @@ export default function Welcome() {
                     <div className="askupon-ways-grid">
                         {giveWays.map((way) => (
                             <article key={way.title} className={`askupon-way way-${way.tone}`}>
-                                <img src={way.ball} alt="" />
+                                <div className="askupon-way-ball">
+                                    <span className="askupon-way-ripple" />
+                                    <img src={way.ball} alt="" />
+                                </div>
                                 <div>
                                     <h3>{way.title}</h3>
                                     <strong>{way.lead}</strong>

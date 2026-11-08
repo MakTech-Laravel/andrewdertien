@@ -4426,11 +4426,168 @@
 
 .askupon-pond-stage {
     position: relative;
-    width: min(100%, 820px);
-    height: 320px;
+    width: min(100%, 920px);
+    height: 400px;
     margin: 18px auto 10px;
     border-radius: 28px;
-    overflow: hidden
+    overflow: hidden;
+    box-shadow: 0 18px 40px #02162755, inset 0 0 0 1px #ffffff22
+}
+
+.askupon-pond-stage-live {
+    background: #062744
+}
+
+/* Client-style readable pond scene */
+.pond-landscape {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%
+}
+
+.pond-landscape-svg {
+    display: block;
+    width: 100%;
+    height: 100%
+}
+
+.pl-ball-wrap {
+    position: absolute;
+    display: grid;
+    place-items: end center;
+    width: 78px;
+    height: 96px;
+    z-index: 3;
+    animation: plBob 4.8s ease-in-out infinite
+}
+
+.pl-ball-wrap img {
+    position: relative;
+    z-index: 2;
+    width: 68px;
+    height: 68px;
+    object-fit: contain;
+    filter: drop-shadow(0 10px 14px #02162788)
+}
+
+.pl-ripple {
+    position: absolute;
+    bottom: 4px;
+    left: 50%;
+    width: 64px;
+    height: 18px;
+    border: 2px solid currentColor;
+    border-radius: 50%;
+    transform: translateX(-50%);
+    opacity: .55;
+    animation: plRipple 2.8s ease-out infinite
+}
+
+.pl-ripple-delay {
+    animation-delay: 1.4s
+}
+
+.pl-ripple-purple {
+    color: #c9b6ff
+}
+
+.pl-ripple-blue {
+    color: #7ec8ff
+}
+
+.pl-ripple-orange {
+    color: #ffc27a
+}
+
+.pl-ripple-green {
+    color: #8dffb5
+}
+
+.pl-ripple-mint {
+    color: #7ef0d8
+}
+
+.pl-ripple-pink {
+    color: #ff9ac8
+}
+
+.pl-ball-1 {
+    left: 8%;
+    top: 52%;
+    animation-delay: -.2s
+}
+
+.pl-ball-2 {
+    left: 22%;
+    top: 42%;
+    animation-delay: -.8s;
+    width: 92px
+}
+
+.pl-ball-2 img {
+    width: 80px;
+    height: 80px
+}
+
+.pl-ball-3 {
+    left: 40%;
+    top: 56%;
+    animation-delay: -1.4s
+}
+
+.pl-ball-4 {
+    left: 55%;
+    top: 40%;
+    animation-delay: -2s;
+    width: 88px
+}
+
+.pl-ball-4 img {
+    width: 76px;
+    height: 76px
+}
+
+.pl-ball-5 {
+    left: 74%;
+    top: 50%;
+    animation-delay: -2.6s
+}
+
+.pl-ball-6 {
+    left: 33%;
+    top: 36%;
+    animation-delay: -3.1s;
+    width: 70px
+}
+
+.pl-ball-6 img {
+    width: 58px;
+    height: 58px
+}
+
+@keyframes plBob {
+
+    0%,
+    100% {
+        transform: translateY(0)
+    }
+
+    50% {
+        transform: translateY(-10px)
+    }
+}
+
+@keyframes plRipple {
+    0% {
+        transform: translateX(-50%) scale(.55);
+        opacity: .65
+    }
+
+    100% {
+        transform: translateX(-50%) scale(1.7);
+        opacity: 0
+    }
 }
 
 .askupon-pond-stage-fallback {
@@ -4763,23 +4920,11 @@
     position: relative;
     overflow: hidden;
     color: #fff;
-    padding: 80px 28px 90px;
-    background:
-        radial-gradient(ellipse 60% 45% at 50% 100%, #1a6cab55 0%, transparent 70%),
-        linear-gradient(180deg, #0a4a7a, #062744 70%, #041c33)
+    padding: 80px 28px 110px;
+    background: #041c33
 }
 
-.askupon-ways:before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    opacity: .1;
-    pointer-events: none;
-    background-image: radial-gradient(#ffffff80 0.7px, transparent 0.8px);
-    background-size: 3px 3px
-}
-
-.askupon-ways-bg {
+.askupon-ways-pond {
     position: absolute;
     inset: 0;
     z-index: 0;
@@ -4787,10 +4932,77 @@
     overflow: hidden
 }
 
+.askupon-ways-pond-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 55%;
+    opacity: .88;
+    filter: saturate(1.12) contrast(1.08) brightness(.95)
+}
+
+.askupon-ways-pond-veil {
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(180deg, #062744d6 0%, #06274466 22%, #041c3340 52%, #041c33a8 88%, #041c33e6 100%),
+        radial-gradient(ellipse 75% 55% at 50% 70%, #1a6cab22 0%, transparent 68%)
+}
+
+.askupon-ways:before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    opacity: .08;
+    pointer-events: none;
+    background-image: radial-gradient(#ffffff80 0.7px, transparent 0.8px);
+    background-size: 3px 3px
+}
+
 .askupon-ways-content {
     position: relative;
     z-index: 5;
     pointer-events: auto
+}
+
+.askupon-ways-head h2,
+.askupon-ways-head p,
+.askupon-way strong,
+.askupon-way p {
+    text-shadow: 0 2px 14px #021627aa
+}
+
+.askupon-way-ball {
+    position: relative;
+    width: 72px;
+    height: 72px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0
+}
+
+.askupon-way-ball img {
+    position: relative;
+    z-index: 2;
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    filter: drop-shadow(0 8px 14px #02162766)
+}
+
+.askupon-way-ripple {
+    position: absolute;
+    bottom: 2px;
+    left: 50%;
+    width: 58px;
+    height: 16px;
+    border: 2px solid #9ad4ff88;
+    border-radius: 50%;
+    transform: translateX(-50%);
+    animation: plRipple 3s ease-out infinite
 }
 
 .askupon-ways-head,
@@ -4837,7 +5049,10 @@
 .askupon-ways-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 16px
+    gap: 16px;
+    background: linear-gradient(180deg, #041c3340, #041c3328 55%, transparent);
+    border-radius: 24px;
+    padding: 8px 12px 4px
 }
 
 .askupon-way {
@@ -5124,29 +5339,53 @@
     .askupon-pond-stage {
         width: 100%;
         max-width: none;
-        height: min(62vw, 280px);
-        min-height: 240px;
+        height: min(78vw, 320px);
+        min-height: 260px;
         margin: 12px auto 8px;
         border-radius: 18px
     }
 
-    .askupon-float-ball.ball-e,
-    .askupon-float-ball.ball-f,
-    .askupon-pond-trees {
+    .askupon-ways-pond-img {
+        opacity: .82;
+        object-position: center 60%
+    }
+
+    .askupon-ways-pond-veil {
+        background:
+            linear-gradient(180deg, #062744e0 0%, #06274477 30%, #041c3355 58%, #041c33c8 100%),
+            radial-gradient(ellipse 80% 45% at 50% 78%, #1a6cab22 0%, transparent 70%)
+    }
+
+    .pl-ball-6 {
         display: none
     }
 
-    .askupon-float-ball.ball-a {
-        width: 64px
+    .pl-ball-wrap {
+        width: 64px;
+        height: 82px
     }
 
-    .askupon-float-ball.ball-b {
+    .pl-ball-wrap img {
+        width: 56px;
+        height: 56px
+    }
+
+    .pl-ball-2 {
         width: 76px
     }
 
-    .askupon-float-ball.ball-c,
-    .askupon-float-ball.ball-d {
-        width: 60px
+    .pl-ball-2 img {
+        width: 66px;
+        height: 66px
+    }
+
+    .pl-ball-4 {
+        width: 72px
+    }
+
+    .pl-ball-4 img {
+        width: 62px;
+        height: 62px
     }
 
     .askupon-hint-desktop {
@@ -5360,10 +5599,14 @@
 
     .askupon-pond-stage {
         width: 100%;
-        height: min(68vw, 260px);
-        min-height: 230px;
+        height: min(78vw, 270px);
+        min-height: 240px;
         margin: 10px auto 8px;
         border-radius: 16px
+    }
+
+    .pl-ball-5 {
+        display: none
     }
 
     .askupon-faq-strip strong,
