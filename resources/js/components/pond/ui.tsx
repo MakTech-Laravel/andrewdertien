@@ -1,7 +1,8 @@
 import { Link, router, usePage } from '@inertiajs/react';
 import type { ReactNode } from 'react';
 import { useEffect, useState } from 'react';
-import { ArrowRight, Bell, Compass, Heart, LayoutDashboard, LogIn, LogOut, Menu, MessageCircle, History, Search, Shield, Sparkles, UserRound, Waves, X } from 'lucide-react';
+import { ArrowRight, Bell, Compass, CreditCard, Droplets, Gem, Globe, Heart, LayoutDashboard, LogIn, LogOut, Menu, MessageCircle, Search, Settings, Sparkles, UserRound, Users, Waves, X } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 import { toast } from 'sonner';
 import { logout } from '@/routes';
 
@@ -21,17 +22,52 @@ export function Modal({ title, children, onClose, subtitle }: { title: string; s
     useEffect(() => { function down(e: KeyboardEvent) { if (e.key === 'Escape') onClose(); } document.addEventListener('keydown', down); return () => document.removeEventListener('keydown', down); }, [onClose]);
     return <div className="pond-modal-backdrop" onMouseDown={e => { if (e.target === e.currentTarget) onClose(); }} role="presentation"><div className="pond-modal" role="dialog" aria-modal="true" aria-label={title}><button className="pond-icon-btn pond-modal-close" onClick={onClose} aria-label="Close dialog"><X size={18} /></button><h2>{title}</h2>{subtitle && <p className="pond-muted">{subtitle}</p>}{children}</div></div>;
 }
-export function PondShell({ children, page = 'The Pond', subheading, action, demo = true }: { children: ReactNode; page?: string; subheading?: string; action?: ReactNode; demo?: boolean }) {
+type ShellUser = { id: number; name: string; avatar?: string | null; is_admin?: boolean };
+type ShellLink = { label: string; href: string; icon: LucideIcon };
+
+const adminLinks: ShellLink[] = [
+    { label: 'Overview', href: '/admin/dashboard', icon: LayoutDashboard },
+    { label: 'Ponds', href: '/admin/ponds', icon: Waves },
+    { label: 'Purchases & payments', href: '/admin/payments', icon: CreditCard },
+    { label: 'Members', href: '/admin/users', icon: Users },
+];
+
+const memberLinks: ShellLink[] = [
+    { label: 'Overview', href: '/dashboard', icon: LayoutDashboard },
+    { label: 'Choose a pond', href: '/dashboard/ponds', icon: Waves },
+    { label: 'My ponds', href: '/dashboard/my-ponds', icon: Gem },
+    { label: 'Payment history', href: '/dashboard/payments', icon: CreditCard },
+    { label: 'The Pond', href: '/preview/feed', icon: Droplets },
+    { label: 'Explore', href: '/explore', icon: Compass },
+    { label: 'My Profile', href: '/my-profile', icon: UserRound },
+    { label: 'The Balls', href: '/preview/balls', icon: Sparkles },
+    { label: 'Connections', href: '/preview/connections', icon: Heart },
+    { label: 'Messages', href: '/preview/messages', icon: MessageCircle },
+];
+
+const guestLinks: ShellLink[] = [
+    { label: 'Overview', href: '/login', icon: LayoutDashboard },
+    { label: 'The Ponds', href: '/ponds', icon: Waves },
+];
+
+/** The longest matching link wins, so /dashboard is not active on /dashboard/ponds. */
+function activeHref(links: ShellLink[], path: string): string | undefined {
+    return links
+        .filter(({ href }) => path === href || path.startsWith(`${href}/`))
+        .sort((a, b) => b.href.length - a.href.length)[0]?.href;
+}
+
+export function PondShell({ children, page = 'The Pond', subheading, action, demo = true, hideHeading = false }: { children: ReactNode; page?: string; subheading?: string; action?: ReactNode; demo?: boolean; hideHeading?: boolean }) {
     useEffect(() => { function key(e: KeyboardEvent) { if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); setShowSearch(true); } } window.addEventListener('keydown', key); return () => window.removeEventListener('keydown', key); }, []);
     const [menu, setMenu] = useState(false); const [search, setSearch] = useState(''); const [showSearch, setShowSearch] = useState(false); const [notifications, setNotifications] = useState(false);
-    const user = (usePage().props as { auth?: { user?: { id: number; name: string; avatar?: string | null } | null } }).auth?.user ?? null;
+    const user = (usePage().props as { auth?: { user?: ShellUser | null } }).auth?.user ?? null;
+    const isAdmin = user?.is_admin === true;
     const avatarSrc = user?.avatar ? (user.avatar.startsWith('http') ? user.avatar : `/storage/${user.avatar}`) : null;
-    const exploreHref = user ? '/explore' : '/preview/explore'; const profileHref = user ? '/my-profile' : '/preview/profile';
-    const overviewHref = user ? '/dashboard' : '/login';
-    const links = [{ label: 'Overview', href: overviewHref, icon: LayoutDashboard }, { label: 'The Pond', href: user ? '/preview/feed' : '/login', icon: Waves }, { label: 'Explore', href: user ? exploreHref : '/login', icon: Compass }, { label: 'My Profile', href: user ? profileHref : '/login', icon: UserRound }, { label: 'The Balls', href: user ? '/preview/balls' : '/login', icon: Sparkles }, { label: 'Connections', href: user ? '/preview/connections' : '/login', icon: Heart }, { label: 'Messages', href: user ? '/preview/messages' : '/login', icon: MessageCircle }, { label: 'Giving history', href: user ? '/preview/history' : '/login', icon: History }];
-    const current = typeof window !== 'undefined' ? window.location.pathname : '';
-    return <div className="pond-app"><aside className={`pond-sidebar ${menu ? 'is-open' : ''}`}><div className="pond-sidebar-brand"><Brand /><button className="pond-icon-btn pond-mobile-close" onClick={() => setMenu(false)} aria-label="Close menu"><X size={20} /></button></div><div className="pond-sidebar-little">YOUR COMMUNITY</div><nav className="pond-side-links" aria-label="Member navigation">{links.map(({ label, href, icon: Icon }) => <Link onClick={() => setMenu(false)} key={label} href={href} className={`pond-side-link ${current === href ? 'active' : ''}`}><Icon size={19} /><span>{label}</span>{label === 'Messages' && <span className="pond-unread">2</span>}</Link>)}</nav><div className="pond-sidebar-bottom"><div className="pond-side-quote"><div className="pond-side-quote-star"><Sparkles size={18} /></div><strong>Keep the balls rolling.</strong><p>Give a ball. Get a ball. Pass one along. See what happens.</p><Link href="/preview/balls">Explore the Balls <ArrowRight size={13} /></Link></div><Link href="/preview/admin" className={`pond-side-link ${current === '/preview/admin' ? 'active' : ''}`}><Shield size={19} /> Admin design preview</Link>{user ? <Link href={logout()} as="button" onClick={() => router.flushAll()} className="pond-side-link pond-side-logout" data-test="logout-button"><LogOut size={19} /> Log out</Link> : <Link href="/login" className="pond-side-link"><LogIn size={19} /> Sign in</Link>}</div></aside>{menu && <button className="pond-mobile-shade" onClick={() => setMenu(false)} aria-label="Close navigation" />}
-        <div className="pond-main"><header className="pond-topbar"><div className="pond-top-left"><button className="pond-icon-btn pond-menu-toggle" aria-label="Open menu" onClick={() => setMenu(true)}><Menu size={21} /></button><div className="pond-breadcrumb"><span>Community</span><span className="crumb-sep">/</span><strong>{page}</strong></div></div><div className="pond-header-actions"><button className="pond-search-trigger" onClick={() => setShowSearch(true)}><Search size={17} /><span>Search the pond...</span><kbd>⌘ K</kbd></button><div className="pond-notification-wrap"><button className="pond-icon-btn pond-bell" onClick={() => setNotifications(v => !v)} aria-label="Notifications"><Bell size={19} /><i /></button>{notifications && <div className="pond-popover"><strong>Notifications</strong><p>Welcome to the Ask Upon A Pond preview.</p><p>Toss a ball. Make a ripple.</p></div>}</div><Link href={profileHref} aria-label="Your profile"><Avatar name={user?.name ?? 'Jordan Lee'} hue={user ? hueFor(user.id) : 'lilac'} size="avatar-small" src={avatarSrc} /></Link></div></header>{demo && <DemoBanner />}<main className="pond-content"><div className="pond-page-heading"><div><span className="pond-page-kicker">ASK UPON A POND</span><h1>{page}</h1>{subheading && <p>{subheading}</p>}</div>{action}</div>{children}</main><footer className="pond-app-footer"><span>© 2026 Ask Upon A Pond · There's room for everyone</span><span>{demo ? 'Design preview · Laravel + Inertia + React' : 'Ask Upon A Pond community'}</span></footer></div>
+    const profileHref = user ? '/my-profile' : '/preview/profile';
+    const links = isAdmin ? adminLinks : user ? memberLinks : guestLinks;
+    const current = activeHref(links, typeof window !== 'undefined' ? window.location.pathname : '');
+    return <div className="pond-app"><aside className={`pond-sidebar ${menu ? 'is-open' : ''}`}><div className="pond-sidebar-brand"><Brand /><button className="pond-icon-btn pond-mobile-close" onClick={() => setMenu(false)} aria-label="Close menu"><X size={20} /></button></div><div className="pond-sidebar-little">{isAdmin ? 'ADMINISTRATION' : 'YOUR COMMUNITY'}</div><nav className="pond-side-links" aria-label={isAdmin ? 'Admin navigation' : 'Member navigation'}>{links.map(({ label, href, icon: Icon }) => <Link onClick={() => setMenu(false)} key={label} href={href} className={`pond-side-link ${current === href ? 'active' : ''}`}><Icon size={19} /><span>{label}</span></Link>)}</nav><div className="pond-sidebar-bottom">{!isAdmin && <div className="pond-side-quote"><div className="pond-side-quote-star"><Sparkles size={18} /></div><strong>Keep the balls rolling.</strong><p>Give a ball. Get a ball. Pass one along. See what happens.</p><Link href="/preview/balls">Explore the Balls <ArrowRight size={13} /></Link></div>}<Link href="/" className="pond-side-link"><Globe size={19} /> View website</Link>{user && <Link href="/settings/profile" className="pond-side-link"><Settings size={19} /> Account settings</Link>}{user ? <Link href={logout()} as="button" onClick={() => router.flushAll()} className="pond-side-link pond-side-logout" data-test="logout-button"><LogOut size={19} /> Log out</Link> : <Link href="/login" className="pond-side-link"><LogIn size={19} /> Sign in</Link>}</div></aside>{menu && <button className="pond-mobile-shade" onClick={() => setMenu(false)} aria-label="Close navigation" />}
+        <div className="pond-main"><header className="pond-topbar"><div className="pond-top-left"><button className="pond-icon-btn pond-menu-toggle" aria-label="Open menu" onClick={() => setMenu(true)}><Menu size={21} /></button><div className="pond-breadcrumb"><span>{isAdmin ? 'Admin' : 'Community'}</span><span className="crumb-sep">/</span><strong>{page}</strong></div></div><div className="pond-header-actions"><button className="pond-search-trigger" onClick={() => setShowSearch(true)}><Search size={17} /><span>Search the pond...</span><kbd>⌘ K</kbd></button><div className="pond-notification-wrap"><button className="pond-icon-btn pond-bell" onClick={() => setNotifications(v => !v)} aria-label="Notifications"><Bell size={19} /><i /></button>{notifications && <div className="pond-popover"><strong>Notifications</strong><p>Welcome to the Ask Upon A Pond preview.</p><p>Toss a ball. Make a ripple.</p></div>}</div><Link href={profileHref} aria-label="Your profile"><Avatar name={user?.name ?? 'Jordan Lee'} hue={user ? hueFor(user.id) : 'lilac'} size="avatar-small" src={avatarSrc} /></Link></div></header>{demo && <DemoBanner />}<main className="pond-content">{!hideHeading && <div className="pond-page-heading"><div><span className="pond-page-kicker">ASK UPON A POND</span><h1>{page}</h1>{subheading && <p>{subheading}</p>}</div>{action}</div>}{children}</main><footer className="pond-app-footer"><span>© 2026 Ask Upon A Pond · There's room for everyone</span><span>{demo ? 'Design preview · Laravel + Inertia + React' : 'Ask Upon A Pond community'}</span></footer></div>
         {showSearch && <Modal title="Find your people" subtitle="Search members, dreams, and giving moments." onClose={() => setShowSearch(false)}><div className="pond-search-field"><Search size={19} /><input autoFocus value={search} onChange={e => setSearch(e.target.value)} placeholder="Search the community..." /></div><div className="pond-search-results">{['Michael Chen · Photography dream', 'James Rivera · A fresh start', 'Clara Williams · A little treat'].filter(a => a.toLowerCase().includes(search.toLowerCase())).map(a => <Link key={a} href="/preview/explore" onClick={() => setShowSearch(false)}><Search size={15} />{a}<ArrowRight size={14} /></Link>)}</div></Modal>}</div>;
 }
 export function GiveModal({ onClose, initial = 10, member = 'a community member' }: { onClose: () => void; initial?: number; member?: string }) { const [selected, setSelected] = useState(initial); return <Modal title="Toss a ball in the Pond" subtitle={`Choose a ball for ${member}.`} onClose={onClose}><div className="pond-give-grid">{[2, 5, 10, 20, 50, 100].map(n => <button key={n} className={`pond-give-choice ${selected === n ? 'selected' : ''}`} onClick={() => setSelected(n)}><img src={`/quantum/images/ball-${n}.png`} alt="" /><strong>${n.toLocaleString()}</strong></button>)}</div><div className="pond-form-note">This is a visual preview. Purchases, card processing and transfers are not connected.</div><button className="pond-btn pond-btn-primary pond-wide" onClick={() => toast.info('Design preview: no charge or gift was made.')}><Sparkles size={17} /> Preview ${selected} Ball <ArrowRight size={16} /></button></Modal>; }

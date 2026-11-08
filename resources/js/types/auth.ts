@@ -9,7 +9,7 @@ export type User = {
     two_factor_enabled?: boolean;
     roles: string[];
     permissions: PermissionKey[];
-    is_super_admin: boolean;
+    is_admin: boolean;
     created_at: string;
     updated_at: string;
     [key: string]: unknown;

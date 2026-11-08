@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests\User;
 
-use App\Support\SuperAdmin;
+use App\Enums\RoleEnum;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Validator;
+use Illuminate\Validation\Rule;
 
 class StoreUserRequest extends FormRequest
 {
@@ -30,26 +30,9 @@ class StoreUserRequest extends FormRequest
             'password' => 'required|min:8',
             'avatar' => 'nullable|image|max:2048',
             'remove_avatar' => 'nullable|boolean',
-            'roles' => 'nullable|array',
-            'roles.*' => 'string|exists:roles,name',
+            'roles' => ['nullable', 'array', 'max:1'],
+            'roles.*' => ['string', Rule::enum(RoleEnum::class)],
         ];
-    }
-
-    /**
-     * Enforce that only a super-admin may grant the super-admin role.
-     */
-    public function withValidator(Validator $validator): void
-    {
-        $validator->after(function (Validator $validator): void {
-            $roles = (array) $this->input('roles', []);
-
-            if (SuperAdmin::isGrantedBy($roles) && ! $this->user()->isSuperAdmin()) {
-                $validator->errors()->add(
-                    'roles',
-                    'Only a super administrator can assign the super-admin role.'
-                );
-            }
-        });
     }
 
     public function messages(): array
@@ -66,7 +49,8 @@ class StoreUserRequest extends FormRequest
             'avatar.image' => 'The avatar field must be an image.',
             'avatar.mimes' => 'The avatar field must be an image.',
             'avatar.max' => 'The avatar field must be less than 2048 kilobytes.',
-            'roles.*.exists' => 'One of the selected roles is invalid.',
+            'roles.max' => 'An account can only have one role.',
+            'roles.*.enum' => 'A role must be either admin or user.',
         ];
     }
 

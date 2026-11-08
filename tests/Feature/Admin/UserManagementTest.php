@@ -11,7 +11,7 @@ beforeEach(function () {
     $this->seed([PermissionSeeder::class, RoleSeeder::class]);
 
     $this->admin = User::factory()->create();
-    $this->admin->assignRole(RoleEnum::SUPER_ADMIN->value);
+    $this->admin->assignRole(RoleEnum::ADMIN->value);
 });
 
 test('guests cannot access user management', function () {
@@ -24,7 +24,7 @@ test('users without permission are forbidden', function () {
     $this->actingAs($plain)->get(route('admin.users.index'))->assertForbidden();
 });
 
-test('super admin can view the users list', function () {
+test('an admin can view the users list', function () {
     $this->actingAs($this->admin)
         ->get(route('admin.users.index'))
         ->assertOk()
@@ -36,21 +36,20 @@ test('super admin can view the users list', function () {
         );
 });
 
-test('a user can be created with multiple roles', function () {
+test('a user can be created with a role', function () {
     $this->actingAs($this->admin)
         ->post(route('admin.users.store'), [
             'name' => 'Jane Doe',
             'email' => 'jane@example.com',
             'password' => 'password123',
-            'roles' => [RoleEnum::EDITOR->value, RoleEnum::AUTHOR->value],
+            'roles' => [RoleEnum::ADMIN->value],
         ])
         ->assertRedirect(route('admin.users.index'));
 
     $user = User::where('email', 'jane@example.com')->sole();
 
     expect($user->name)->toBe('Jane Doe')
-        ->and($user->hasRole(RoleEnum::EDITOR->value))->toBeTrue()
-        ->and($user->hasRole(RoleEnum::AUTHOR->value))->toBeTrue()
+        ->and($user->hasRole(RoleEnum::ADMIN->value))->toBeTrue()
         ->and(Hash::check('password123', $user->password))->toBeTrue();
 });
 

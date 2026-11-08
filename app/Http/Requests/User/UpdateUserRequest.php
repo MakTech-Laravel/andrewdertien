@@ -2,22 +2,19 @@
 
 namespace App\Http\Requests\User;
 
+use App\Enums\RoleEnum;
 use App\Models\User;
-use App\Support\SuperAdmin;
+use App\Support\LastAdmin;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\Validator;
 
 class UpdateUserRequest extends FormRequest
 {
-    /**
-     * Only a super-admin may modify a super-admin account (UserPolicy::update).
-     * Runs before validation, so the super-admin invariants below are only
-     * evaluated once the actor is allowed to touch this account at all.
-     */
     public function authorize(): bool
     {
-        return $this->user()->can('update', $this->route('user'));
+        return true;
     }
 
     /**
@@ -33,15 +30,13 @@ class UpdateUserRequest extends FormRequest
             'password' => 'nullable|min:8',
             'avatar' => 'nullable|image|max:2048',
             'remove_avatar' => 'nullable|boolean',
-            'roles' => 'nullable|array',
-            'roles.*' => 'string|exists:roles,name',
+            'roles' => ['nullable', 'array', 'max:1'],
+            'roles.*' => ['string', Rule::enum(RoleEnum::class)],
         ];
     }
 
     /**
-     * Enforce the super-admin invariants:
-     *   - only a super-admin may grant the super-admin role;
-     *   - the last super-admin cannot have the role removed.
+     * The last admin cannot have the role removed.
      */
     public function withValidator(Validator $validator): void
     {
@@ -51,21 +46,10 @@ class UpdateUserRequest extends FormRequest
             /** @var User $target */
             $target = $this->route('user');
 
-            if (SuperAdmin::isGrantedBy($roles)
-                && ! $target->isSuperAdmin()
-                && ! $this->user()->isSuperAdmin()) {
+            if ($roles !== [] && ! in_array(RoleEnum::ADMIN->value, $roles, true) && LastAdmin::is($target)) {
                 $validator->errors()->add(
                     'roles',
-                    'Only a super administrator can assign the super-admin role.'
-                );
-            }
-
-            if ($target->isSuperAdmin()
-                && ! SuperAdmin::isGrantedBy($roles)
-                && SuperAdmin::isLast($target)) {
-                $validator->errors()->add(
-                    'roles',
-                    'You must assign the super-admin role to another user before removing it from the last super administrator.'
+                    'Make another user an admin before removing this role from the last administrator.'
                 );
             }
         });
@@ -85,7 +69,8 @@ class UpdateUserRequest extends FormRequest
             'avatar.image' => 'The avatar field must be an image.',
             'avatar.mimes' => 'The avatar field must be an image.',
             'avatar.max' => 'The avatar field must be less than 2048 kilobytes.',
-            'roles.*.exists' => 'One of the selected roles is invalid.',
+            'roles.max' => 'An account can only have one role.',
+            'roles.*.enum' => 'A role must be either admin or user.',
         ];
     }
 

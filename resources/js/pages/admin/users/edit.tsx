@@ -11,20 +11,20 @@ interface EditUserProps {
     user: AdminUser;
     roles: RoleRef[];
     userRoles: string[];
-    isLastSuperAdmin: boolean;
+    isLastAdmin: boolean;
 }
 
 export default function EditUser({
     user,
     roles,
     userRoles,
-    isLastSuperAdmin,
+    isLastAdmin,
 }: EditUserProps) {
     return (
         <>
             <Head title={`Edit ${user.name}`} />
 
-            <div className="w-full space-y-6 px-4 py-6 sm:px-6 lg:px-8">
+            <div className="w-full space-y-6">
                 <AdminPageHeader
                     title="Edit user"
                     description={`Update ${user.name}'s account and roles.`}
@@ -43,7 +43,7 @@ export default function EditUser({
                         roles={roles}
                         isEdit
                         currentAvatar={user.avatar}
-                        isLastSuperAdmin={isLastSuperAdmin}
+                        isLastAdmin={isLastAdmin}
                         defaults={{
                             name: user.name,
                             email: user.email,

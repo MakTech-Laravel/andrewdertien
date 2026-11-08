@@ -2,7 +2,6 @@ import { Link } from '@inertiajs/react';
 import {
     BookOpen,
     FolderGit2,
-    KeyRound,
     LayoutGrid,
     LockKeyhole,
     Settings,
@@ -27,8 +26,6 @@ import {
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
 import { dashboard } from '@/routes';
-import adminPermissions from '@/routes/admin/permissions';
-import adminRoles from '@/routes/admin/roles';
 import adminUsers from '@/routes/admin/users';
 import { index as fileUploadDemo } from '@/routes/file-upload-demo';
 import type { NavItem } from '@/types';
@@ -53,29 +50,13 @@ const mainNav: NavNode[] = [
     {
         title: 'Access Control',
         icon: ShieldCheck,
-        permissions: [
-            PERMISSIONS.USERS.INDEX,
-            PERMISSIONS.ROLES.INDEX,
-            PERMISSIONS.PERMISSIONS.INDEX,
-        ],
+        permissions: [PERMISSIONS.USERS.INDEX],
         items: [
             {
                 title: 'Users',
                 href: adminUsers.index(),
                 icon: Users,
                 permissions: [PERMISSIONS.USERS.INDEX],
-            },
-            {
-                title: 'Roles',
-                href: adminRoles.index(),
-                icon: Shield,
-                permissions: [PERMISSIONS.ROLES.INDEX],
-            },
-            {
-                title: 'Permissions',
-                href: adminPermissions.index(),
-                icon: KeyRound,
-                permissions: [PERMISSIONS.PERMISSIONS.INDEX],
             },
             {
                 title: 'Settings',

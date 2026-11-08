@@ -35,6 +35,8 @@ test('new users can register', function () {
     $this->assertAuthenticated();
     $response->assertRedirect(route('dashboard', absolute: false));
 
+    expect(User::firstWhere('email', 'test@example.com')->getRoleNames()->all())->toBe(['user']);
+
     expect(User::firstWhere('email', 'test@example.com'))
         ->username->toBe('test_user')
         ->open_to_romance->toBeFalse()

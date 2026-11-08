@@ -24,7 +24,7 @@ test('authenticated users get the dashboard with their auth data and can log out
     $this->actingAs($user)
         ->get(route('dashboard'))
         ->assertInertia(fn ($page) => $page
-            ->component('pond/preview')
+            ->component('pond/member/dashboard')
             ->where('auth.user.id', $user->id));
 
     $this->post(route('logout'))->assertRedirect(route('home'));

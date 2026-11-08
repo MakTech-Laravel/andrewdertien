@@ -20,16 +20,6 @@ class RoleSeeder extends Seeder
             );
             $isNew = $role->wasRecentlyCreated;
 
-            // super-admin: no permissions assigned — Gate::before handles it
-            if ($roleEnum === RoleEnum::SUPER_ADMIN) {
-                $this->command->warn(
-                    '  [super-admin] Skipping permission assignment — handled by Gate::before.'
-                );
-                $isNew ? $created++ : $updated++;
-
-                continue;
-            }
-
             // Convert Permissions[] cases to string values for syncPermissions
             $permissionValues = array_map(
                 fn ($p) => $p->value,

@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\PurchaseStatus;
+use App\Enums\RoleEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\StoreUserRequest;
 use App\Http\Requests\User\UpdateUserRequest;
+use App\Models\PondPurchase;
 use App\Models\User;
-use App\Support\SuperAdmin;
+use App\Support\LastAdmin;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -23,6 +26,8 @@ class UserController extends Controller
 
         $users = User::query()
             ->with('roles:id,name')
+            ->withCount(['pondPurchases as ponds_owned' => fn ($query) => $query->where('status', PurchaseStatus::PAID)])
+            ->withSum(['pondPurchases as spent_cents' => fn ($query) => $query->where('status', PurchaseStatus::PAID)], 'amount_cents')
             ->when($search !== '', function ($query) use ($search): void {
                 $query->where(function ($query) use ($search): void {
                     $query->where('name', 'like', "%{$search}%")
@@ -43,15 +48,18 @@ class UserController extends Controller
                 'search' => $search,
                 'role' => $role,
             ],
-            // Lets the client disable destructive actions on the last super-admin.
-            'superAdminCount' => SuperAdmin::count(),
-            // Optional so the table renders instantly; fetched on scroll-into-view
-            // by the <WhenVisible> wrapper on the client.
-            'stats' => Inertia::optional(fn (): array => [
+            // Lets the client disable destructive actions on the last admin.
+            'adminCount' => LastAdmin::count(),
+            'currency' => config('payments.currency'),
+            'stats' => [
                 'total' => User::count(),
                 'verified' => User::whereNotNull('email_verified_at')->count(),
-                'roles' => Role::count(),
-            ]),
+                'buyers' => PondPurchase::query()
+                    ->where('status', PurchaseStatus::PAID)
+                    ->whereNotNull('user_id')
+                    ->distinct()
+                    ->count('user_id'),
+            ],
         ]);
     }
 
@@ -73,7 +81,7 @@ class UserController extends Controller
 
         $user = User::create(collect($data)->except(['roles', 'remove_avatar'])->all());
 
-        $user->syncRoles($request->validated('roles', []));
+        $user->syncRoles($request->validated('roles') ?: [RoleEnum::USER->value]);
 
         Inertia::flash('toast', ['type' => 'success', 'message' => 'User created successfully.']);
 
@@ -82,32 +90,47 @@ class UserController extends Controller
 
     public function show(User $user): Response
     {
-        $user->load('roles:id,name', 'permissions:id,name');
+        $user->load('roles:id,name');
 
-        return Inertia::render('admin/users/show', [
-            'user' => $user,
+        $purchases = $user->pondPurchases()->with('pond')->latest('id')->get();
+        $paid = $purchases->where('status', PurchaseStatus::PAID);
+
+        return Inertia::render('pond/admin/member', [
+            'member' => [
+                ...$user->only(['id', 'name', 'email', 'username', 'location', 'email_verified_at']),
+                'avatar_url' => $user->avatarUrl(),
+                'roles' => $user->getRoleNames(),
+                'joined_at' => $user->created_at?->toIso8601String(),
+            ],
+            'stats' => [
+                'owned' => $paid->count(),
+                'spent_cents' => (int) $paid->sum('amount_cents'),
+                'payments' => $purchases->count(),
+            ],
+            'ownedPonds' => $paid->values()->map(fn (PondPurchase $purchase): array => [
+                ...$purchase->toHistoryRow(),
+                'pond' => $purchase->pond->toCard(),
+            ]),
+            'payments' => $purchases->map(fn (PondPurchase $purchase): array => $purchase->toHistoryRow()),
+            'currency' => config('payments.currency'),
         ]);
     }
 
     public function edit(User $user): Response
     {
-        $this->authorize('update', $user);
-
         $user->load('roles:id,name');
 
         return Inertia::render('admin/users/edit', [
             'user' => $user,
             'roles' => Role::orderBy('name')->get(['id', 'name']),
             'userRoles' => $user->roles->pluck('name'),
-            // The last super-admin cannot have the role removed from the UI.
-            'isLastSuperAdmin' => SuperAdmin::isLast($user),
+            // The last admin cannot have the role removed from the UI.
+            'isLastAdmin' => LastAdmin::is($user),
         ]);
     }
 
     public function update(UpdateUserRequest $request, User $user): RedirectResponse
     {
-        $this->authorize('update', $user);
-
         $data = $request->validated();
 
         // Keep the current password when the field is left blank; the model's
@@ -125,7 +148,11 @@ class UserController extends Controller
         }
 
         $user->update(collect($data)->except(['roles', 'remove_avatar'])->all());
-        $user->syncRoles($request->validated('roles', []));
+
+        // Leaving roles out keeps the current one, so an account always has a role.
+        if ($roles = $request->validated('roles')) {
+            $user->syncRoles($roles);
+        }
 
         Inertia::flash('toast', ['type' => 'success', 'message' => 'User updated successfully.']);
 
@@ -134,13 +161,11 @@ class UserController extends Controller
 
     public function destroy(User $user): RedirectResponse
     {
-        $this->authorize('delete', $user);
-
-        // Never allow the system to be left without a super-admin.
-        if (SuperAdmin::isLast($user)) {
+        // Never allow the system to be left without an admin.
+        if (LastAdmin::is($user)) {
             Inertia::flash('toast', [
                 'type' => 'error',
-                'message' => 'You must assign the super-admin role to another user before deleting the last super administrator.',
+                'message' => 'Make another user an admin before deleting the last administrator.',
             ]);
 
             return redirect()->back();

@@ -44,7 +44,7 @@ export default function PermissionsIndex({
         <>
             <Head title="Permissions" />
 
-            <div className="w-full space-y-6 px-4 py-6 sm:px-6 lg:px-8">
+            <div className="w-full space-y-6">
                 <AdminPageHeader
                     title="Permissions"
                     description="Developer-defined permissions, grouped by domain. Read-only."

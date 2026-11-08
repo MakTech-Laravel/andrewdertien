@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\RoleEnum;
 use App\Models\Attachment;
 use App\Models\Post;
 use App\Models\User;
@@ -8,10 +9,20 @@ use Illuminate\Support\Facades\Storage;
 
 beforeEach(function () {
     Storage::fake('public');
-    $this->actingAs(User::factory()->create());
+    $this->actingAs(User::factory()->create()->assignRole(RoleEnum::ADMIN->value));
 });
 
 // ── upload.store (demos §1 & §2) ────────────────────────────────────────────
+
+test('regular users cannot upload files', function () {
+    $this->actingAs(User::factory()->create()->assignRole(RoleEnum::USER->value));
+
+    $this->post(route('upload.store'), [
+        'file' => UploadedFile::fake()->image('photo.jpg'),
+    ])->assertForbidden();
+
+    expect(Attachment::count())->toBe(0);
+});
 
 test('guests cannot upload files', function () {
     auth()->logout();

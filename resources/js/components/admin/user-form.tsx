@@ -1,5 +1,5 @@
 import type { UrlMethodPair } from '@inertiajs/core';
-import { useForm, usePage } from '@inertiajs/react';
+import { useForm } from '@inertiajs/react';
 import { Loader2, Lock, UserPlus } from 'lucide-react';
 import { motion } from 'motion/react';
 import { toast } from 'sonner';
@@ -12,7 +12,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils';
-import { avatarUrl, SUPER_ADMIN_ROLE } from '@/types/admin';
+import { ADMIN_ROLE, avatarUrl } from '@/types/admin';
 import type { RoleRef } from '@/types/admin';
 
 interface UserFormDefaults {
@@ -26,8 +26,8 @@ interface UserFormProps {
     roles: RoleRef[];
     isEdit?: boolean;
     currentAvatar?: string | null;
-    /** The target is the only remaining super-admin — its role is locked. */
-    isLastSuperAdmin?: boolean;
+    /** The target is the only remaining admin — its role is locked. */
+    isLastAdmin?: boolean;
     defaults?: UserFormDefaults;
     onCancel?: () => void;
 }
@@ -37,45 +37,30 @@ export function UserForm({
     roles,
     isEdit = false,
     currentAvatar = null,
-    isLastSuperAdmin = false,
+    isLastAdmin = false,
     defaults,
     onCancel,
 }: UserFormProps) {
-    const actorIsSuperAdmin =
-        usePage().props.auth.user?.is_super_admin ?? false;
-
     const form = useForm(action, {
         name: defaults?.name ?? '',
         email: defaults?.email ?? '',
         password: '',
-        roles: defaults?.roles ?? [],
+        roles: defaults?.roles ?? ['user'],
         avatar: null as File | null,
         remove_avatar: false as boolean,
     });
 
-    // Only a super-admin may see/assign the protected super-admin role.
-    const selectableRoles = actorIsSuperAdmin
-        ? roles
-        : roles.filter((r) => r.name !== SUPER_ADMIN_ROLE);
-
-    const toggleRole = (name: string) => {
-        const hasRole = form.data.roles.includes(name);
-
-        // Block removing the super-admin role from the last super-admin.
-        if (name === SUPER_ADMIN_ROLE && hasRole && isLastSuperAdmin) {
+    const chooseRole = (name: string) => {
+        // Block removing the admin role from the last admin.
+        if (name !== ADMIN_ROLE && isLastAdmin) {
             toast.error(
-                'Assign the super-admin role to another user before removing it from the last super administrator.',
+                'Make another user an admin before removing this role from the last administrator.',
             );
 
             return;
         }
 
-        form.setData(
-            'roles',
-            hasRole
-                ? form.data.roles.filter((r) => r !== name)
-                : [...form.data.roles, name],
-        );
+        form.setData('roles', [name]);
     };
 
     const existingAvatar =
@@ -110,14 +95,13 @@ export function UserForm({
             onSubmit={handleSubmit}
             className="space-y-6"
         >
-            {isLastSuperAdmin && (
+            {isLastAdmin && (
                 <Alert>
                     <Lock className="h-4 w-4" />
-                    <AlertTitle>Last super administrator</AlertTitle>
+                    <AlertTitle>Last administrator</AlertTitle>
                     <AlertDescription>
-                        This is the only account with the super-admin role. To
-                        change it, first assign the super-admin role to another
-                        user.
+                        This is the only admin account. To change its role,
+                        first make another user an admin.
                     </AlertDescription>
                 </Alert>
             )}
@@ -197,22 +181,14 @@ export function UserForm({
 
             {/* Roles */}
             <div className="grid gap-2">
-                <Label>Roles</Label>
+                <Label>Role</Label>
                 <p className="text-xs text-muted-foreground">
-                    Assign one or more roles. Permissions are inherited from the
-                    selected roles.
+                    Every account is either an admin or a user.
                 </p>
                 <div className="mt-1 flex flex-wrap gap-2">
-                    {selectableRoles.length === 0 && (
-                        <span className="text-sm text-muted-foreground">
-                            No roles available.
-                        </span>
-                    )}
-                    {selectableRoles.map((role) => {
+                    {roles.map((role) => {
                         const checked = form.data.roles.includes(role.name);
-                        const isProtected = role.name === SUPER_ADMIN_ROLE;
-                        const locked =
-                            isProtected && isLastSuperAdmin && checked;
+                        const locked = isLastAdmin && checked;
 
                         return (
                             <Label
@@ -228,7 +204,7 @@ export function UserForm({
                                 <Checkbox
                                     checked={checked}
                                     onCheckedChange={() =>
-                                        toggleRole(role.name)
+                                        chooseRole(role.name)
                                     }
                                     className="size-3.5"
                                 />

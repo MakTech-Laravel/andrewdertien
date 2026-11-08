@@ -21,7 +21,6 @@ import type {PermissionKey} from '@/types/permissions';
 export function usePermission() {
     const { auth } = usePage().props;
 
-    const isSuperAdmin = auth?.user?.is_super_admin ?? false;
     const userPermissions: PermissionKey[] = (auth?.user?.permissions ??
         []) as PermissionKey[];
     const userRoles: string[] = auth?.user?.roles ?? [];
@@ -34,7 +33,7 @@ export function usePermission() {
      *   ❌ can('posts.delete')
      */
     const can = (permission: PermissionKey): boolean =>
-        isSuperAdmin || userPermissions.includes(permission);
+        userPermissions.includes(permission);
 
     /**
      * Check if user has ANY of the given permissions.
@@ -42,7 +41,7 @@ export function usePermission() {
      *   canAny([PERMISSIONS.POSTS.EDIT, PERMISSIONS.POSTS.DELETE])
      */
     const canAny = (permissions: PermissionKey[]): boolean =>
-        isSuperAdmin || permissions.some((p) => userPermissions.includes(p));
+        permissions.some((p) => userPermissions.includes(p));
 
     /**
      * Check if user has ALL of the given permissions.
@@ -50,22 +49,20 @@ export function usePermission() {
      *   canAll([PERMISSIONS.POSTS.CREATE, PERMISSIONS.POSTS.PUBLISH])
      */
     const canAll = (permissions: PermissionKey[]): boolean =>
-        isSuperAdmin || permissions.every((p) => userPermissions.includes(p));
+        permissions.every((p) => userPermissions.includes(p));
 
     /**
-     * Check a role by name.
-     * Roles are dynamic strings — no constant.
+     * Check a role by name: 'admin' or 'user'.
      * Prefer can() for features. Use hasRole() for role-specific UI only.
      *
      *   hasRole('admin')
-     *   hasRole('super-admin')
      */
     const hasRole = (role: string): boolean => userRoles.includes(role);
 
     /**
      * Check if user has ANY of the given roles.
      *
-     *   hasAnyRole(['admin', 'super-admin'])
+     *   hasAnyRole(['admin', 'user'])
      */
     const hasAnyRole = (roles: string[]): boolean =>
         roles.some(r => userRoles.includes(r));

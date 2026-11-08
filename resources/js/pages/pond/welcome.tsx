@@ -1,7 +1,11 @@
 import { Head, Link } from '@inertiajs/react';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
+import type { PondCard } from '@/components/pond/commerce';
 import { PondLandscape } from '@/components/pond/pond-landscape';
+import { PublicPondGrid } from '@/components/pond/public-pond-grid';
+import { PublicNavActions } from '@/components/pond/public-shell';
 import { Brand, PondMark } from '@/components/pond/ui';
+import { index as pondsIndex } from '@/routes/ponds';
 
 const giveWays = [
     {
@@ -76,7 +80,7 @@ const faqs = [
     { q: 'Is it like Venmo or PayPal?', a: 'Yep! Send someone money through the Pond!' },
 ];
 
-export default function Welcome() {
+export default function Welcome({ ponds = [] }: { ponds?: PondCard[] }) {
     return (
         <div className="pond-home askupon-home">
             <Head title="Ask Upon A Pond — Toss a ball in the Pond" />
@@ -88,12 +92,7 @@ export default function Welcome() {
                 <nav className="askupon-nav">
                     <Brand dark />
                     <div className="askupon-nav-actions">
-                        <Link href="/login" className="askupon-login">
-                            Log in
-                        </Link>
-                        <Link href="/register" className="askupon-btn askupon-btn-pink">
-                            Join the Pond <ArrowRight size={16} />
-                        </Link>
+                        <PublicNavActions />
                     </div>
                 </nav>
 
@@ -178,6 +177,21 @@ export default function Welcome() {
                     </article>
                 ))}
             </section>
+
+            {ponds.length > 0 && (
+                <section className="pd-home-ponds" id="ponds">
+                    <div className="askupon-ways-head">
+                        <h2>Find your pond.</h2>
+                        <p>Pick the one that feels like yours.</p>
+                    </div>
+                    <PublicPondGrid ponds={ponds} />
+                    <div className="askupon-ways-ctas">
+                        <Link href={pondsIndex()} className="askupon-btn askupon-btn-navy askupon-btn-lg">
+                            See all the ponds <ArrowUpRight size={18} />
+                        </Link>
+                    </div>
+                </section>
+            )}
 
             <section className="askupon-ways" id="explore">
                 <div className="askupon-ways-pond" aria-hidden="true">

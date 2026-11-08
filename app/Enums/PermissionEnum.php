@@ -31,9 +31,20 @@ enum PermissionEnum: string
     // ROLES
     case ROLES_INDEX = 'roles.index';
     case ROLES_VIEW = 'roles.view';
-    case ROLES_CREATE = 'roles.create';
-    case ROLES_EDIT = 'roles.edit';
-    case ROLES_DELETE = 'roles.delete';
+
+    // ADMIN: PONDS, PURCHASES & PAYMENTS
+    case ADMIN_DASHBOARD_VIEW = 'admin-dashboard.view';
+    case PONDS_INDEX = 'ponds.index';
+    case PONDS_CREATE = 'ponds.create';
+    case PONDS_EDIT = 'ponds.edit';
+    case PONDS_DELETE = 'ponds.delete';
+    case PAYMENTS_INDEX = 'payments.index';
+    case PAYMENTS_REFUND = 'payments.refund';
+
+    // MEMBER: CHOOSING AND BUYING PONDS
+    case MEMBER_PONDS_VIEW = 'member-ponds.view';
+    case MEMBER_PONDS_PURCHASE = 'member-ponds.purchase';
+    case MEMBER_PAYMENTS_VIEW = 'member-payments.view';
 
     // PERMISSIONS (developer-defined, read-only — listing & export only)
     case PERMISSIONS_INDEX = 'permissions.index';
@@ -77,10 +88,20 @@ enum PermissionEnum: string
             self::USERS_DELETE => 'Users',
 
             self::ROLES_INDEX,
-            self::ROLES_VIEW,
-            self::ROLES_CREATE,
-            self::ROLES_EDIT,
-            self::ROLES_DELETE => 'Roles',
+            self::ROLES_VIEW => 'Roles',
+
+            self::ADMIN_DASHBOARD_VIEW,
+            self::PONDS_INDEX,
+            self::PONDS_CREATE,
+            self::PONDS_EDIT,
+            self::PONDS_DELETE => 'Ponds',
+
+            self::PAYMENTS_INDEX,
+            self::PAYMENTS_REFUND => 'Payments',
+
+            self::MEMBER_PONDS_VIEW,
+            self::MEMBER_PONDS_PURCHASE,
+            self::MEMBER_PAYMENTS_VIEW => 'Member',
 
             self::PERMISSIONS_INDEX,
             self::PERMISSIONS_EXPORT => 'Permissions',
@@ -94,6 +115,16 @@ enum PermissionEnum: string
             self::SETTINGS_EXPORT,
             self::SETTINGS_PRINT => 'Settings',
         };
+    }
+
+    /**
+     * Permissions that only make sense for a member buying ponds.
+     *
+     * @return array<int, self>
+     */
+    public static function memberOnly(): array
+    {
+        return [self::MEMBER_PONDS_VIEW, self::MEMBER_PONDS_PURCHASE, self::MEMBER_PAYMENTS_VIEW];
     }
 
     // -------------------------------------------------------------------------

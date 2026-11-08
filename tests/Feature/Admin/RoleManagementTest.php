@@ -5,6 +5,7 @@ use App\Enums\RoleEnum;
 use App\Models\User;
 use Database\Seeders\PermissionSeeder;
 use Database\Seeders\RoleSeeder;
+use Illuminate\Support\Facades\Route;
 use Inertia\Testing\AssertableInertia as Assert;
 use Spatie\Permission\Models\Role;
 
@@ -12,106 +13,66 @@ beforeEach(function () {
     $this->seed([PermissionSeeder::class, RoleSeeder::class]);
 
     $this->admin = User::factory()->create();
-    $this->admin->assignRole(RoleEnum::SUPER_ADMIN->value);
+    $this->admin->assignRole(RoleEnum::ADMIN->value);
 });
 
-test('super admin can view the roles list', function () {
+test('only the admin and user roles exist', function () {
+    expect(Role::pluck('name')->sort()->values()->all())->toBe(['admin', 'user'])
+        ->and(array_column(RoleEnum::cases(), 'value'))->toBe(['admin', 'user']);
+});
+
+test('an admin can view the two roles and their permissions', function () {
     $this->actingAs($this->admin)
         ->get(route('admin.roles.index'))
         ->assertOk()
-        ->assertInertia(
-            fn (Assert $page) => $page
-                ->component('admin/roles/index')
-                ->has('roles.data')
+        ->assertInertia(fn (Assert $page) => $page
+            ->component('admin/roles/index')
+            ->has('roles', 2)
+            ->where('roles.0.name', 'admin')
+            ->has('roles.0.permissions')
         );
 });
 
-test('the role editor receives the full permission list', function () {
-    $this->actingAs($this->admin)
-        ->get(route('admin.roles.create'))
-        ->assertOk()
-        ->assertInertia(
-            fn (Assert $page) => $page
-                ->component('admin/roles/create')
-                ->has('permissions', count(PermissionEnum::cases()))
-        );
+test('a user cannot view the roles', function () {
+    $user = User::factory()->create();
+    $user->assignRole(RoleEnum::USER->value);
+
+    $this->actingAs($user)->get(route('admin.roles.index'))->assertForbidden();
 });
 
-test('a role can be created with grouped permissions', function () {
-    $permissions = [
-        PermissionEnum::POSTS_INDEX->value,
-        PermissionEnum::POSTS_VIEW->value,
-        PermissionEnum::POSTS_CREATE->value,
-    ];
+test('roles cannot be created, edited or deleted', function (string $routeName) {
+    expect(Route::has($routeName))->toBeFalse();
+})->with(['admin.roles.create', 'admin.roles.store', 'admin.roles.edit', 'admin.roles.update', 'admin.roles.destroy']);
 
-    $this->actingAs($this->admin)
-        ->post(route('admin.roles.store'), [
-            'name' => 'content-manager',
-            'permissions' => $permissions,
-        ])
-        ->assertRedirect(route('admin.roles.index'));
+test('admins cannot act as a member and users cannot act as an admin', function () {
+    $admin = RoleEnum::ADMIN->permissions();
+    $user = RoleEnum::USER->permissions();
 
-    $role = Role::findByName('content-manager');
+    foreach (PermissionEnum::memberOnly() as $memberPermission) {
+        expect($admin)->not->toContain($memberPermission)
+            ->and($user)->toContain($memberPermission);
+    }
 
-    expect($role->permissions->pluck('name')->all())
-        ->toEqualCanonicalizing($permissions);
+    expect($user)->not->toContain(PermissionEnum::ADMIN_DASHBOARD_VIEW)
+        ->and($user)->not->toContain(PermissionEnum::PONDS_CREATE)
+        ->and($user)->not->toContain(PermissionEnum::PAYMENTS_REFUND)
+        ->and($user)->not->toContain(PermissionEnum::USERS_INDEX);
 });
 
-test('the role name is required and reserved names are rejected', function () {
-    $this->actingAs($this->admin)
-        ->post(route('admin.roles.store'), [
-            'name' => RoleEnum::SUPER_ADMIN->value,
-            'permissions' => [],
-        ])
-        ->assertSessionHasErrors('name');
-});
+test('the role migration moves every account onto admin or user', function () {
+    $superAdmin = User::factory()->create();
+    $editor = User::factory()->create();
+    $noRole = User::factory()->create();
 
-test('a role name must be unique', function () {
-    $this->actingAs($this->admin)
-        ->post(route('admin.roles.store'), [
-            'name' => RoleEnum::EDITOR->value,
-            'permissions' => [],
-        ])
-        ->assertSessionHasErrors('name');
-});
+    $superAdmin->assignRole(Role::create(['name' => 'super-admin', 'guard_name' => 'web']));
+    $editor->assignRole(Role::create(['name' => 'editor', 'guard_name' => 'web']));
 
-test('a role permissions can be updated', function () {
-    $role = Role::create(['name' => 'temp', 'guard_name' => 'web']);
-    $role->givePermissionTo(PermissionEnum::POSTS_VIEW->value);
+    $migration = require database_path('migrations/2026_11_08_100200_reduce_roles_to_admin_and_user.php');
+    $migration->up();
 
-    $this->actingAs($this->admin)
-        ->put(route('admin.roles.update', $role), [
-            'name' => 'temp',
-            'permissions' => [
-                PermissionEnum::POSTS_CREATE->value,
-                PermissionEnum::POSTS_EDIT->value,
-            ],
-        ])
-        ->assertRedirect(route('admin.roles.index'));
-
-    expect($role->fresh()->permissions->pluck('name')->all())
-        ->toEqualCanonicalizing([
-            PermissionEnum::POSTS_CREATE->value,
-            PermissionEnum::POSTS_EDIT->value,
-        ]);
-});
-
-test('the super admin role cannot be deleted', function () {
-    $role = Role::findByName(RoleEnum::SUPER_ADMIN->value);
-
-    $this->actingAs($this->admin)
-        ->delete(route('admin.roles.destroy', $role))
-        ->assertRedirect();
-
-    expect(Role::find($role->id))->not->toBeNull();
-});
-
-test('a non-system role can be deleted', function () {
-    $role = Role::create(['name' => 'disposable', 'guard_name' => 'web']);
-
-    $this->actingAs($this->admin)
-        ->delete(route('admin.roles.destroy', $role))
-        ->assertRedirect();
-
-    expect(Role::find($role->id))->toBeNull();
+    expect($superAdmin->fresh()->getRoleNames()->all())->toBe(['admin'])
+        ->and($editor->fresh()->getRoleNames()->all())->toBe(['user'])
+        ->and($noRole->fresh()->getRoleNames()->all())->toBe(['user'])
+        ->and($this->admin->fresh()->getRoleNames()->all())->toBe(['admin'])
+        ->and(Role::pluck('name')->sort()->values()->all())->toBe(['admin', 'user']);
 });

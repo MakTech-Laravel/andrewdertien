@@ -3,8 +3,8 @@
 // (admin/users, admin/roles, admin/permissions).
 // =============================================================================
 
-/** The protected, system-critical role. Mirrors App\Enums\RoleEnum::SUPER_ADMIN. */
-export const SUPER_ADMIN_ROLE = 'super-admin';
+/** The role that must always have at least one holder. Mirrors App\Enums\RoleEnum::ADMIN. */
+export const ADMIN_ROLE = 'admin';
 
 export interface PaginationLink {
     url: string | null;
@@ -38,34 +38,16 @@ export interface AdminUser {
     email_verified_at: string | null;
     created_at: string;
     roles: RoleRef[];
+    ponds_owned?: number;
+    spent_cents?: number | null;
 }
 
-export interface AdminUserDetail extends AdminUser {
-    permissions: { id: number; name: string }[];
-    updated_at: string;
-}
-
-export interface AdminRoleListItem {
+/** A fixed role and what it can do, as shown on the read-only roles page. */
+export interface AdminRole {
     id: number;
     name: string;
-    guard_name: string;
-    permissions_count: number;
     users_count: number;
-    created_at: string;
-}
-
-export interface AdminRoleDetail {
-    id: number;
-    name: string;
-    permissions: string[];
-    is_super_admin: boolean;
-}
-
-/** A single assignable permission, as sent to the role editor. */
-export interface PermissionOption {
-    id: number;
-    name: string;
-    group: string;
+    permissions: { id: number; name: string; group: string }[];
 }
 
 /** A permission row for the read-only permissions listing. */

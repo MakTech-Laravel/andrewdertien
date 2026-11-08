@@ -42,34 +42,10 @@ class UserSeeder extends Seeder
     {
         return [
             [
-                'name' => 'Super Admin',
-                'email' => 'superadmin@dev.com',
-                'password' => 'superadmin@dev.com',
-                'role' => RoleEnum::SUPER_ADMIN->value,
-            ],
-            [
                 'name' => 'Admin',
                 'email' => 'admin@dev.com',
                 'password' => 'admin@dev.com',
                 'role' => RoleEnum::ADMIN->value,
-            ],
-            [
-                'name' => 'Editor',
-                'email' => 'editor@dev.com',
-                'password' => 'editor@dev.com',
-                'role' => RoleEnum::EDITOR->value,
-            ],
-            [
-                'name' => 'Author',
-                'email' => 'author@dev.com',
-                'password' => 'author@dev.com',
-                'role' => RoleEnum::AUTHOR->value,
-            ],
-            [
-                'name' => 'Viewer',
-                'email' => 'viewer@dev.com',
-                'password' => 'viewer@dev.com',
-                'role' => RoleEnum::VIEWER->value,
             ],
             [
                 'name' => 'User',

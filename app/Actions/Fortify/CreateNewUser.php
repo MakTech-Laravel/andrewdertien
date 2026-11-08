@@ -4,6 +4,7 @@ namespace App\Actions\Fortify;
 
 use App\Concerns\PasswordValidationRules;
 use App\Concerns\ProfileValidationRules;
+use App\Enums\RoleEnum;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
@@ -27,7 +28,7 @@ class CreateNewUser implements CreatesNewUsers
             'password' => $this->passwordRules(),
         ])->validate();
 
-        return User::create([
+        $user = User::create([
             'name' => $input['name'],
             'username' => $input['username'],
             'email' => $input['email'],
@@ -35,5 +36,10 @@ class CreateNewUser implements CreatesNewUsers
             'date_of_birth' => $input['date_of_birth'] ?? null,
             'open_to_romance' => filter_var($input['open_to_romance'] ?? false, FILTER_VALIDATE_BOOLEAN),
         ]);
+
+        // Everyone who signs up is a regular user; admins are appointed by admins.
+        $user->assignRole(RoleEnum::USER->value);
+
+        return $user;
     }
 }

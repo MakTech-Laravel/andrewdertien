@@ -11,7 +11,7 @@ beforeEach(function () {
     $this->seed([PermissionSeeder::class, RoleSeeder::class]);
 
     $this->admin = User::factory()->create();
-    $this->admin->assignRole(RoleEnum::SUPER_ADMIN->value);
+    $this->admin->assignRole(RoleEnum::ADMIN->value);
 });
 
 test('the permissions list is grouped and read-only', function () {

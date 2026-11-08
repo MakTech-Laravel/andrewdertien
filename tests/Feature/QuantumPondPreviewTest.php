@@ -4,7 +4,7 @@ use App\Models\User;
 use Inertia\Testing\AssertableInertia as Assert;
 
 it('serves the public Ask Upon A Pond landing page', function () {
-    $this->get('/')->assertOk()->assertInertia(fn(Assert $page) => $page->component('pond/welcome'));
+    $this->get('/')->assertOk()->assertInertia(fn (Assert $page) => $page->component('pond/welcome'));
 });
 
 it('ships the Ask Upon A Pond favicon and lotus mark', function () {
@@ -24,8 +24,8 @@ it('redirects guests from the dashboard to login', function () {
 });
 
 it('redirects guests from member preview screens to login', function (string $screen) {
-    $this->get('/preview/' . $screen)->assertRedirect(route('login'));
-})->with(['dashboard', 'feed', 'explore', 'profile', 'balls', 'connections', 'messages', 'history', 'admin']);
+    $this->get('/preview/'.$screen)->assertRedirect(route('login'));
+})->with(['dashboard', 'feed', 'explore', 'profile', 'balls', 'connections', 'messages', 'history']);
 
 it('lets authenticated members open the dashboard', function () {
     $user = User::factory()->create();
@@ -33,18 +33,22 @@ it('lets authenticated members open the dashboard', function () {
     $this->actingAs($user)
         ->get('/dashboard')
         ->assertOk()
-        ->assertInertia(fn(Assert $page) => $page
-            ->component('pond/preview')
-            ->where('view', 'dashboard'));
+        ->assertInertia(fn (Assert $page) => $page->component('pond/member/dashboard'));
+});
+
+it('no longer has a public admin preview screen', function () {
+    $user = User::factory()->create();
+
+    $this->actingAs($user)->get('/preview/admin')->assertNotFound();
 });
 
 it('lets authenticated members open each member preview screen', function (string $screen) {
     $user = User::factory()->create();
 
     $this->actingAs($user)
-        ->get('/preview/' . $screen)
+        ->get('/preview/'.$screen)
         ->assertOk()
-        ->assertInertia(fn(Assert $page) => $page
+        ->assertInertia(fn (Assert $page) => $page
             ->component('pond/preview')
             ->where('view', $screen));
-})->with(['dashboard', 'feed', 'explore', 'profile', 'balls', 'connections', 'messages', 'history', 'admin']);
+})->with(['dashboard', 'feed', 'explore', 'profile', 'balls', 'connections', 'messages', 'history']);

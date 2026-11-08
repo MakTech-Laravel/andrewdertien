@@ -1,0 +1,1126 @@
+/* Admin and member dashboards, built on the Quantum Pond design system (pond.css) */
+
+/* ── Layout ─────────────────────────────────────────────────────────────── */
+.pd-stats {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+    margin: 20px 0
+}
+
+.pd-stats-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr))
+}
+
+.pd-stat strong {
+    font-variant-numeric: tabular-nums;
+    overflow-wrap: anywhere
+}
+
+.pd-grid-2 {
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+    gap: 16px
+}
+
+.pd-section {
+    margin-top: 20px
+}
+
+.pd-form-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(280px, 2fr);
+    gap: 20px;
+    align-items: start
+}
+
+.pd-heading-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap
+}
+
+.pd-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px
+}
+
+.pd-toolbar .pond-inline-search {
+    flex: 1 1 280px;
+    max-width: 420px
+}
+
+.pd-select {
+    width: auto;
+    min-width: 170px;
+    margin-top: 0;
+    font-size: 13px;
+    background: #fff
+}
+
+.pd-chips {
+    margin-bottom: 18px;
+    flex-wrap: wrap
+}
+
+/* ── Notices ────────────────────────────────────────────────────────────── */
+.pd-notice {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 14px 16px;
+    border-radius: 14px;
+    border: 1px solid;
+    margin-bottom: 4px
+}
+
+.pd-notice svg {
+    flex-shrink: 0;
+    margin-top: 2px
+}
+
+.pd-notice strong {
+    display: block;
+    font-size: 14px
+}
+
+.pd-notice p {
+    font-size: 13px;
+    margin: 2px 0 0
+}
+
+.pd-notice-warn {
+    background: #fff8e8;
+    border-color: #f6e2ae;
+    color: #7a5a06
+}
+
+.pd-notice-error {
+    background: #fdeef0;
+    border-color: #f7ccd3;
+    color: #a0263a
+}
+
+.pd-notice-ok {
+    background: #e9f8f0;
+    border-color: #c3ebd5;
+    color: #1d6f49
+}
+
+/* ── Tables ─────────────────────────────────────────────────────────────── */
+.pd-table-wrap {
+    overflow-x: auto
+}
+
+.pd-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    text-align: left;
+    font-size: 14px;
+    color: #4b5a72
+}
+
+.pd-table th {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: #6f7d93;
+    background: var(--qp-soft);
+    padding: 12px 14px;
+    white-space: nowrap
+}
+
+.pd-table th:first-child {
+    border-radius: 12px 0 0 12px
+}
+
+.pd-table th:last-child {
+    border-radius: 0 12px 12px 0
+}
+
+.pd-table td {
+    padding: 16px 14px;
+    border-bottom: 1px solid #eef2f7;
+    vertical-align: middle;
+    transition: background .15s
+}
+
+.pd-table tbody tr:last-child td {
+    border-bottom: 0
+}
+
+.pd-table tbody tr:hover td {
+    background: #f8fbfe
+}
+
+.pd-table tbody tr:hover td:first-child {
+    border-radius: 12px 0 0 12px
+}
+
+.pd-table tbody tr:hover td:last-child {
+    border-radius: 0 12px 12px 0
+}
+
+.pd-table-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    padding: 14px 14px 0;
+    margin-top: 6px;
+    border-top: 1px solid #eef2f7;
+    font-size: 13px;
+    color: var(--qp-muted)
+}
+
+.pd-table-foot .pond-pagination {
+    margin: 0;
+    gap: 16px
+}
+
+.pd-member-cell {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0
+}
+
+.pd-member-cell>div {
+    min-width: 0
+}
+
+.pd-member-cell small {
+    overflow-wrap: anywhere
+}
+
+.pd-member-name {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: 700;
+    color: var(--qp-ink)
+}
+
+.pd-member-name:hover {
+    color: var(--qp-purple)
+}
+
+.pd-member-name svg {
+    flex-shrink: 0;
+    color: var(--qp-purple)
+}
+
+.pd-role {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: capitalize;
+    white-space: nowrap;
+    background: #eef1f6;
+    color: #4b5a72
+}
+
+.pd-role-admin {
+    background: #e7f0fb;
+    color: #154872
+}
+
+.pd-pond-count {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 13px;
+    color: #768499;
+    white-space: nowrap
+}
+
+.pd-pond-count.has-ponds {
+    font-weight: 700;
+    color: var(--qp-ink)
+}
+
+.pd-pond-count.has-ponds svg {
+    color: var(--qp-pink)
+}
+
+.pd-actions .pond-icon-btn:disabled {
+    opacity: .35;
+    cursor: not-allowed
+}
+
+
+.pd-table strong {
+    color: var(--qp-ink);
+    font-weight: 700
+}
+
+.pd-table small {
+    display: block;
+    font-size: 12px;
+    color: var(--qp-muted);
+    margin-top: 2px
+}
+
+.pd-num {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap
+}
+
+.pd-table th.pd-num {
+    text-align: right
+}
+
+.pd-nowrap {
+    white-space: nowrap
+}
+
+.pd-table small.pd-show-mobile {
+    display: none
+}
+
+.pd-mono {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 12px;
+    white-space: nowrap
+}
+
+.pd-actions {
+    text-align: right;
+    white-space: nowrap
+}
+
+.pd-actions .pond-icon-btn {
+    display: inline-flex;
+    margin-left: 6px
+}
+
+.pd-link:hover strong {
+    color: var(--qp-purple);
+    text-decoration: underline
+}
+
+.pd-pond-cell {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 220px
+}
+
+.pd-pond-cell .pd-pond-art {
+    width: 46px;
+    height: 46px;
+    flex-shrink: 0;
+    border-radius: 12px
+}
+
+/* ── Status ─────────────────────────────────────────────────────────────── */
+.pd-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap
+}
+
+.pd-status-paid {
+    background: #e4f7ec;
+    color: #1d6f49
+}
+
+.pd-status-pending {
+    background: #fff4d9;
+    color: #7a5a06
+}
+
+.pd-status-failed {
+    background: #fde8ec;
+    color: #a0263a
+}
+
+.pd-status-cancelled {
+    background: #eef1f6;
+    color: #566579
+}
+
+.pd-status-refunded {
+    background: #e7f0fb;
+    color: #154872
+}
+
+/* ── Switches ───────────────────────────────────────────────────────────── */
+.pd-switch {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    line-height: 0
+}
+
+.pd-switch input {
+    position: absolute;
+    opacity: 0;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    cursor: pointer
+}
+
+.pd-switch span {
+    display: inline-block;
+    width: 40px;
+    height: 23px;
+    border-radius: 999px;
+    background: #cdd7e4;
+    position: relative;
+    transition: background .15s
+}
+
+.pd-switch span:after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 19px;
+    height: 19px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 1px 3px #13294b40;
+    transition: transform .15s
+}
+
+.pd-switch input:checked+span {
+    background: var(--qp-purple)
+}
+
+.pd-switch input:checked+span:after {
+    transform: translateX(17px)
+}
+
+.pd-switch input:focus-visible+span {
+    outline: 2px solid var(--qp-purple);
+    outline-offset: 2px
+}
+
+/* ── Revenue chart ──────────────────────────────────────────────────────── */
+.pd-bars {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 2px;
+    height: 230px;
+    align-items: stretch;
+    border-bottom: 1px solid var(--qp-line);
+    padding-bottom: 28px;
+    position: relative
+}
+
+.pd-bar-slot {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    position: relative
+}
+
+.pd-bar-slot small {
+    position: absolute;
+    bottom: -24px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 12px;
+    color: var(--qp-muted)
+}
+
+.pd-bar-track {
+    flex: 1;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    position: relative
+}
+
+.pd-bar {
+    width: min(38px, 62%);
+    background: var(--qp-purple);
+    border-radius: 4px 4px 0 0;
+    min-height: 0;
+    transition: background .15s
+}
+
+.pd-bar-slot:hover .pd-bar {
+    background: var(--qp-purple-dark)
+}
+
+.pd-bar-tip {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--qp-ink);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 8px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .12s;
+    z-index: 2
+}
+
+.pd-bar-slot:hover .pd-bar-tip {
+    opacity: 1
+}
+
+/* ── Lists ──────────────────────────────────────────────────────────────── */
+.pd-rank {
+    list-style: none;
+    margin: 0;
+    padding: 0
+}
+
+.pd-rank li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid #f0f4f9;
+    font-size: 14px
+}
+
+.pd-rank li:last-child {
+    border-bottom: 0
+}
+
+.pd-rank li>div:nth-child(2) {
+    flex: 1;
+    min-width: 0
+}
+
+.pd-rank strong {
+    color: var(--qp-ink);
+    font-variant-numeric: tabular-nums
+}
+
+.pd-rank small {
+    display: block;
+    color: var(--qp-muted);
+    font-size: 12px
+}
+
+.pd-rank .pd-pond-art {
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+    border-radius: 11px
+}
+
+/* ── Pond art and cards ─────────────────────────────────────────────────── */
+.pd-pond-art {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: radial-gradient(circle at 50% 35%, #e9f4ff, #d6e7f7)
+}
+
+.pd-pond-art img {
+    display: block
+}
+
+.pd-pond-art.is-ball img {
+    width: 78%;
+    height: 78%;
+    object-fit: contain
+}
+
+.pd-pond-art.is-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover
+}
+
+.pd-pond-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 18px
+}
+
+.pd-pond-card {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border: 1px solid #e6edf5;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 5px 22px #13294b0a;
+    transition: transform .18s, box-shadow .18s
+}
+
+.pd-pond-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px #13294b14
+}
+
+.pd-pond-card>.pd-pond-art {
+    aspect-ratio: 16 / 10;
+    width: 100%
+}
+
+.pd-pond-card>.pd-pond-art.is-ball img {
+    width: auto;
+    height: 76%
+}
+
+.pd-pond-card-body {
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1
+}
+
+.pd-pond-card-body h3 {
+    font-size: 19px;
+    margin: 4px 0 0;
+    color: var(--qp-ink)
+}
+
+.pd-pond-card-body p {
+    font-size: 14px;
+    color: #5a687e;
+    margin: 0
+}
+
+.pd-pond-card-foot {
+    margin-top: auto;
+    padding-top: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px
+}
+
+.pd-pond-card-foot strong {
+    font-size: 19px;
+    color: var(--qp-ink);
+    font-variant-numeric: tabular-nums
+}
+
+.pd-pond-card-foot small {
+    font-size: 12px;
+    color: var(--qp-muted)
+}
+
+.pd-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: 800;
+    font-size: 14px;
+    color: var(--qp-purple)
+}
+
+.pd-owned {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #1d6f49;
+    white-space: nowrap
+}
+
+.pd-category {
+    align-self: flex-start;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: #eaf2fb;
+    color: #154872
+}
+
+.pd-category-fun {
+    background: #e6f6fd;
+    color: #0b6283
+}
+
+.pd-category-treats {
+    background: #fff1e0;
+    color: #8a5209
+}
+
+.pd-category-boost {
+    background: #e6f7ee;
+    color: #1d6f49
+}
+
+.pd-category-creator {
+    background: #f2ecfd;
+    color: #5b34a8
+}
+
+.pd-category-flirt {
+    background: #fde9f3;
+    color: #a81c64
+}
+
+/* ── Buttons and modals ─────────────────────────────────────────────────── */
+.pd-btn-small {
+    padding: 8px 14px;
+    font-size: 13px;
+    white-space: nowrap
+}
+
+.pd-btn-danger {
+    background: #c3283f;
+    color: #fff
+}
+
+.pd-btn-danger:hover {
+    background: #a31f33
+}
+
+.pd-danger-icon:hover {
+    color: #c3283f
+}
+
+.pd-modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+    flex-wrap: wrap
+}
+
+.pd-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    margin: 16px 0;
+    border-radius: 14px;
+    background: var(--qp-soft);
+    font-size: 14px;
+    color: #4b5a72
+}
+
+.pd-summary strong {
+    font-size: 20px;
+    color: var(--qp-ink);
+    font-variant-numeric: tabular-nums
+}
+
+.pd-test-note {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px
+}
+
+.pd-checkout {
+    max-width: 480px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px
+}
+
+.pd-checkout .pd-summary {
+    margin: 4px 0
+}
+
+/* ── Forms ──────────────────────────────────────────────────────────────── */
+.pd-form-grid .pond-form-label {
+    font-size: 13px;
+    color: var(--qp-ink)
+}
+
+.pd-form-grid .pond-input,
+.pd-form-grid .pond-textarea {
+    font-size: 14px;
+    font-weight: 400
+}
+
+.pd-field-error {
+    color: #b3233a;
+    font-size: 13px;
+    font-weight: 500;
+    margin: 6px 0 0
+}
+
+.pd-hint {
+    display: block;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--qp-muted);
+    margin-top: 6px
+}
+
+.pd-check {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 12px 0;
+    border-bottom: 1px solid #f0f4f9;
+    cursor: pointer
+}
+
+.pd-check input {
+    width: 18px;
+    height: 18px;
+    margin-top: 2px;
+    flex-shrink: 0;
+    accent-color: var(--qp-purple)
+}
+
+.pd-check strong {
+    display: block;
+    font-size: 14px;
+    color: var(--qp-ink)
+}
+
+.pd-check small {
+    font-size: 13px;
+    color: var(--qp-muted)
+}
+
+.pd-ball-picker {
+    border: 0;
+    padding: 0;
+    margin: 18px 0 0
+}
+
+.pd-ball-picker legend {
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--qp-ink);
+    padding: 0
+}
+
+.pd-ball-picker>div {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(54px, 1fr));
+    gap: 8px;
+    margin-top: 8px
+}
+
+.pd-ball-option,
+.pd-ball-upload,
+.pd-ball-custom {
+    aspect-ratio: 1;
+    border-radius: 12px;
+    border: 2px solid var(--qp-line);
+    background: var(--qp-soft);
+    position: relative
+}
+
+.pd-ball-option {
+    padding: 6px;
+    cursor: pointer;
+    transition: border-color .15s, transform .15s
+}
+
+.pd-ball-option:hover {
+    border-color: #a9c4df;
+    transform: translateY(-1px)
+}
+
+.pd-ball-option.is-selected,
+.pd-ball-custom.is-selected {
+    border-color: var(--qp-purple);
+    background: #e7f0fb;
+    box-shadow: 0 0 0 3px #1f5f9a22
+}
+
+.pd-ball-option img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain
+}
+
+.pd-ball-upload {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    border-style: dashed;
+    border-color: #a9c4df;
+    background: #fff;
+    color: var(--qp-purple);
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background .15s
+}
+
+.pd-ball-upload:hover {
+    background: #e7f0fb
+}
+
+.pd-ball-upload:focus-within {
+    outline: 2px solid var(--qp-purple);
+    outline-offset: 2px
+}
+
+.pd-ball-upload input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0
+}
+
+.pd-ball-custom img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    display: block
+}
+
+.pd-ball-custom button {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 0;
+    background: var(--qp-ink);
+    color: #fff;
+    cursor: pointer
+}
+
+/* ── Member profile card (admin) ────────────────────────────────────────── */
+.pd-member-card {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap
+}
+
+.pd-member-card dl {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 14px;
+    margin: 0
+}
+
+.pd-member-card dt {
+    font-size: 12px;
+    color: var(--qp-muted)
+}
+
+.pd-member-card dd {
+    margin: 2px 0 0;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--qp-ink);
+    overflow-wrap: anywhere
+}
+
+.pd-capitalize {
+    text-transform: capitalize
+}
+
+/* ── Access pages (shadcn components inside the pond shell) ─────────────── */
+.pd-access-page {
+    width: 100%;
+    margin-top: 4px;
+    --primary: #1f5f9a;
+    --primary-foreground: #fff;
+    --ring: #1f5f9a
+}
+
+.pd-access-page>div {
+    padding: 0
+}
+
+/* ── Public website ─────────────────────────────────────────────────────── */
+.pd-public-header {
+    background: #07325a;
+    color: #fff;
+    padding-bottom: 44px
+}
+
+.pd-public-title {
+    max-width: 1180px;
+    margin: 20px auto 0;
+    padding: 0 28px
+}
+
+.pd-public-title h1 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: clamp(34px, 5vw, 54px);
+    color: #fff;
+    margin: 0
+}
+
+.pd-public-title p {
+    font-size: 18px;
+    color: #d7e6f5;
+    margin: 8px 0 0
+}
+
+.pd-public-main {
+    max-width: 1180px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 36px 28px 64px
+}
+
+.pd-pond-link {
+    color: inherit
+}
+
+.pd-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--qp-purple);
+    margin-bottom: 18px
+}
+
+.pd-pond-detail {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 32px;
+    align-items: center;
+    background: #fff;
+    border: 1px solid #e6edf5;
+    border-radius: 24px;
+    padding: 24px
+}
+
+.pd-pond-detail>.pd-pond-art {
+    aspect-ratio: 1;
+    border-radius: 18px
+}
+
+.pd-pond-detail p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #4b5a72;
+    margin: 14px 0 0
+}
+
+.pd-home-ponds {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 56px 28px 64px
+}
+
+.pd-home-ponds .askupon-ways-head {
+    margin-bottom: 26px
+}
+
+.pd-home-ponds .askupon-ways-ctas {
+    margin-top: 28px
+}
+
+/* ── Sidebar: more links than the original member shell had ─────────────── */
+.pond-sidebar {
+    overflow-x: hidden
+}
+
+.pond-sidebar .pond-brand {
+    font-size: 16px
+}
+
+@media (max-height: 940px) {
+    .pond-sidebar .pond-side-quote {
+        display: none
+    }
+}
+
+/* ── Small screens ──────────────────────────────────────────────────────── */
+@media (max-width: 1320px) {
+    .pd-wide-only {
+        display: none
+    }
+
+    .pd-pond-cell {
+        min-width: 170px
+    }
+
+    .pd-table th,
+    .pd-table td {
+        padding-left: 8px;
+        padding-right: 8px
+    }
+}
+
+@media (max-width: 1100px) {
+    .pd-stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr))
+    }
+
+    .pd-stats-3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr))
+    }
+
+    .pd-grid-2,
+    .pd-form-grid {
+        grid-template-columns: minmax(0, 1fr)
+    }
+}
+
+@media (max-width: 700px) {
+
+    .pd-hide-mobile {
+        display: none
+    }
+
+    .pd-table {
+        font-size: 13px
+    }
+
+    .pd-table small.pd-show-mobile {
+        display: block
+    }
+
+    .pd-stats,
+    .pd-stats-3 {
+        grid-template-columns: minmax(0, 1fr)
+    }
+
+    .pd-pond-detail {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 18px;
+        padding: 16px
+    }
+
+    .pd-public-main,
+    .pd-public-title,
+    .pd-home-ponds {
+        padding-left: 16px;
+        padding-right: 16px
+    }
+
+    .pd-select {
+        flex: 1 1 100%
+    }
+}

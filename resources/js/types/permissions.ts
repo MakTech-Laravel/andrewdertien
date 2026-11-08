@@ -36,9 +36,16 @@ export const PERMISSIONS = {
     ROLES: {
         INDEX: 'roles.index',
         VIEW: 'roles.view',
-        CREATE: 'roles.create',
-        EDIT: 'roles.edit',
-        DELETE: 'roles.delete',
+    },
+    PONDS: {
+        INDEX: 'ponds.index',
+        CREATE: 'ponds.create',
+        EDIT: 'ponds.edit',
+        DELETE: 'ponds.delete',
+    },
+    PAYMENTS: {
+        INDEX: 'payments.index',
+        REFUND: 'payments.refund',
     },
     PERMISSIONS: {
         INDEX: 'permissions.index',
@@ -104,28 +111,14 @@ export interface PermissionFlat {
 export type PermissionsByGroup = Record<string, Permission[]>;
 
 // =============================================================================
-// ROLES — Dynamic, admin-managed at runtime via the UI.
-// Admins can create, rename, delete roles and assign permissions to them.
-// Always plain strings — never a hardcoded union type.
+// ROLES — Fixed: only 'admin' and 'user' exist (App\Enums\RoleEnum).
 // =============================================================================
 
 export interface Role {
     id: number;
-    name: string; // dynamic — never hardcode as a union
+    name: 'admin' | 'user';
     guard_name: string;
     permissions: Permission[]; // full permission objects with group info
-}
-
-// Payload sent to POST /admin/roles
-export interface CreateRolePayload {
-    name: string;
-    permissions: PermissionKey[];
-}
-
-// Payload sent to PUT /admin/roles/{id}
-export interface UpdateRolePayload {
-    name?: string;
-    permissions: PermissionKey[];
 }
 
 // =============================================================================
