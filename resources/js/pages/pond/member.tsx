@@ -57,7 +57,7 @@ export default function Member({ member, isOwnProfile, canSendSparkBall }: Props
                             {!isOwnProfile && (
                                 <div className="pond-member-actions">
                                     <button className="pond-btn pond-btn-primary pond-wide" onClick={() => setGiving(true)}>
-                                        <Sparkles size={16} /> Give {firstName} a Quantum Ball
+                                        <Sparkles size={16} /> Give {firstName} a Ball
                                     </button>
                                     {canSendSparkBall && (
                                         <button className="pond-btn pond-btn-soft pond-wide" onClick={() => setSparkInfo(true)}>

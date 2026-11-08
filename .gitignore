@@ -27,3 +27,8 @@ yarn-error.log
 /.nova
 /.vscode
 /.zed
+
+/client-attachments
+/_extract.php
+/_make_icons.php
+

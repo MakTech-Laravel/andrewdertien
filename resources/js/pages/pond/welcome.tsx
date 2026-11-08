@@ -1,5 +1,7 @@
 import { Head, Link } from '@inertiajs/react';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
+import { PondHeroScene } from '@/components/pond/pond-hero-scene';
+import { PondOrbitScene } from '@/components/pond/pond-orbit-scene';
 import { Brand, PondMark } from '@/components/pond/ui';
 
 const giveWays = [
@@ -105,18 +107,26 @@ export default function Welcome() {
                         Give one to a friend, a stranger, or even a flirt!
                     </p>
 
-                    <div className="askupon-pond-stage" aria-hidden="true">
-                        <div className="askupon-pond-water" />
-                        <div className="askupon-pond-sun" />
-                        <div className="askupon-pond-trees askupon-pond-trees-left" />
-                        <div className="askupon-pond-trees askupon-pond-trees-right" />
-                        <img className="askupon-float-ball ball-a" src="/quantum/images/ball-100.png" alt="" />
-                        <img className="askupon-float-ball ball-b" src="/quantum/images/ball-10.png" alt="" />
-                        <img className="askupon-float-ball ball-c" src="/quantum/images/ball-50.png" alt="" />
-                        <img className="askupon-float-ball ball-d" src="/quantum/images/ball-20.png" alt="" />
-                        <img className="askupon-float-ball ball-e" src="/quantum/images/ball-5.png" alt="" />
-                        <img className="askupon-float-ball ball-f" src="/quantum/images/ball-500.png" alt="" />
+                    <div className="askupon-pond-stage">
+                        <PondHeroScene className="askupon-hero-three" />
+                        <div className="askupon-pond-stage-fallback" aria-hidden="true">
+                            <div className="askupon-pond-water" />
+                            <div className="askupon-pond-sun" />
+                            <div className="askupon-pond-trees askupon-pond-trees-left" />
+                            <div className="askupon-pond-trees askupon-pond-trees-right" />
+                            <img className="askupon-float-ball ball-a" src="/quantum/images/ball-100.png" alt="" />
+                            <img className="askupon-float-ball ball-b" src="/quantum/images/ball-10.png" alt="" />
+                            <img className="askupon-float-ball ball-c" src="/quantum/images/ball-50.png" alt="" />
+                            <img className="askupon-float-ball ball-d" src="/quantum/images/ball-20.png" alt="" />
+                            <img className="askupon-float-ball ball-e" src="/quantum/images/ball-5.png" alt="" />
+                            <img className="askupon-float-ball ball-f" src="/quantum/images/ball-500.png" alt="" />
+                        </div>
                     </div>
+
+                    <p className="askupon-three-hint">
+                        <span className="askupon-hint-desktop">Move and click the pond for ripples</span>
+                        <span className="askupon-hint-mobile">Tap the pond for ripples</span>
+                    </p>
 
                     <div className="askupon-faq-strip">
                         {faqs.map((item) => (
@@ -131,7 +141,7 @@ export default function Welcome() {
                         <Link href="/register" className="askupon-btn askupon-btn-pink askupon-btn-lg">
                             Join the Pond <ArrowRight size={18} />
                         </Link>
-                        <Link href="/preview/balls" className="askupon-btn askupon-btn-ghost askupon-btn-lg">
+                        <Link href="/login" className="askupon-btn askupon-btn-ghost askupon-btn-lg">
                             Explore the Balls <ArrowUpRight size={18} />
                         </Link>
                     </div>
@@ -186,29 +196,34 @@ export default function Welcome() {
             </section>
 
             <section className="askupon-ways" id="explore">
-                <div className="askupon-ways-head">
-                    <h2>There&apos;s more than one way to make someone&apos;s day.</h2>
-                    <p>Six simple ways to give a little support, fun, or love.</p>
+                <div className="askupon-ways-bg" aria-hidden="true">
+                    <PondOrbitScene className="askupon-ways-three" />
                 </div>
-                <div className="askupon-ways-grid">
-                    {giveWays.map((way) => (
-                        <article key={way.title} className={`askupon-way way-${way.tone}`}>
-                            <img src={way.ball} alt="" />
-                            <div>
-                                <h3>{way.title}</h3>
-                                <strong>{way.lead}</strong>
-                                <p>{way.detail}</p>
-                            </div>
-                        </article>
-                    ))}
-                </div>
-                <div className="askupon-ways-ctas">
-                    <Link href="/register" className="askupon-btn askupon-btn-pink askupon-btn-lg">
-                        Join the Pond <ArrowRight size={18} />
-                    </Link>
-                    <Link href="/preview/balls" className="askupon-btn askupon-btn-navy askupon-btn-lg">
-                        Explore the Balls <ArrowUpRight size={18} />
-                    </Link>
+                <div className="askupon-ways-content">
+                    <div className="askupon-ways-head">
+                        <h2>There&apos;s more than one way to make someone&apos;s day.</h2>
+                        <p>Six simple ways to give a little support, fun, or love.</p>
+                    </div>
+                    <div className="askupon-ways-grid">
+                        {giveWays.map((way) => (
+                            <article key={way.title} className={`askupon-way way-${way.tone}`}>
+                                <img src={way.ball} alt="" />
+                                <div>
+                                    <h3>{way.title}</h3>
+                                    <strong>{way.lead}</strong>
+                                    <p>{way.detail}</p>
+                                </div>
+                            </article>
+                        ))}
+                    </div>
+                    <div className="askupon-ways-ctas">
+                        <Link href="/register" className="askupon-btn askupon-btn-pink askupon-btn-lg">
+                            Join the Pond <ArrowRight size={18} />
+                        </Link>
+                        <Link href="/login" className="askupon-btn askupon-btn-navy askupon-btn-lg">
+                            Explore the Balls <ArrowUpRight size={18} />
+                        </Link>
+                    </div>
                 </div>
             </section>
 
@@ -225,9 +240,10 @@ export default function Welcome() {
                 <Brand />
                 <span>© 2026 Ask Upon A Pond · askuponapond.com</span>
                 <div>
-                    <Link href="/preview/feed">The Pond</Link>
-                    <Link href="/preview/balls">The Balls</Link>
+                    <Link href="/login">The Pond</Link>
+                    <Link href="/login">The Balls</Link>
                     <Link href="/login">Log in</Link>
+                    <Link href="/dashboard">Dashboard</Link>
                 </div>
             </footer>
         </div>

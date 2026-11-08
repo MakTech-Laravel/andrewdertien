@@ -1,7 +1,7 @@
 .pond-auth {
     --qp-ink: #1d2342;
     --qp-muted: #7b839b;
-    --qp-purple: #7859cd;
+    --qp-purple: #1f5f9a;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -15,9 +15,9 @@
     letter-spacing: -0.015em;
     color: var(--qp-ink);
     background:
-        radial-gradient(ellipse 45% 45% at 85% 30%, #302469 0%, transparent 70%),
-        radial-gradient(ellipse 60% 55% at 25% 100%, #113555 0%, transparent 80%),
-        #0b1231;
+        radial-gradient(ellipse 45% 45% at 85% 30%, #1a6cab 0%, transparent 70%),
+        radial-gradient(ellipse 60% 55% at 25% 100%, #0a4a7a 0%, transparent 80%),
+        #062744;
 }
 
 .pond-auth::before {
@@ -30,7 +30,7 @@
     pointer-events: none;
 }
 
-.pond-auth > * {
+.pond-auth>* {
     position: relative;
 }
 
@@ -63,6 +63,7 @@
 }
 
 @media (max-width: 900px) {
+
     .pond-auth-orb-a,
     .pond-auth-orb-c {
         display: none;

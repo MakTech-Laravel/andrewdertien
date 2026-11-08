@@ -16,14 +16,13 @@ Route::inertia('/', 'pond/welcome', [
     'canRegister' => Features::enabled(Features::registration()),
 ])->name('home');
 
-// Public, sample-data design previews; never expose real accounts or admin actions.
-// These routes are deliberately not connected to live giving or payment APIs.
-foreach (['dashboard', 'feed', 'explore', 'profile', 'balls', 'connections', 'messages', 'history', 'admin'] as $screen) {
-    Route::inertia("preview/{$screen}", 'pond/preview', ['view' => $screen])->name("preview.{$screen}");
-}
-
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::inertia('dashboard', 'pond/preview', ['view' => 'dashboard'])->name('dashboard');
+
+    // Member app UI (sample-data design). Guests are redirected to login first.
+    foreach (['dashboard', 'feed', 'explore', 'profile', 'balls', 'connections', 'messages', 'history', 'admin'] as $screen) {
+        Route::inertia("preview/{$screen}", 'pond/preview', ['view' => $screen])->name("preview.{$screen}");
+    }
 
     // ── Member profiles ───────────────────────────────────────────────────────
     Route::get('explore', [MemberDirectoryController::class, 'index'])->name('members.index');
@@ -38,60 +37,60 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // ── Demo landing page ─────────────────────────────────────────────────────
     Route::get('/file-upload-demo', [FileUploadDemoController::class, 'index'])
-        ->name('file-upload-demo.index')->middleware('permission:'.PermissionEnum::FILE_UPLOAD_INDEX->value);
+        ->name('file-upload-demo.index')->middleware('permission:' . PermissionEnum::FILE_UPLOAD_INDEX->value);
 
     // ── Single / multiple file upload (used by demos 1 & 2) ──────────────────
     Route::post('/upload', [FileUploadDemoController::class, 'store'])
-        ->name('upload.store')->middleware('permission:'.PermissionEnum::FILE_UPLOAD_STORE->value);
+        ->name('upload.store')->middleware('permission:' . PermissionEnum::FILE_UPLOAD_STORE->value);
 
     // ── Edit-mode endpoint (demo 3) ───────────────────────────────────────────
     Route::post('/posts/{post}', [PostAttachmentController::class, 'update'])
-        ->name('posts.update')->middleware('permission:'.PermissionEnum::POSTS_EDIT->value);
+        ->name('posts.update')->middleware('permission:' . PermissionEnum::POSTS_EDIT->value);
 
     // ── Admin: access management ──────────────────────────────────────────────
     Route::prefix('admin')->name('admin.')->group(function () {
         // Users — full CRUD with Precognition on write routes.
         Route::controller(UserController::class)->group(function () {
             Route::get('users', 'index')->name('users.index')
-                ->middleware('permission:'.PermissionEnum::USERS_INDEX->value);
+                ->middleware('permission:' . PermissionEnum::USERS_INDEX->value);
             Route::get('users/create', 'create')->name('users.create')
-                ->middleware('permission:'.PermissionEnum::USERS_CREATE->value);
+                ->middleware('permission:' . PermissionEnum::USERS_CREATE->value);
             Route::post('users', 'store')->name('users.store')
-                ->middleware(['permission:'.PermissionEnum::USERS_CREATE->value, HandlePrecognitiveRequests::class]);
+                ->middleware(['permission:' . PermissionEnum::USERS_CREATE->value, HandlePrecognitiveRequests::class]);
             Route::get('users/{user}', 'show')->name('users.show')
-                ->middleware('permission:'.PermissionEnum::USERS_VIEW->value);
+                ->middleware('permission:' . PermissionEnum::USERS_VIEW->value);
             Route::get('users/{user}/edit', 'edit')->name('users.edit')
-                ->middleware('permission:'.PermissionEnum::USERS_EDIT->value);
+                ->middleware('permission:' . PermissionEnum::USERS_EDIT->value);
             Route::put('users/{user}', 'update')->name('users.update')
-                ->middleware(['permission:'.PermissionEnum::USERS_EDIT->value, HandlePrecognitiveRequests::class]);
+                ->middleware(['permission:' . PermissionEnum::USERS_EDIT->value, HandlePrecognitiveRequests::class]);
             Route::delete('users/{user}', 'destroy')->name('users.destroy')
-                ->middleware('permission:'.PermissionEnum::USERS_DELETE->value);
+                ->middleware('permission:' . PermissionEnum::USERS_DELETE->value);
         });
 
         // Roles — full CRUD with grouped permission assignment.
         Route::controller(RoleController::class)->group(function () {
             Route::get('roles', 'index')->name('roles.index')
-                ->middleware('permission:'.PermissionEnum::ROLES_INDEX->value);
+                ->middleware('permission:' . PermissionEnum::ROLES_INDEX->value);
             Route::get('roles/create', 'create')->name('roles.create')
-                ->middleware('permission:'.PermissionEnum::ROLES_CREATE->value);
+                ->middleware('permission:' . PermissionEnum::ROLES_CREATE->value);
             Route::post('roles', 'store')->name('roles.store')
-                ->middleware(['permission:'.PermissionEnum::ROLES_CREATE->value, HandlePrecognitiveRequests::class]);
+                ->middleware(['permission:' . PermissionEnum::ROLES_CREATE->value, HandlePrecognitiveRequests::class]);
             Route::get('roles/{role}/edit', 'edit')->name('roles.edit')
-                ->middleware('permission:'.PermissionEnum::ROLES_EDIT->value);
+                ->middleware('permission:' . PermissionEnum::ROLES_EDIT->value);
             Route::put('roles/{role}', 'update')->name('roles.update')
-                ->middleware(['permission:'.PermissionEnum::ROLES_EDIT->value, HandlePrecognitiveRequests::class]);
+                ->middleware(['permission:' . PermissionEnum::ROLES_EDIT->value, HandlePrecognitiveRequests::class]);
             Route::delete('roles/{role}', 'destroy')->name('roles.destroy')
-                ->middleware('permission:'.PermissionEnum::ROLES_DELETE->value);
+                ->middleware('permission:' . PermissionEnum::ROLES_DELETE->value);
         });
 
         // Permissions — read-only listing + CSV / Excel export.
         Route::controller(PermissionController::class)->group(function () {
             Route::get('permissions', 'index')->name('permissions.index')
-                ->middleware('permission:'.PermissionEnum::PERMISSIONS_INDEX->value);
+                ->middleware('permission:' . PermissionEnum::PERMISSIONS_INDEX->value);
             Route::get('permissions/export', 'export')->name('permissions.export')
-                ->middleware('permission:'.PermissionEnum::PERMISSIONS_EXPORT->value);
+                ->middleware('permission:' . PermissionEnum::PERMISSIONS_EXPORT->value);
         });
     });
 });
 
-require __DIR__.'/settings.php';
+require __DIR__ . '/settings.php';

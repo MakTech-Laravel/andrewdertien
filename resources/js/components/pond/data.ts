@@ -36,19 +36,19 @@ export const sparkBalls = [
   { value: 108, name: 'Cosmic Connection', color: '#6946b3', description: "There's something special about you.", phrase: 'A connection worth exploring.', icon: Heart },
 ];
 export const demoPosts: PondPost[] = [
- { id: 1, name: 'Sarah Mitchell', handle: '@sarahm', initials: 'SM', hue: 'lilac', time: '12 min ago', action: 'sent Michael a Dream Ball', category: 'Dreams', message: 'Helping Michael get one step closer to his photography business! 📷 Every big dream starts with a little belief.', target: 500, raised: 160, amount: 5, reactions: 42, comments: 8 },
- { id: 2, name: 'James Rivera', handle: '@jamesr', initials: 'JR', hue: 'sky', time: '38 min ago', action: 'shared a new Boost', category: 'Boost', message: 'Saving up for the tools to start my new job. A fresh start means the world to me. 🌱', target: 200, raised: 85, reactions: 28, comments: 5 },
- { id: 3, name: 'Clara Williams', handle: '@claraw', initials: 'CW', hue: 'peach', time: '2 hours ago', action: 'shared a little Treat', category: 'Treats', message: 'Coffee and a good book on a rainy Sunday. Sometimes the smallest moments are the sweetest. ☕', target: 25, raised: 15, reactions: 51, comments: 12 },
- { id: 4, name: 'Noah Thompson', handle: '@noaht', initials: 'NT', hue: 'mint', time: 'Yesterday', action: 'shared a Fun goal', category: 'Fun', message: 'I want to take my little sister to her first concert. Making memories together is everything. 🎶', target: 180, raised: 72, reactions: 38, comments: 6 },
+  { id: 1, name: 'Sarah Mitchell', handle: '@sarahm', initials: 'SM', hue: 'lilac', time: '12 min ago', action: 'sent Michael a Dream Ball', category: 'Dreams', message: 'Helping Michael get one step closer to his photography business! 📷 Every big dream starts with a little belief.', target: 500, raised: 160, amount: 5, reactions: 42, comments: 8 },
+  { id: 2, name: 'James Rivera', handle: '@jamesr', initials: 'JR', hue: 'sky', time: '38 min ago', action: 'shared a new Boost', category: 'Boost', message: 'Saving up for the tools to start my new job. A fresh start means the world to me. 🌱', target: 200, raised: 85, reactions: 28, comments: 5 },
+  { id: 3, name: 'Clara Williams', handle: '@claraw', initials: 'CW', hue: 'peach', time: '2 hours ago', action: 'shared a little Treat', category: 'Treats', message: 'Coffee and a good book on a rainy Sunday. Sometimes the smallest moments are the sweetest. ☕', target: 25, raised: 15, reactions: 51, comments: 12 },
+  { id: 4, name: 'Noah Thompson', handle: '@noaht', initials: 'NT', hue: 'mint', time: 'Yesterday', action: 'shared a Fun goal', category: 'Fun', message: 'I want to take my little sister to her first concert. Making memories together is everything. 🎶', target: 180, raised: 72, reactions: 38, comments: 6 },
 ];
 export const people = [
- { name: 'Michael Chen', handle: '@michaelc', initials: 'MC', hue: 'sky', category: 'Dreams' as Category, title: 'Starting a photography studio', location: 'Portland, OR', raised: 160, target: 500 },
- { name: 'Ava Rodriguez', handle: '@avar', initials: 'AR', hue: 'peach', category: 'Fun' as Category, title: 'Taking my first pottery class', location: 'Austin, TX', raised: 75, target: 150 },
- { name: 'James Rivera', handle: '@jamesr', initials: 'JR', hue: 'mint', category: 'Boost' as Category, title: 'New tools for a fresh start', location: 'Denver, CO', raised: 85, target: 200 },
- { name: 'Clara Williams', handle: '@claraw', initials: 'CW', hue: 'lilac', category: 'Treats' as Category, title: 'Coffee, a book, and a little joy', location: 'Seattle, WA', raised: 15, target: 25 },
- { name: 'Noah Thompson', handle: '@noaht', initials: 'NT', hue: 'blue', category: 'Fun' as Category, title: 'My sister’s first concert', location: 'Chicago, IL', raised: 72, target: 180 },
- { name: 'Leah Brooks', handle: '@leahb', initials: 'LB', hue: 'pink', category: 'Dreams' as Category, title: 'A tiny flower studio of my own', location: 'Brooklyn, NY', raised: 340, target: 900 },
+  { name: 'Michael Chen', handle: '@michaelc', initials: 'MC', hue: 'sky', category: 'Dreams' as Category, title: 'Starting a photography studio', location: 'Portland, OR', raised: 160, target: 500 },
+  { name: 'Ava Rodriguez', handle: '@avar', initials: 'AR', hue: 'peach', category: 'Fun' as Category, title: 'Taking my first pottery class', location: 'Austin, TX', raised: 75, target: 150 },
+  { name: 'James Rivera', handle: '@jamesr', initials: 'JR', hue: 'mint', category: 'Boost' as Category, title: 'New tools for a fresh start', location: 'Denver, CO', raised: 85, target: 200 },
+  { name: 'Clara Williams', handle: '@claraw', initials: 'CW', hue: 'lilac', category: 'Treats' as Category, title: 'Coffee, a book, and a little joy', location: 'Seattle, WA', raised: 15, target: 25 },
+  { name: 'Noah Thompson', handle: '@noaht', initials: 'NT', hue: 'blue', category: 'Fun' as Category, title: 'My sister’s first concert', location: 'Chicago, IL', raised: 72, target: 180 },
+  { name: 'Leah Brooks', handle: '@leahb', initials: 'LB', hue: 'pink', category: 'Dreams' as Category, title: 'A tiny flower studio of my own', location: 'Brooklyn, NY', raised: 340, target: 900 },
 ];
 export const testimonials = [
- { quote: 'Sometimes knowing someone believes in your dream is the best gift of all.', name: 'A little belief goes a long way', detail: 'The heart behind Quantum Pond' },
+  { quote: 'Imagine your asks have already been answered.', name: 'Come on in', detail: 'The heart behind Ask Upon A Pond' },
 ];
