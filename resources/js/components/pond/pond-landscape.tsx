@@ -100,10 +100,10 @@ export function PondLandscape({ className = '', mode = 'hero' }: PondLandscapePr
                 <ellipse cx="450" cy="318" rx="470" ry="138" fill="url(#plWater)" />
                 <ellipse cx="450" cy="300" rx="430" ry="100" fill="#1b6fa8" opacity="0.28" />
 
-                {/* Rectangular sun reflection (client mockup style) */}
-                <rect x="422" y="248" width="56" height="78" rx="4" fill="#ffe27a" opacity="0.42" />
-                <rect x="430" y="255" width="40" height="58" rx="3" fill="#fff1a0" opacity="0.35" />
-                <ellipse cx="450" cy="275" rx="48" ry="10" fill="#ffe27a" opacity="0.3" />
+                {/* Soft sun reflection on water */}
+                <ellipse cx="450" cy="268" rx="42" ry="12" fill="#ffe27a" opacity="0.4" />
+                <ellipse cx="450" cy="292" rx="30" ry="8" fill="#fff1a0" opacity="0.28" />
+                <ellipse cx="450" cy="312" rx="18" ry="5" fill="#ffe27a" opacity="0.18" />
 
                 {/* Strong horizontal ripple lines */}
                 <g fill="none" stroke="#9ad4ff" strokeLinecap="round">
@@ -157,12 +157,12 @@ export function PondLandscape({ className = '', mode = 'hero' }: PondLandscapePr
                     <circle cx="0" cy="4" r="5.5" fill="#ffd54a" />
                 </g>
 
-                {/* Bright yellow foreground grass (client mockup) */}
-                <g fill="url(#plGrass)">
-                    <path d="M0 420 L0 340 Q18 300 28 250 Q36 300 42 340 Q50 290 62 240 Q72 300 78 350 Q88 310 98 270 Q108 320 112 360 Q122 300 138 255 Q148 320 152 370 L160 420 Z" opacity="0.95" />
-                    <path d="M12 420 Q22 330 34 280 Q44 340 48 390 Q56 340 70 290 Q80 350 84 400 Q94 350 108 300 Q116 360 120 420 Z" opacity="0.75" />
-                    <path d="M760 420 Q770 350 782 300 Q792 360 798 400 Q808 340 822 290 Q832 360 838 420 Z" opacity="0.55" />
-                    <path d="M820 420 Q832 330 848 270 Q858 340 864 390 Q874 330 890 280 Q898 350 900 420 Z" opacity="0.85" />
+                {/* Soft yellow foreground reeds */}
+                <g fill="url(#plGrass)" opacity="0.9">
+                    <path d="M18 420 Q28 340 38 290 Q46 340 52 380 Q62 330 74 285 Q82 350 88 420 Z" />
+                    <path d="M48 420 Q58 350 70 300 Q78 360 84 400 Q94 340 108 295 Q116 360 122 420 Z" opacity="0.75" />
+                    <path d="M780 420 Q790 350 802 300 Q812 360 818 400 Q828 340 842 290 Q852 360 858 420 Z" opacity="0.55" />
+                    <path d="M830 420 Q842 340 856 290 Q866 350 872 395 Q882 335 896 290 Q900 360 900 420 Z" opacity="0.8" />
                 </g>
             </svg>
 
