@@ -1,13 +1,235 @@
 import { Head, Link } from '@inertiajs/react';
-import { ArrowDownRight, ArrowRight, ArrowUpRight, CheckCircle2, Compass, Gift, Heart, MoveUpRight, ShieldCheck, Sparkles, Users, Waves } from 'lucide-react';
-import { balls, categories, people } from '@/components/pond/data';
-import { Avatar, Brand, CategoryPill, PondMark, Progress, SectionEyebrow } from '@/components/pond/ui';
+import { ArrowRight, ArrowUpRight } from 'lucide-react';
+import { Brand, PondMark } from '@/components/pond/ui';
+
+const giveWays = [
+    {
+        title: 'Dreams',
+        tone: 'dreams',
+        lead: 'Help me make something possible.',
+        detail: 'Dreams, goals, and aspirations, whether big or small.',
+        ball: '/quantum/images/ball-100.png',
+    },
+    {
+        title: 'Fun',
+        tone: 'fun',
+        lead: 'Help support me in enjoying an experience.',
+        detail: 'Hobbies, interests, activities, and experiences you would love to have.',
+        ball: '/quantum/images/ball-10.png',
+    },
+    {
+        title: 'Treats',
+        tone: 'treats',
+        lead: 'Perhaps a coffee, lunch, or something small.',
+        detail: 'Everyday little pleasures, such as coffee, a meal, or a gallon of gas.',
+        ball: '/quantum/images/ball-50.png',
+    },
+    {
+        title: 'Boost',
+        tone: 'boost',
+        lead: 'I get by with a little help from my friends.',
+        detail: 'Where a little help would make a difference: groceries, transportation, bills.',
+        ball: '/quantum/images/ball-20.png',
+    },
+    {
+        title: 'Support a Creator',
+        tone: 'creator',
+        lead: 'Show some love to a creator.',
+        detail: 'Support a YouTuber, streamer, podcaster, artist, or independent creator you enjoy.',
+        ball: '/quantum/images/ball-5.png',
+    },
+    {
+        title: 'Flirt',
+        tone: 'flirt',
+        lead: 'Give and receive!',
+        detail: 'Enable flirtation and find out.',
+        ball: '/quantum/images/ball-500.png',
+    },
+];
+
+const steps = [
+    {
+        number: '01',
+        title: 'Show up as yourself',
+        body: 'Create a profile around your Dreams, Fun, and the things that make you, you.',
+        ball: '/quantum/images/ball-100.png',
+    },
+    {
+        number: '02',
+        title: 'Discover your people',
+        body: 'Explore stories, celebrate someone, make connections.',
+        ball: '/quantum/images/ball-10.png',
+    },
+    {
+        number: '03',
+        title: 'Keep the balls rolling',
+        body: 'Give a ball. Get a ball. Pass one along. See what happens.',
+        ball: '/quantum/images/ball-20.png',
+    },
+];
+
+const faqs = [
+    { q: 'Is it social media?', a: 'Kind of!' },
+    { q: 'Is it crowdfunding?', a: 'You bet!' },
+    { q: 'Is it a dating site?', a: 'Enable flirtation and find out!' },
+    { q: 'Is it like Venmo or PayPal?', a: 'Yep! Send someone money through the Pond!' },
+];
 
 export default function Welcome() {
- return <div className="pond-home"><Head title="A ripple of kindness can change everything"/><div className="pond-home-hero-wrap"><nav className="pond-public-nav"><Brand dark/><div className="pond-public-links"><a href="#how-it-works">How it works</a><a href="#explore">Explore</a><a href="#our-story">Our story</a></div><div className="pond-public-auth"><Link href="/login" className="pond-nav-login">Log in</Link><Link href="/register" className="pond-btn pond-btn-light">Join the pond <ArrowUpRight size={16}/></Link></div></nav><div className="pond-home-hero"><div className="pond-hero-left"><span className="pond-hero-pill"><span className="hero-dot"/> A COMMUNITY BUILT ON KINDNESS</span><h1>One little ripple.<br/><em>Endless possibilities.</em></h1><p>A beautiful place to share your dreams, celebrate life's little joys, and make kindness a part of every day. Because when we lift each other, magic happens.</p><div className="pond-hero-ctas"><Link href="/register" className="pond-btn pond-btn-glow">Join our community <ArrowRight size={18}/></Link><Link href="/preview/feed" className="pond-hero-outline">Explore the pond <ArrowUpRight size={16}/></Link></div><div className="pond-hero-trust"><div className="pond-mini-avatars"><Avatar name="Sarah Mitchell" hue="peach"/><Avatar name="Michael Chen" hue="lilac"/><Avatar name="James Rivera" hue="mint"/><Avatar name="Clara Williams" hue="sky"/></div><span>A space to belong, connect & give</span></div></div><div className="pond-hero-art"><div className="pond-art-orbit orbit-one"/><div className="pond-art-orbit orbit-two"/><img className="pond-home-orb orb-a" src="/quantum/images/ball-5000.png" alt="Glowing violet Quantum Ball"/><img className="pond-home-orb orb-b" src="/quantum/images/ball-20.png" alt="Glowing green Quantum Ball"/><img className="pond-home-orb orb-c" src="/quantum/images/ball-5.png" alt="Glowing pink Quantum Ball"/><img className="pond-home-orb orb-d" src="/quantum/images/ball-2.png" alt="Glowing aqua Quantum Ball"/><div className="pond-glass-note"><span className="glass-sparkle"><Heart size={17}/></span><div><strong>Little acts. Big impact.</strong><span>Kindness is making waves ✨</span></div></div><div className="pond-art-caption">YOUR GENEROSITY CREATES THE MAGIC</div></div></div><div className="pond-hero-bottom"><span><span className="dot-olive"/> A KINDER KIND OF SOCIAL NETWORK</span><a href="#how-it-works">Discover how it works <ArrowDownRight size={17}/></a></div></div>
- <div className="pond-home-main"><section className="pond-intro-section" id="how-it-works"><div className="pond-intro-top"><div><SectionEyebrow>THE QUANTUM POND WAY</SectionEyebrow><h2>A little more human.<br/><em>A lot more heart.</em></h2></div><p>Social connection should feel like something good. Share what matters to you, find your people, and turn even the smallest gesture into a meaningful moment.</p></div><div className="pond-step-grid"><div className="pond-step"><span className="step-number">01</span><div className="step-symbol step-symbol-purple"><Users size={26}/></div><h3>Show up as yourself</h3><p>Create a profile around your Dreams, Fun, Treats and Boost — the things that make you, you.</p></div><div className="pond-step"><span className="step-number">02</span><div className="step-symbol step-symbol-blue"><Compass size={26}/></div><h3>Discover your people</h3><p>Explore honest stories, celebrate someone's win, and find connections that feel real.</p></div><div className="pond-step"><span className="step-number">03</span><div className="step-symbol step-symbol-pink"><Gift size={26}/></div><h3>Make a ripple</h3><p>Brighten someone's day with a Quantum Ball. Big gestures or tiny treats — all kindness counts.</p></div></div></section>
- <section className="pond-category-section"><div className="pond-center-intro"><SectionEyebrow>WHAT MAKES YOU, YOU</SectionEyebrow><h2>There's more than one way<br/>to <em>make someone's day.</em></h2><p>Four simple windows into what matters most to each of us.</p></div><div className="pond-category-grid">{categories.map(({title,subtitle,description,icon:Icon,tone})=><article className={`pond-category-card category-${tone}`} key={title}><div className="pond-category-icon"><Icon size={26}/></div><span>0{categories.findIndex(c=>c.title===title)+1} / THE GOOD STUFF</span><h3>{title}</h3><strong>{subtitle}</strong><p>{description}</p><Link href="/preview/explore">Explore {title.toLowerCase()} <ArrowUpRight size={16}/></Link></article>)}</div></section>
- <section className="pond-home-visual" id="explore"><div className="pond-home-visual-text"><SectionEyebrow>THE LITTLE GIFTS THAT KEEP GIVING</SectionEyebrow><h2>Send a little<br/><em>bit of magic.</em></h2><p>From a $2 thought to a truly extraordinary act, Quantum Balls turn giving into something memorable, heartfelt, and uniquely you.</p><div className="pond-feature-point"><CheckCircle2 size={19}/> Choose a Quantum Ball</div><div className="pond-feature-point"><CheckCircle2 size={19}/> Celebrate someone else's journey</div><div className="pond-feature-point"><CheckCircle2 size={19}/> Let kindness ripple through the pond</div><Link href="/preview/balls" className="pond-btn pond-btn-primary">Explore Quantum Balls <ArrowRight size={17}/></Link></div><div className="pond-home-visual-panel"><div className="pond-visual-header"><span>✦ THE QUANTUM COLLECTION</span><span>15 ways to give</span></div><div className="pond-ball-feature-grid">{balls.slice(0,6).map(ball=><Link href="/preview/balls" className="pond-feature-ball" key={ball.value}><img src={`/quantum/images/ball-${ball.value}.png`} alt={`${ball.name} Quantum Ball`}/><strong>${ball.value}</strong></Link>)}</div><p>Every ball holds a little possibility ✨</p></div></section>
- <section className="pond-community-section"><div><SectionEyebrow>REAL PEOPLE · REAL POSSIBILITY</SectionEyebrow><h2>Behind every dream,<br/><em>there's a person.</em></h2><p>Explore the community through the moments and hopes members choose to share.</p><Link href="/preview/explore" className="pond-btn pond-btn-outline-dark">Meet the community <ArrowRight size={17}/></Link></div><div className="pond-feature-member-cards">{people.slice(0,3).map(m=><div className="pond-member-mini" key={m.name}><div className="pond-member-mini-head"><Avatar name={m.name} hue={m.hue}/><div><strong>{m.name}</strong><span>{m.location}</span></div><CategoryPill category={m.category}/></div><h3>{m.title}</h3><div className="pond-member-mini-bottom"><span>${m.raised} of ${m.target}</span><span>{Math.round(m.raised/m.target*100)}%</span></div><Progress value={m.raised} max={m.target}/></div>)}</div></section>
- <section className="pond-final-cta" id="our-story"><PondMark/><SectionEyebrow>YOUR PLACE IN THE POND IS WAITING</SectionEyebrow><h2>Good things grow<br/>when we <em>grow together.</em></h2><p>Come as you are. Bring your story. Find your people. Your next beautiful ripple starts here.</p><Link href="/register" className="pond-btn pond-btn-glow">Find your place <ArrowRight size={17}/></Link><div className="pond-cta-stars">✧ ✦ ✧</div></section></div><footer className="pond-public-footer"><Brand dark/><span>Goodness creates ripples. © 2026 Quantum Pond.</span><div><Link href="/preview/feed">The Pond</Link><Link href="/preview/profile">Profile preview</Link><Link href="/login">Log in</Link></div></footer></div>;
+    return (
+        <div className="pond-home askupon-home">
+            <Head title="Ask Upon A Pond — Toss a ball in the Pond" />
+
+            <div className="askupon-hero">
+                <div className="askupon-hero-sky" aria-hidden="true" />
+                <div className="askupon-hero-grain" aria-hidden="true" />
+
+                <nav className="askupon-nav">
+                    <Brand dark />
+                    <div className="askupon-nav-actions">
+                        <Link href="/login" className="askupon-login">
+                            Log in
+                        </Link>
+                        <Link href="/register" className="askupon-btn askupon-btn-pink">
+                            Join the Pond <ArrowRight size={16} />
+                        </Link>
+                    </div>
+                </nav>
+
+                <div className="askupon-hero-main">
+                    <p className="askupon-script">Balls, Balls, Balls!</p>
+                    <h1>
+                        <span className="askupon-brush">Toss a ball in the Pond!</span>
+                    </h1>
+                    <p className="askupon-hero-tag">
+                        Give one to a friend, a stranger, or even a flirt!
+                    </p>
+
+                    <div className="askupon-pond-stage" aria-hidden="true">
+                        <div className="askupon-pond-water" />
+                        <div className="askupon-pond-sun" />
+                        <div className="askupon-pond-trees askupon-pond-trees-left" />
+                        <div className="askupon-pond-trees askupon-pond-trees-right" />
+                        <img className="askupon-float-ball ball-a" src="/quantum/images/ball-100.png" alt="" />
+                        <img className="askupon-float-ball ball-b" src="/quantum/images/ball-10.png" alt="" />
+                        <img className="askupon-float-ball ball-c" src="/quantum/images/ball-50.png" alt="" />
+                        <img className="askupon-float-ball ball-d" src="/quantum/images/ball-20.png" alt="" />
+                        <img className="askupon-float-ball ball-e" src="/quantum/images/ball-5.png" alt="" />
+                        <img className="askupon-float-ball ball-f" src="/quantum/images/ball-500.png" alt="" />
+                    </div>
+
+                    <div className="askupon-faq-strip">
+                        {faqs.map((item) => (
+                            <div key={item.q}>
+                                <strong>{item.q}</strong>
+                                <em>{item.a}</em>
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className="askupon-hero-ctas">
+                        <Link href="/register" className="askupon-btn askupon-btn-pink askupon-btn-lg">
+                            Join the Pond <ArrowRight size={18} />
+                        </Link>
+                        <Link href="/preview/balls" className="askupon-btn askupon-btn-ghost askupon-btn-lg">
+                            Explore the Balls <ArrowUpRight size={18} />
+                        </Link>
+                    </div>
+
+                    <p className="askupon-room">
+                        <PondMark small /> There&apos;s room for everyone in this Pond.
+                    </p>
+                </div>
+            </div>
+
+            <section className="askupon-imagine">
+                <div className="askupon-imagine-copy">
+                    <h2>Imagine your asks have already been answered.</h2>
+                    <p>And sign up while feeling that feeling.</p>
+                    <Link href="/register" className="askupon-come-in">
+                        Come on in!
+                    </Link>
+                </div>
+                <div className="askupon-pie-wrap" aria-hidden="true">
+                    <div className="askupon-pie">
+                        <span className="askupon-pie-crust" />
+                        <span className="askupon-pie-lattice" />
+                        <span className="askupon-pie-slice" />
+                    </div>
+                </div>
+            </section>
+
+            <section className="askupon-motto" id="how-it-works">
+                <h2>
+                    <span className="askupon-brush askupon-brush-light">
+                        The pond as pie, pie as pond.
+                    </span>
+                </h2>
+                <p>
+                    Together, we can expand the pond, the pie, and all have a swim or a
+                    slice—however you want to say it!
+                </p>
+            </section>
+
+            <section className="askupon-steps">
+                {steps.map((step) => (
+                    <article key={step.number} className="askupon-step">
+                        <img src={step.ball} alt="" />
+                        <div>
+                            <h3>
+                                <span>{step.number}</span> {step.title}
+                            </h3>
+                            <p>{step.body}</p>
+                        </div>
+                    </article>
+                ))}
+            </section>
+
+            <section className="askupon-ways" id="explore">
+                <div className="askupon-ways-head">
+                    <h2>There&apos;s more than one way to make someone&apos;s day.</h2>
+                    <p>Six simple ways to give a little support, fun, or love.</p>
+                </div>
+                <div className="askupon-ways-grid">
+                    {giveWays.map((way) => (
+                        <article key={way.title} className={`askupon-way way-${way.tone}`}>
+                            <img src={way.ball} alt="" />
+                            <div>
+                                <h3>{way.title}</h3>
+                                <strong>{way.lead}</strong>
+                                <p>{way.detail}</p>
+                            </div>
+                        </article>
+                    ))}
+                </div>
+                <div className="askupon-ways-ctas">
+                    <Link href="/register" className="askupon-btn askupon-btn-pink askupon-btn-lg">
+                        Join the Pond <ArrowRight size={18} />
+                    </Link>
+                    <Link href="/preview/balls" className="askupon-btn askupon-btn-navy askupon-btn-lg">
+                        Explore the Balls <ArrowUpRight size={18} />
+                    </Link>
+                </div>
+            </section>
+
+            <section className="askupon-final">
+                <PondMark />
+                <h2>Come on in. The Pond&apos;s waiting.</h2>
+                <p>Show up as yourself. Toss a ball. Find your people.</p>
+                <Link href="/register" className="askupon-btn askupon-btn-pink askupon-btn-lg">
+                    Join the Pond <ArrowRight size={18} />
+                </Link>
+            </section>
+
+            <footer className="askupon-footer">
+                <Brand />
+                <span>© 2026 Ask Upon A Pond · askuponapond.com</span>
+                <div>
+                    <Link href="/preview/feed">The Pond</Link>
+                    <Link href="/preview/balls">The Balls</Link>
+                    <Link href="/login">Log in</Link>
+                </div>
+            </footer>
+        </div>
+    );
 }

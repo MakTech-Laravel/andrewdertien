@@ -24,6 +24,13 @@ export default defineConfig({
                 bunny('DM Sans', {
                     weights: [400, 500, 600, 700],
                 }),
+                bunny('Fraunces', {
+                    weights: [600, 700],
+                    styles: ['normal', 'italic'],
+                }),
+                bunny('Caveat', {
+                    weights: [600, 700],
+                }),
             ],
         }),
         inertia(),

@@ -28,7 +28,7 @@ export default function AuthPondLayout({
 
             <div className="pond-auth-card">
                 <div className="pond-auth-head">
-                    <SectionEyebrow>Quantum Pond</SectionEyebrow>
+                    <SectionEyebrow>Ask Upon A Pond</SectionEyebrow>
                     <h1>{title}</h1>
                     {description && <p>{description}</p>}
                 </div>
@@ -37,10 +37,9 @@ export default function AuthPondLayout({
 
             <p className="pond-auth-tagline">
                 <strong>
-                    One little ripple. <em>Endless possibilities.</em>
+                    Imagine your asks have <em>already been answered.</em>
                 </strong>
-                Small acts of giving, shared with a community that makes every
-                ripple count.
+                Sign up while feeling that feeling. Come on in!
             </p>
         </div>
     );

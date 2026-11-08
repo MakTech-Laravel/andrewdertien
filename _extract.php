@@ -1,4 +1,12 @@
-<?php
-$p = new Phar('C:/ProgramData/ComposerSetup/bin/composer.phar');
-file_put_contents('_locker.php', $p['src/Composer/Package/Locker.php']->getContent());
-echo "ok\n";
+﻿<?php
+
+$pdf = file_get_contents(__DIR__.'/client-attachments/Askupon.pdf');
+
+preg_match_all('/\(((?:\\\\.|[^\\\\)])*)\)\s*Tj/s', $pdf, $matches);
+
+$out = '';
+foreach ($matches[1] as $text) {
+    $out .= stripcslashes($text);
+}
+
+echo $out, PHP_EOL;
