@@ -1,6 +1,6 @@
-/* Animated hero, drifting balls and scroll reveals on the public website */
+/* Hero pond, balls on the lawn and scroll reveals on the public website */
 
-/* ── Hero stage: static artwork until the live scene is ready ───────────── */
+/* ── Hero: golf balls floating on a real golf course pond ───────────────── */
 .ln-stage {
     position: relative;
     width: min(100%, 1080px);
@@ -8,128 +8,157 @@
     overflow: hidden;
     border-radius: 28px;
     isolation: isolate;
-    background: #16489a;
+    background: #0b3f96;
     box-shadow: 0 18px 44px #00296526
 }
 
-.ln-stage-art,
-.ln-stage-sky {
+/* The client's artwork, with only the water and sun moving. */
+.ln-stage-art {
     position: absolute;
-    left: 0;
+    inset: 0;
     width: 100%;
+    height: 100%;
+    object-fit: cover;
     display: block
 }
 
-.ln-stage-art {
-    top: 0;
-    height: 100%;
-    object-fit: cover;
-    z-index: 1;
-    transition: opacity .7s
-}
-
-.ln-stage-sky {
-    top: 0;
-    height: 30%;
-    object-fit: cover;
-    opacity: 0
-}
-
-.ln-stage-canvas {
-    position: absolute;
-    inset: 0;
-    z-index: 2;
-    opacity: 0;
-    transition: opacity .7s
-}
-
-.ln-stage-canvas canvas {
-    display: block;
-    width: 100%;
-    height: 100%;
-    cursor: pointer;
-    touch-action: pan-y
-}
-
-.ln-stage.is-live .ln-stage-art {
-    opacity: 0
-}
-
-.ln-stage.is-live .ln-stage-sky,
-.ln-stage.is-live .ln-stage-canvas {
-    opacity: 1
-}
-
-.ln-stage-hint {
+.ln-stage-sun {
     position: absolute;
     left: 50%;
-    bottom: 14px;
-    z-index: 3;
-    transform: translateX(-50%);
-    margin: 0;
-    padding: 7px 16px;
-    border-radius: 999px;
-    background: #002446b8;
-    color: #fff;
-    font-size: 14px;
-    font-weight: 700;
-    white-space: nowrap;
+    top: 26%;
+    width: 42%;
+    aspect-ratio: 1;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, #fff2b866 0, #ffd76a33 28%, transparent 62%);
+    mix-blend-mode: screen;
     pointer-events: none;
-    backdrop-filter: blur(6px);
-    transition: opacity .5s
+    animation: ln-sun-glow 7s ease-in-out infinite
 }
 
-.ln-stage-hint.is-done {
-    opacity: 0
+@keyframes ln-sun-glow {
+
+    0%,
+    100% {
+        opacity: .45;
+        scale: .96
+    }
+
+    50% {
+        opacity: 1;
+        scale: 1.04
+    }
 }
 
-/* Only appears for keyboard users; pointer users click the water itself. */
-.ln-stage-toss {
+/* Light moving across the water, strongest in the sun's reflection. */
+.ln-stage-shimmer {
     position: absolute;
-    left: 50%;
-    bottom: 14px;
-    z-index: 4;
-    transform: translateX(-50%);
-    padding: 9px 18px;
-    border: 2px solid #fff;
-    border-radius: 999px;
-    background: #fc036c;
-    color: #fff;
-    font-size: 14px;
-    font-weight: 800;
-    white-space: nowrap;
-    opacity: 0;
-    pointer-events: none
+    left: 0;
+    right: 0;
+    top: 34%;
+    bottom: 0;
+    overflow: hidden;
+    pointer-events: none;
+    mix-blend-mode: screen;
+    -webkit-mask-image: radial-gradient(ellipse 62% 90% at 50% 18%, #000 0, #0009 45%, #0000 100%);
+    mask-image: radial-gradient(ellipse 62% 90% at 50% 18%, #000 0, #0009 45%, #0000 100%)
 }
 
-.ln-stage-toss:focus {
-    opacity: 1;
-    pointer-events: auto;
-    outline: 3px solid #fff;
-    outline-offset: 2px
+.ln-stage-shimmer::before {
+    content: '';
+    position: absolute;
+    inset: -30% -10%;
+    background: repeating-linear-gradient(176deg, #ffffff00 0 9px, #ffe9b52e 11px, #ffffff00 14px 23px, #bfe6ff24 25px, #ffffff00 29px 38px);
+    animation: ln-water-drift 9s ease-in-out infinite alternate
 }
 
-/* ── Drifting balls behind the Join and Explore buttons ─────────────────── */
+@keyframes ln-water-drift {
+    from {
+        transform: translate3d(-1.5%, -4px, 0)
+    }
+
+    to {
+        transform: translate3d(1.5%, 8px, 0)
+    }
+}
+
+/* A soft ring leaving each ball, matching the rings painted in the artwork. */
+.ln-stage-ripple {
+    position: absolute;
+    aspect-ratio: 7.5;
+    transform: translate(-50%, -50%);
+    border: 2px solid #ffffffb3;
+    border-radius: 50%;
+    pointer-events: none;
+    animation: ln-ring-out 6.5s ease-out infinite
+}
+
+@keyframes ln-ring-out {
+    0% {
+        opacity: 0;
+        scale: .82
+    }
+
+    18% {
+        opacity: .7
+    }
+
+    100% {
+        opacity: 0;
+        scale: 1.34
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .ln-stage-sun,
+    .ln-stage-shimmer::before,
+    .ln-stage-ripple {
+        animation: none
+    }
+
+    .ln-stage-ripple {
+        display: none
+    }
+}
+
+@media (max-width: 600px) {
+    .ln-stage-ripple {
+        border-width: 1px
+    }
+}
+
+/* ── Balls resting on the grass beside the Join and Explore buttons ──────── */
 .ln-cta-panel {
     position: relative;
     overflow: hidden
 }
 
-.ln-cta-panel>.ln-btn {
-    position: relative;
-    z-index: 1
-}
-
-.ln-cta-balls {
+.ln-lawn {
     position: absolute;
     inset: 0;
     pointer-events: none
 }
 
-.ln-cta-balls canvas {
-    display: block;
-    width: 100%;
-    height: 100%
+.ln-lawn img {
+    position: absolute;
+    bottom: 26%;
+    filter: drop-shadow(0 12px 8px #00140ab3)
+}
+
+.ln-lawn img:nth-child(2),
+.ln-lawn img:nth-child(5) {
+    bottom: 12%
+}
+
+.ln-lawn img:nth-child(3),
+.ln-lawn img:nth-child(4) {
+    bottom: 36%
+}
+
+@media (max-width: 1180px) {
+    .ln-lawn {
+        display: none
+    }
 }
 
 /* ── Scroll reveals ─────────────────────────────────────────────────────── */
@@ -160,14 +189,13 @@
 .ln-tile img,
 .ln-step img,
 .ln-way>img {
-    transition: scale .35s cubic-bezier(.3, 1.6, .5, 1), rotate .5s ease
+    transition: scale .35s cubic-bezier(.3, 1.6, .5, 1)
 }
 
 .ln-tile:hover img,
 .ln-step:hover img,
 .ln-way:hover>img {
     scale: 1.09;
-    rotate: -14deg
 }
 
 .ln-tile img {
@@ -234,7 +262,6 @@
     .ln-step:hover img,
     .ln-way:hover>img {
         scale: 1;
-        rotate: 0deg
     }
 
     .ln-step:hover {
@@ -256,7 +283,7 @@
 
 /* ── Golf course pond: the six ways and the call to action share one scene ── */
 .ln-course {
-    background: #0d55bb url('/askupon/golf-course-pond.jpg') center 85% / cover no-repeat
+    background: #1d2f24 url('/askupon/pond-reeds-sunset.jpg') center 60% / cover no-repeat
 }
 
 .ln-page .ln-ways,
@@ -269,10 +296,15 @@
 }
 
 .ln-page .ln-ways-card {
-    background: #03224fd9;
+    background: #03224f99;
     border-color: #ffffff38;
     box-shadow: 0 24px 60px #00143a59;
-    backdrop-filter: blur(10px) saturate(1.15)
+    backdrop-filter: blur(3px) saturate(1.1)
+}
+
+.ln-page .ln-way strong,
+.ln-page .ln-way p {
+    text-shadow: 0 1px 4px #00143acc
 }
 
 .ln-page .ln-way p {
@@ -334,9 +366,6 @@
 
 /* A phone has no room beside the buttons, so the drifting balls would only hide behind them. */
 @media (max-width: 700px) {
-    .ln-cta-balls {
-        display: none
-    }
 
     .ln-page .ln-cta-panel {
         padding-bottom: 56px
@@ -358,5 +387,12 @@
 @media (max-width: 700px) {
     .ln-page .ln-sunset {
         background-position: center, 62% center
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .ln-tile img {
+        animation: none
     }
 }

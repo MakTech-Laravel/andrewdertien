@@ -145,7 +145,7 @@ test('each category has its own golf ball, which starter ponds use', function ()
 
     expect(array_unique($balls))->toHaveCount(count(PondCategory::cases()))
         ->and(array_diff($balls, array_keys(Pond::artwork())))->toBe([])
-        ->and(Pond::where('category', 'fun')->first()->toCard()['image_url'])->toBe('/askupon/balls/golf-sky.png');
+        ->and(Pond::where('category', 'fun')->first()->toCard()['image_url'])->toBe('/askupon/balls/golf-sky.svg');
 });
 
 test('the artwork migration moves existing ponds onto their category golf ball', function () {

@@ -1,7 +1,7 @@
 import { Head, Link, usePage } from '@inertiajs/react';
 import { ArrowRight, ArrowUpRight, Play } from 'lucide-react';
 import type { PondCard } from '@/components/pond/commerce';
-import { FloatingBallsBackdrop, PondHeroScene, useScrollReveal } from '@/components/pond/pond-motion';
+import { LawnBalls, PondHeroScene, useScrollReveal } from '@/components/pond/pond-motion';
 import { PublicPondGrid } from '@/components/pond/public-pond-grid';
 import { PublicNavActions } from '@/components/pond/public-shell';
 import { Brand, PondMark } from '@/components/pond/ui';
@@ -33,7 +33,7 @@ const ways = [
 ];
 
 function golfBall(color: string): string {
-    return `/askupon/balls/golf-${color}.png`;
+    return `/askupon/balls/golf-${color}.svg`;
 }
 
 export default function Welcome({ ponds = [] }: { ponds?: PondCard[] }) {
@@ -180,7 +180,7 @@ export default function Welcome({ ponds = [] }: { ponds?: PondCard[] }) {
                 </section>
 
                 <section className="ln-cta-panel">
-                    <FloatingBallsBackdrop />
+                    <LawnBalls />
                     <div className="ln-cta-actions">
                         <Link href={joinHref} className="ln-btn ln-btn-join">
                             Join the Pond <ArrowRight size={20} />

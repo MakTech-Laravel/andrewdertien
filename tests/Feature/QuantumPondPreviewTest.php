@@ -19,11 +19,25 @@ it('includes the three.js dependency for pond animations', function () {
     expect($package['dependencies']['three'] ?? null)->not->toBeNull();
 });
 
-it('ships the artwork the animated hero and its static fallback need', function () {
+it('ships the real photos and golf balls the landing page needs', function () {
     expect(file_exists(public_path('askupon/scene-sunrise.jpg')))->toBeTrue()
-        ->and(file_exists(public_path('askupon/scene-sky.jpg')))->toBeTrue()
-        ->and(file_exists(public_path('askupon/golf-course-pond.jpg')))->toBeTrue()
-        ->and(file_exists(public_path('askupon/golf-course-sunset.jpg')))->toBeTrue();
+        ->and(file_exists(public_path('askupon/pond-reeds-sunset.jpg')))->toBeTrue()
+        ->and(file_exists(public_path('askupon/golf-course-sunset.jpg')))->toBeTrue()
+        ->and(file_exists(public_path('askupon/balls/golf-white.svg')))->toBeTrue();
+});
+
+it('does not use 3D anywhere in the website code', function () {
+    $files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator(resource_path('js/pages'), FilesystemIterator::SKIP_DOTS));
+
+    foreach ($files as $file) {
+        expect(file_get_contents($file->getPathname()))->not->toContain("from 'three'");
+    }
+
+    $components = new RecursiveIteratorIterator(new RecursiveDirectoryIterator(resource_path('js/components'), FilesystemIterator::SKIP_DOTS));
+
+    foreach ($components as $file) {
+        expect(file_get_contents($file->getPathname()))->not->toContain("from 'three'");
+    }
 });
 
 it('redirects guests from the dashboard to login', function () {

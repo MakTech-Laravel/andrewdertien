@@ -49,7 +49,7 @@ class Pond extends Model
         $artwork = [];
 
         foreach (self::GOLF_BALLS as $color) {
-            $artwork["golf-{$color}"] = "/askupon/balls/golf-{$color}.png";
+            $artwork["golf-{$color}"] = "/askupon/balls/golf-{$color}.svg";
         }
 
         foreach (self::MARBLES as $value) {
