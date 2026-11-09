@@ -19,6 +19,13 @@ it('includes the three.js dependency for pond animations', function () {
     expect($package['dependencies']['three'] ?? null)->not->toBeNull();
 });
 
+it('ships the artwork the animated hero and its static fallback need', function () {
+    expect(file_exists(public_path('askupon/scene-sunrise.jpg')))->toBeTrue()
+        ->and(file_exists(public_path('askupon/scene-sky.jpg')))->toBeTrue()
+        ->and(file_exists(public_path('askupon/golf-course-pond.jpg')))->toBeTrue()
+        ->and(file_exists(public_path('askupon/golf-course-sunset.jpg')))->toBeTrue();
+});
+
 it('redirects guests from the dashboard to login', function () {
     $this->get('/dashboard')->assertRedirect(route('login'));
 });

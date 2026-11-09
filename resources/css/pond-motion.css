@@ -1,0 +1,362 @@
+/* Animated hero, drifting balls and scroll reveals on the public website */
+
+/* ── Hero stage: static artwork until the live scene is ready ───────────── */
+.ln-stage {
+    position: relative;
+    width: min(100%, 1080px);
+    aspect-ratio: 1075 / 460;
+    overflow: hidden;
+    border-radius: 28px;
+    isolation: isolate;
+    background: #16489a;
+    box-shadow: 0 18px 44px #00296526
+}
+
+.ln-stage-art,
+.ln-stage-sky {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    display: block
+}
+
+.ln-stage-art {
+    top: 0;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    transition: opacity .7s
+}
+
+.ln-stage-sky {
+    top: 0;
+    height: 30%;
+    object-fit: cover;
+    opacity: 0
+}
+
+.ln-stage-canvas {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    opacity: 0;
+    transition: opacity .7s
+}
+
+.ln-stage-canvas canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    touch-action: pan-y
+}
+
+.ln-stage.is-live .ln-stage-art {
+    opacity: 0
+}
+
+.ln-stage.is-live .ln-stage-sky,
+.ln-stage.is-live .ln-stage-canvas {
+    opacity: 1
+}
+
+.ln-stage-hint {
+    position: absolute;
+    left: 50%;
+    bottom: 14px;
+    z-index: 3;
+    transform: translateX(-50%);
+    margin: 0;
+    padding: 7px 16px;
+    border-radius: 999px;
+    background: #002446b8;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    white-space: nowrap;
+    pointer-events: none;
+    backdrop-filter: blur(6px);
+    transition: opacity .5s
+}
+
+.ln-stage-hint.is-done {
+    opacity: 0
+}
+
+/* Only appears for keyboard users; pointer users click the water itself. */
+.ln-stage-toss {
+    position: absolute;
+    left: 50%;
+    bottom: 14px;
+    z-index: 4;
+    transform: translateX(-50%);
+    padding: 9px 18px;
+    border: 2px solid #fff;
+    border-radius: 999px;
+    background: #fc036c;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 800;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none
+}
+
+.ln-stage-toss:focus {
+    opacity: 1;
+    pointer-events: auto;
+    outline: 3px solid #fff;
+    outline-offset: 2px
+}
+
+/* ── Drifting balls behind the Join and Explore buttons ─────────────────── */
+.ln-cta-panel {
+    position: relative;
+    overflow: hidden
+}
+
+.ln-cta-panel>.ln-btn {
+    position: relative;
+    z-index: 1
+}
+
+.ln-cta-balls {
+    position: absolute;
+    inset: 0;
+    pointer-events: none
+}
+
+.ln-cta-balls canvas {
+    display: block;
+    width: 100%;
+    height: 100%
+}
+
+/* ── Scroll reveals ─────────────────────────────────────────────────────── */
+.ln-reveal {
+    opacity: 0;
+    translate: 0 22px;
+    transition: opacity .6s ease, translate .6s cubic-bezier(.2, .7, .2, 1)
+}
+
+.ln-reveal.is-revealed {
+    opacity: 1;
+    translate: 0 0
+}
+
+.ln-tile:nth-child(3n+2).ln-reveal {
+    transition-delay: .08s
+}
+
+.ln-tile:nth-child(3n).ln-reveal {
+    transition-delay: .16s
+}
+
+.ln-way:nth-child(even).ln-reveal {
+    transition-delay: .08s
+}
+
+/* ── Balls that respond ─────────────────────────────────────────────────── */
+.ln-tile img,
+.ln-step img,
+.ln-way>img {
+    transition: scale .35s cubic-bezier(.3, 1.6, .5, 1), rotate .5s ease
+}
+
+.ln-tile:hover img,
+.ln-step:hover img,
+.ln-way:hover>img {
+    scale: 1.09;
+    rotate: -14deg
+}
+
+.ln-tile img {
+    animation: ln-bob 4.2s ease-in-out infinite
+}
+
+.ln-tile:nth-child(2) img {
+    animation-delay: -.7s
+}
+
+.ln-tile:nth-child(3) img {
+    animation-delay: -1.4s
+}
+
+.ln-tile:nth-child(4) img {
+    animation-delay: -2.1s
+}
+
+.ln-tile:nth-child(5) img {
+    animation-delay: -2.8s
+}
+
+.ln-tile:nth-child(6) img {
+    animation-delay: -3.5s
+}
+
+@keyframes ln-bob {
+
+    0%,
+    100% {
+        translate: 0 0
+    }
+
+    50% {
+        translate: 0 -6px
+    }
+}
+
+.ln-step,
+.ln-way {
+    transition: transform .2s ease, box-shadow .2s ease
+}
+
+.ln-step:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 26px #00296514
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .ln-tile img {
+        animation: none
+    }
+
+    .ln-tile img,
+    .ln-step img,
+    .ln-way>img,
+    .ln-step,
+    .ln-way {
+        transition: none
+    }
+
+    .ln-tile:hover img,
+    .ln-step:hover img,
+    .ln-way:hover>img {
+        scale: 1;
+        rotate: 0deg
+    }
+
+    .ln-step:hover {
+        transform: none
+    }
+}
+
+@media (max-width: 600px) {
+    .ln-stage {
+        border-radius: 18px
+    }
+
+    .ln-stage-hint {
+        bottom: 8px;
+        padding: 4px 11px;
+        font-size: 11px
+    }
+}
+
+/* ── Golf course pond: the six ways and the call to action share one scene ── */
+.ln-course {
+    background: #0d55bb url('/askupon/golf-course-pond.jpg') center 85% / cover no-repeat
+}
+
+.ln-page .ln-ways,
+.ln-page .ln-cta-panel {
+    background: none
+}
+
+.ln-page .ln-ways {
+    padding: 72px 20px 28px
+}
+
+.ln-page .ln-ways-card {
+    background: #03224fd9;
+    border-color: #ffffff38;
+    box-shadow: 0 24px 60px #00143a59;
+    backdrop-filter: blur(10px) saturate(1.15)
+}
+
+.ln-page .ln-way p {
+    color: #eef5fd
+}
+
+.ln-page .ln-cta-panel {
+    padding: 26px 20px 96px
+}
+
+.ln-cta-actions {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    width: 100%
+}
+
+.ln-cta-actions .ln-btn {
+    min-width: 270px;
+    justify-content: center
+}
+
+.ln-page .ln-btn-join {
+    box-shadow: 0 14px 30px #00143a59
+}
+
+.ln-page .ln-cta-actions .ln-btn-explore {
+    background: #ffffff;
+    border-color: #ffffff;
+    color: #0041a7;
+    box-shadow: 0 14px 30px #00143a40
+}
+
+@media (max-width: 700px) {
+    .ln-course {
+        background-position: 55% bottom
+    }
+
+    .ln-page .ln-ways {
+        padding: 40px 14px 18px
+    }
+
+    .ln-page .ln-cta-panel {
+        padding: 16px 20px 76px
+    }
+
+    .ln-cta-actions {
+        flex-direction: column;
+        align-items: center
+    }
+
+    .ln-cta-actions .ln-btn {
+        width: min(100%, 420px)
+    }
+}
+
+/* A phone has no room beside the buttons, so the drifting balls would only hide behind them. */
+@media (max-width: 700px) {
+    .ln-cta-balls {
+        display: none
+    }
+
+    .ln-page .ln-cta-panel {
+        padding-bottom: 56px
+    }
+}
+
+/* ── Sunset section: real golf course photo (Andrew Shelley, Pexels) ───────── */
+.ln-page .ln-sunset {
+    background:
+        linear-gradient(180deg, #00244673 0%, #00244626 24%, #0024460d 50%, #00244659 78%, #002446b8 100%),
+        #002446 url('/askupon/golf-course-sunset.jpg') center / cover no-repeat
+}
+
+.ln-page .ln-sunset-tag,
+.ln-page .ln-wordmark span {
+    text-shadow: 0 2px 14px #002446b3
+}
+
+@media (max-width: 700px) {
+    .ln-page .ln-sunset {
+        background-position: center, 62% center
+    }
+}

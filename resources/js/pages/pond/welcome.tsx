@@ -1,6 +1,7 @@
 import { Head, Link, usePage } from '@inertiajs/react';
 import { ArrowRight, ArrowUpRight, Play } from 'lucide-react';
 import type { PondCard } from '@/components/pond/commerce';
+import { FloatingBallsBackdrop, PondHeroScene, useScrollReveal } from '@/components/pond/pond-motion';
 import { PublicPondGrid } from '@/components/pond/public-pond-grid';
 import { PublicNavActions } from '@/components/pond/public-shell';
 import { Brand, PondMark } from '@/components/pond/ui';
@@ -39,6 +40,8 @@ export default function Welcome({ ponds = [] }: { ponds?: PondCard[] }) {
     const { auth } = usePage().props;
     const joinHref = auth?.user ? dashboard() : register();
 
+    useScrollReveal('.ln-tile, .ln-story, .ln-imagine h2, .ln-brushed, .ln-strip, .ln-step, .pd-home-ponds .pd-pond-card, .ln-way, .ln-final h2');
+
     return (
         <div className="pond-home askupon-home ln-page">
             <Head title="Ask Upon A Pond — Toss a ball in the Pond" />
@@ -56,7 +59,7 @@ export default function Welcome({ ponds = [] }: { ponds?: PondCard[] }) {
                 <p className="ln-kicker">ASK UPON A POND</p>
                 <h1>Balls, Balls, Balls!</h1>
                 <p className="ln-marbles">And marvelous marbles, too!</p>
-                <img className="ln-scene" src="/askupon/scene-sunrise.jpg" alt="Colorful golf balls and marbles floating on a pond at sunrise" />
+                <PondHeroScene />
                 <h2>Collect. Give. Dream.</h2>
                 <p className="ln-possibilities">A pond full of possibilities.</p>
                 <a href="#how-it-works" className="ln-btn ln-btn-deep ln-btn-wide">
@@ -160,29 +163,34 @@ export default function Welcome({ ponds = [] }: { ponds?: PondCard[] }) {
                 </section>
             )}
 
-            <section className="ln-ways">
-                <div className="ln-ways-card">
-                    {ways.map((way) => (
-                        <article key={way.title} className="ln-way">
-                            <img src={golfBall(way.ball)} alt="" />
-                            <div>
-                                <span className={`ln-way-tag ln-way-tag-${way.tone}`}>{way.title}</span>
-                                <strong>{way.lead}</strong>
-                                <p>{way.detail}</p>
-                            </div>
-                        </article>
-                    ))}
-                </div>
-            </section>
+            <div className="ln-course">
+                <section className="ln-ways">
+                    <div className="ln-ways-card">
+                        {ways.map((way) => (
+                            <article key={way.title} className="ln-way">
+                                <img src={golfBall(way.ball)} alt="" />
+                                <div>
+                                    <span className={`ln-way-tag ln-way-tag-${way.tone}`}>{way.title}</span>
+                                    <strong>{way.lead}</strong>
+                                    <p>{way.detail}</p>
+                                </div>
+                            </article>
+                        ))}
+                    </div>
+                </section>
 
-            <section className="ln-cta-panel">
-                <Link href={joinHref} className="ln-btn ln-btn-join ln-btn-wide">
-                    Join the Pond <ArrowRight size={20} />
-                </Link>
-                <Link href={pondsIndex()} className="ln-btn ln-btn-explore ln-btn-wide">
-                    Explore the Pond <ArrowUpRight size={20} />
-                </Link>
-            </section>
+                <section className="ln-cta-panel">
+                    <FloatingBallsBackdrop />
+                    <div className="ln-cta-actions">
+                        <Link href={joinHref} className="ln-btn ln-btn-join">
+                            Join the Pond <ArrowRight size={20} />
+                        </Link>
+                        <Link href={pondsIndex()} className="ln-btn ln-btn-explore">
+                            Explore the Pond <ArrowUpRight size={20} />
+                        </Link>
+                    </div>
+                </section>
+            </div>
 
             <section className="ln-final">
                 <PondMark />
