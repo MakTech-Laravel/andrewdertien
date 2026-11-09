@@ -178,7 +178,7 @@
     padding: 42px 20px 40px;
     background:
         linear-gradient(180deg, #002446cc 0%, #00244680 24%, #f28a2c70 52%, #ffb54a59 62%, #0041a780 80%, #002446d9 100%),
-        url('/askupon/ways-pond-realistic.jpg') center / cover no-repeat
+        url('../../public/askupon/ways-pond-realistic.jpg') center / cover no-repeat
 }
 
 .ln-sunset-inner {
@@ -488,7 +488,7 @@
     padding: 44px 20px;
     background:
         linear-gradient(180deg, #062a4de6, #103d68cc 45%, #062a4de6),
-        url('/askupon/ways-pond-realistic.jpg') center / cover no-repeat
+        url('../../public/askupon/ways-pond-realistic.jpg') center / cover no-repeat
 }
 
 .ln-ways-card {
@@ -752,14 +752,14 @@ h3.ln-brushed {
     background:
         radial-gradient(circle at 96% 37%, #fff3c4 0, #ffc85a 3%, #ff9d2e40 13%, transparent 30%),
         linear-gradient(180deg, #001f46e6 0%, #00295c99 26%, #f0882e8c 40%, #ff9e3a80 47%, #0a4a8c99 58%, #0041a7b3 78%, #002446e6 100%),
-        url('/askupon/ways-pond-realistic.jpg') center / cover no-repeat
+        url('../../public/askupon/ways-pond-realistic.jpg') center / cover no-repeat
 }
 
 .ln-ways {
     background:
         radial-gradient(circle at 88% 40%, #ffb76b73 0, transparent 22%),
         linear-gradient(180deg, #062a4de6, #103d68c7 45%, #062a4de6),
-        url('/askupon/ways-pond-realistic.jpg') center / cover no-repeat
+        url('../../public/askupon/ways-pond-realistic.jpg') center / cover no-repeat
 }
 
 /* ── The same look through the signed-in pages ──────────────────────────── */

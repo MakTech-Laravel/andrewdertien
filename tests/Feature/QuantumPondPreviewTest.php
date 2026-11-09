@@ -26,6 +26,20 @@ it('ships the real photos and golf balls the landing page needs', function () {
         ->and(file_exists(public_path('askupon/balls/golf-white.svg')))->toBeTrue();
 });
 
+it('points css background images at files vite can serve in dev and build', function () {
+    foreach (glob(resource_path('css/*.css')) as $stylesheet) {
+        $css = (string) file_get_contents($stylesheet);
+
+        expect($css)->not->toMatch('/url\(\s*[\'"]?\/askupon/');
+
+        preg_match_all('/url\(\s*[\'"]?(\.\.\/[^\'")]+)/', $css, $matches);
+
+        foreach ($matches[1] as $relativePath) {
+            expect(file_exists(dirname($stylesheet).'/'.$relativePath))->toBeTrue();
+        }
+    }
+});
+
 it('does not use 3D anywhere in the website code', function () {
     $files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator(resource_path('js/pages'), FilesystemIterator::SKIP_DOTS));
 

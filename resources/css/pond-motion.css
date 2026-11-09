@@ -283,7 +283,7 @@
 
 /* ── Golf course pond: the six ways and the call to action share one scene ── */
 .ln-course {
-    background: #1d2f24 url('/askupon/pond-reeds-sunset.jpg') center 60% / cover no-repeat
+    background: #1d2f24 url('../../public/askupon/pond-reeds-sunset.jpg') center 60% / cover no-repeat
 }
 
 .ln-page .ln-ways,
@@ -376,7 +376,7 @@
 .ln-page .ln-sunset {
     background:
         linear-gradient(180deg, #00244673 0%, #00244626 24%, #0024460d 50%, #00244659 78%, #002446b8 100%),
-        #002446 url('/askupon/golf-course-sunset.jpg') center / cover no-repeat
+        #002446 url('../../public/askupon/golf-course-sunset.jpg') center / cover no-repeat
 }
 
 .ln-page .ln-sunset-tag,
