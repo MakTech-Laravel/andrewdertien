@@ -1,0 +1,12 @@
+{
+    "version": "0.0.1",
+    "configurations": [
+        {
+            "name": "ask-upon-a-pond",
+            "runtimeExecutable": "php",
+            "runtimeArgs": ["artisan", "serve", "--host=127.0.0.1", "--port=8931", "--no-reload"],
+            "port": 8931,
+            "url": "http://127.0.0.1:8931"
+        }
+    ]
+}
