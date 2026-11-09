@@ -101,6 +101,23 @@
     box-shadow: none
 }
 
+@media (max-width: 600px) {
+
+    .pond-home .askupon-nav-actions .askupon-btn,
+    .pond-home .askupon-btn-pink,
+    .pond-home .askupon-btn-navy {
+        min-height: 32px;
+        padding: 6px 11px;
+        font-size: 11.5px;
+        gap: 4px
+    }
+
+    .pond-home .askupon-nav-actions .askupon-btn svg {
+        width: 13px;
+        height: 13px
+    }
+}
+
 .pond-home .askupon-btn-pink:hover {
     background: #0052cc;
     border-color: #0052cc
@@ -724,8 +741,66 @@
         font-size: 15px
     }
 
+    .ln-btn {
+        gap: 6px
+    }
+
+    .ln-btn svg {
+        width: 14px;
+        height: 14px
+    }
+
+    .ln-btn-deep {
+        font-size: 14px;
+        padding: 10px 16px
+    }
+
+    .ln-play {
+        width: 26px;
+        height: 26px
+    }
+
+    .ln-play svg {
+        width: 12px;
+        height: 12px
+    }
+
+    .ln-btn-join,
+    .ln-btn-explore {
+        font-size: 13px;
+        padding: 9px 16px;
+        box-shadow: 0 6px 14px #0062ef22
+    }
+
     .ln-btn-toss {
-        padding: 12px 24px
+        font-size: 16px;
+        padding: 8px 18px;
+        border-width: 2px;
+        box-shadow: 0 6px 14px #00244622
+    }
+
+    .ln-btn-come {
+        font-size: 20px;
+        padding: 6px 18px;
+        box-shadow: 0 6px 14px #fc036c33
+    }
+
+    .ln-btn-story {
+        font-size: 13px;
+        padding: 7px 14px;
+        border-width: 1.5px
+    }
+
+    .ln-btn-wide {
+        width: auto;
+        max-width: 100%
+    }
+
+    .ln-final .ln-btn,
+    .pd-home-ponds .ln-btn,
+    .askupon-ways-ctas .ln-btn {
+        font-size: 13px;
+        padding: 9px 16px
     }
 
 }
