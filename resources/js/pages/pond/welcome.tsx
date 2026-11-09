@@ -107,7 +107,7 @@ export default function Welcome({ ponds = [] }: { ponds?: PondCard[] }) {
                             <p>Decades and a few life lessons later, one of those boys had a bigger idea:</p>
                             <p className="ln-story-idea">Let&rsquo;s make giving, receiving, and even money a little more fun.</p>
                             <a href="#how-it-works" className="ln-btn ln-btn-story">
-                                Read the Founder&rsquo;s Story <ArrowRight size={18} />
+                                Read the Founder&rsquo;s Story <ArrowRight size={14} />
                             </a>
                         </div>
                     </article>
@@ -157,7 +157,7 @@ export default function Welcome({ ponds = [] }: { ponds?: PondCard[] }) {
                     <PublicPondGrid ponds={ponds} />
                     <div className="askupon-ways-ctas">
                         <Link href={pondsIndex()} className="ln-btn ln-btn-join">
-                            See all the ponds <ArrowUpRight size={18} />
+                            See all the ponds <ArrowUpRight size={14} />
                         </Link>
                     </div>
                 </section>
@@ -183,10 +183,10 @@ export default function Welcome({ ponds = [] }: { ponds?: PondCard[] }) {
                     <LawnBalls />
                     <div className="ln-cta-actions">
                         <Link href={joinHref} className="ln-btn ln-btn-join">
-                            Join the Pond <ArrowRight size={20} />
+                            Join the Pond <ArrowRight size={14} />
                         </Link>
                         <Link href={pondsIndex()} className="ln-btn ln-btn-explore">
-                            Explore the Pond <ArrowUpRight size={20} />
+                            Explore the Pond <ArrowUpRight size={14} />
                         </Link>
                     </div>
                 </section>
@@ -196,8 +196,8 @@ export default function Welcome({ ponds = [] }: { ponds?: PondCard[] }) {
                 <PondMark />
                 <h2>Come on in. The Pond&rsquo;s waiting.</h2>
                 <p>Show up as yourself. Toss a ball. Find your people.</p>
-                <Link href={joinHref} className="ln-btn ln-btn-join ln-btn-wide">
-                    Join the Pond <ArrowRight size={20} />
+                <Link href={joinHref} className="ln-btn ln-btn-join">
+                    Join the Pond <ArrowRight size={14} />
                 </Link>
             </section>
 

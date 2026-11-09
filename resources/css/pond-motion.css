@@ -351,16 +351,28 @@
     }
 
     .ln-page .ln-cta-panel {
-        padding: 16px 20px 76px
+        padding: 16px 20px 56px
     }
 
     .ln-cta-actions {
-        flex-direction: column;
-        align-items: center
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 8px
     }
 
     .ln-cta-actions .ln-btn {
-        width: min(100%, 420px)
+        width: auto;
+        min-width: 0;
+        min-height: 34px;
+        font-size: 13px;
+        padding: 8px 14px
+    }
+
+    .ln-cta-actions .ln-btn svg {
+        width: 14px;
+        height: 14px
     }
 }
 
