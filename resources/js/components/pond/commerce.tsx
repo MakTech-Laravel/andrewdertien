@@ -95,7 +95,7 @@ export function StatTile({ icon: Icon, label, value, hint, tone = 'purple' }: { 
 }
 
 export function PondArt({ pond }: { pond: Pick<PondCard, 'image_url' | 'name'> }) {
-    const isBall = pond.image_url.startsWith('/quantum/images/');
+    const isBall = pond.image_url.startsWith('/quantum/images/') || pond.image_url.startsWith('/askupon/balls/');
 
     return (
         <div className={`pd-pond-art ${isBall ? 'is-ball' : 'is-photo'}`}>

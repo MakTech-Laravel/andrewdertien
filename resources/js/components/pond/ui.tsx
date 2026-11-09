@@ -9,7 +9,7 @@ import { logout } from '@/routes';
 export function PondMark({ small = false }: { small?: boolean }) {
     return <span className={`pond-mark ${small ? 'pond-mark-small' : ''}`} aria-hidden="true"><img src="/askupon/lotus.svg" alt="" /></span>;
 }
-export function Brand({ dark = false }: { dark?: boolean }) { return <Link href="/" className={`pond-brand ${dark ? 'pond-brand-light' : ''}`}><PondMark /><span className="pond-brand-text"><span className="pond-brand-ask">Ask Upon </span><em>A Pond</em></span></Link>; }
+export function Brand({ dark = false }: { dark?: boolean }) { return <Link href="/" className={`pond-brand ${dark ? 'pond-brand-light' : ''}`}><PondMark /><span className="pond-brand-text"><span className="pond-brand-ask">Ask Upon </span><em>A Pond</em><sup className="pond-brand-tm">™</sup></span></Link>; }
 export function Avatar({ name, hue = 'lilac', size = '', src }: { name: string; hue?: string; size?: string; src?: string | null }) { return <span aria-label={name} className={`pond-avatar avatar-${hue} ${size}`} title={name}>{src ? <img src={src} alt="" className="pond-avatar-img" /> : name.split(' ').map(a => a[0]).slice(0, 2).join('').toUpperCase()}</span>; }
 /** A stable avatar colour per member so the same person always looks the same. */
 export function hueFor(seed: number): string { const hues = ['lilac', 'sky', 'peach', 'mint', 'pink', 'blue']; return hues[Math.abs(seed) % hues.length]; }

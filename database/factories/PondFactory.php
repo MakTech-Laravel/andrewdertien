@@ -19,7 +19,7 @@ class PondFactory extends Factory
             'description' => fake()->paragraph(),
             'category' => fake()->randomElement(PondCategory::cases()),
             'price_cents' => fake()->numberBetween(500, 50000),
-            'ball_value' => fake()->randomElement([10, 20, 50, 100]),
+            'ball_art' => 'golf-'.fake()->randomElement(Pond::GOLF_BALLS),
             'is_published' => true,
             'show_on_frontend' => true,
         ];

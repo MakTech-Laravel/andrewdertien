@@ -27,7 +27,7 @@ class StorePondRequest extends FormRequest
             'category' => ['required', Rule::enum(PondCategory::class)],
             // Stripe's lowest charge is 50 cents.
             'price' => ['required', 'numeric', 'min:0.5', 'max:1000000', 'decimal:0,2'],
-            'ball_value' => ['required', 'integer', Rule::in(Pond::BALL_VALUES)],
+            'ball_art' => ['required', 'string', Rule::in(array_keys(Pond::artwork()))],
             'image' => ['nullable', 'image', 'max:4096'],
             'remove_image' => ['nullable', 'boolean'],
             'is_published' => ['nullable', 'boolean'],
@@ -52,7 +52,7 @@ class StorePondRequest extends FormRequest
             'description' => $this->validated('description'),
             'category' => $this->validated('category'),
             'price_cents' => (int) round(((float) $this->validated('price')) * 100),
-            'ball_value' => (int) $this->validated('ball_value'),
+            'ball_art' => $this->validated('ball_art'),
             'is_published' => $isPublished,
             'show_on_frontend' => $isPublished && $this->boolean('show_on_frontend'),
             'sort_order' => (int) $this->validated('sort_order', 0),

@@ -40,8 +40,8 @@ export default function MemberDashboard({ stats, currency, recentPayments, sugge
                             </Link>
                         </div>
                     </div>
-                    <img className="pond-dashboard-hero-ball hero-ball-main" src="/quantum/images/ball-5000.png" alt="" />
-                    <img className="pond-dashboard-hero-ball hero-ball-secondary" src="/quantum/images/ball-2.png" alt="" />
+                    <img className="pond-dashboard-hero-ball hero-ball-main" src="/askupon/balls/golf-blue.png" alt="" />
+                    <img className="pond-dashboard-hero-ball hero-ball-secondary" src="/askupon/balls/golf-gold.png" alt="" />
                     <div className="pond-dashboard-circle" />
                 </div>
 

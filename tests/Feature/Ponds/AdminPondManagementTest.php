@@ -5,6 +5,7 @@ use App\Enums\RoleEnum;
 use App\Models\Pond;
 use App\Models\PondPurchase;
 use App\Models\User;
+use Database\Seeders\PondSeeder;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Testing\AssertableInertia as Assert;
@@ -25,7 +26,7 @@ function validPondInput(array $overrides = []): array
         'description' => 'A calm place.',
         'category' => PondCategory::DREAMS->value,
         'price' => '49.99',
-        'ball_value' => 100,
+        'ball_art' => 'golf-blue',
         'is_published' => '1',
         'show_on_frontend' => '1',
         'sort_order' => 2,
@@ -65,7 +66,7 @@ test('a pond needs valid details', function (array $input, string $field) {
     'unknown category' => [['category' => 'nope'], 'category'],
     'price below the minimum charge' => [['price' => '0.10'], 'price'],
     'price with too many decimals' => [['price' => '10.999'], 'price'],
-    'ball without artwork' => [['ball_value' => 7], 'ball_value'],
+    'ball without artwork' => [['ball_art' => 'golf-plaid'], 'ball_art'],
 ]);
 
 test('an unpublished pond can never be on the website', function () {
@@ -124,11 +125,37 @@ test('choosing a ball again removes the uploaded picture', function () {
     $pond = Pond::sole();
 
     $this->actingAs($this->admin)->post(route('admin.ponds.update', $pond), validPondInput([
-        'ball_value' => 500,
+        'ball_art' => 'marble-500',
         'remove_image' => '1',
     ]));
 
     expect($pond->fresh()->toCard()['image_url'])->toBe('/quantum/images/ball-500.png');
+});
+
+test('every golf ball and marble has its artwork file', function () {
+    foreach (Pond::artwork() as $key => $url) {
+        expect(file_exists(public_path($url)))->toBeTrue("Missing artwork for {$key}");
+    }
+});
+
+test('each category has its own golf ball, which starter ponds use', function () {
+    $this->seed(PondSeeder::class);
+
+    $balls = array_map(fn (PondCategory $category): string => $category->golfBall(), PondCategory::cases());
+
+    expect(array_unique($balls))->toHaveCount(count(PondCategory::cases()))
+        ->and(array_diff($balls, array_keys(Pond::artwork())))->toBe([])
+        ->and(Pond::where('category', 'fun')->first()->toCard()['image_url'])->toBe('/askupon/balls/golf-sky.png');
+});
+
+test('the artwork migration moves existing ponds onto their category golf ball', function () {
+    $pond = Pond::factory()->create(['category' => PondCategory::TREATS, 'ball_art' => 'marble-100']);
+
+    $migration = require database_path('migrations/2026_11_09_100000_replace_pond_ball_value_with_ball_art.php');
+    $migration->down();
+    $migration->up();
+
+    expect($pond->fresh()->ball_art)->toBe('golf-orange');
 });
 
 test('only images within the size limit can be uploaded', function (UploadedFile $file) {

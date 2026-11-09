@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 #[Fillable([
-    'name', 'slug', 'tagline', 'description', 'category', 'price_cents', 'ball_value',
+    'name', 'slug', 'tagline', 'description', 'category', 'price_cents', 'ball_art',
     'image', 'is_published', 'show_on_frontend', 'sort_order',
 ])]
 class Pond extends Model
@@ -23,12 +23,41 @@ class Pond extends Model
     /** @use HasFactory<PondFactory> */
     use HasFactory, SoftDeletes;
 
+    public const DEFAULT_ARTWORK = 'golf-blue';
+
     /**
-     * The Quantum Ball artwork available as a pond's picture (public/quantum/images).
+     * Golf ball artwork in public/askupon/balls.
+     *
+     * @var list<string>
+     */
+    public const GOLF_BALLS = ['blue', 'purple', 'gold', 'white', 'red', 'green', 'violet', 'sky', 'orange', 'lime', 'pink', 'rainbow'];
+
+    /**
+     * Marble artwork in public/quantum/images.
      *
      * @var list<int>
      */
-    public const BALL_VALUES = [2, 5, 10, 20, 50, 100, 500, 1000, 5000, 10000, 50000, 100000, 250000, 500000, 1000000];
+    public const MARBLES = [2, 5, 10, 20, 50, 100, 500, 1000, 5000, 10000, 50000, 100000, 250000, 500000, 1000000];
+
+    /**
+     * Every artwork a pond can use, keyed by the value stored in ball_art.
+     *
+     * @return array<string, string>
+     */
+    public static function artwork(): array
+    {
+        $artwork = [];
+
+        foreach (self::GOLF_BALLS as $color) {
+            $artwork["golf-{$color}"] = "/askupon/balls/golf-{$color}.png";
+        }
+
+        foreach (self::MARBLES as $value) {
+            $artwork["marble-{$value}"] = "/quantum/images/ball-{$value}.png";
+        }
+
+        return $artwork;
+    }
 
     protected static function booted(): void
     {
@@ -92,7 +121,7 @@ class Pond extends Model
     {
         return $this->image
             ? Storage::disk('public')->url($this->image)
-            : "/quantum/images/ball-{$this->ball_value}.png";
+            : self::artwork()[$this->ball_art] ?? self::artwork()[self::DEFAULT_ARTWORK];
     }
 
     /**
@@ -124,7 +153,6 @@ class Pond extends Model
         return [
             'category' => PondCategory::class,
             'price_cents' => 'integer',
-            'ball_value' => 'integer',
             'is_published' => 'boolean',
             'show_on_frontend' => 'boolean',
             'sort_order' => 'integer',

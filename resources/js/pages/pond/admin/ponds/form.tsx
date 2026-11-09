@@ -6,12 +6,13 @@ import type { PondCard } from '@/components/pond/commerce';
 import { PondShell } from '@/components/pond/ui';
 import adminPonds from '@/routes/admin/ponds';
 
-type EditablePond = PondCard & { ball_value: number; has_custom_image: boolean; is_published: boolean; show_on_frontend: boolean; sort_order: number };
+type EditablePond = PondCard & { ball_art: string; has_custom_image: boolean; is_published: boolean; show_on_frontend: boolean; sort_order: number };
 
 type Props = {
     pond?: EditablePond;
     categories: { value: string; label: string }[];
-    ballValues: number[];
+    artwork: Record<string, string>;
+    defaultArtwork: string;
     currency: string;
 };
 
@@ -19,7 +20,7 @@ function FieldError({ message }: { message?: string }) {
     return message ? <p className="pd-field-error">{message}</p> : null;
 }
 
-export default function AdminPondForm({ pond, categories, ballValues, currency }: Props) {
+export default function AdminPondForm({ pond, categories, artwork, defaultArtwork, currency }: Props) {
     const [customImageUrl, setCustomImageUrl] = useState<string | null>(pond?.has_custom_image ? pond.image_url : null);
     const uploadedPreview = useRef<string | null>(null);
 
@@ -29,7 +30,7 @@ export default function AdminPondForm({ pond, categories, ballValues, currency }
         description: pond?.description ?? '',
         category: pond?.category ?? categories[0].value,
         price: pond ? (pond.price_cents / 100).toFixed(2) : '',
-        ball_value: pond?.ball_value ?? 100,
+        ball_art: pond?.ball_art ?? defaultArtwork,
         image: null as File | null,
         remove_image: false as boolean,
         is_published: pond?.is_published ?? true,
@@ -71,8 +72,8 @@ export default function AdminPondForm({ pond, categories, ballValues, currency }
     };
 
     /** Choosing a ball replaces any uploaded picture, which is removed on save. */
-    const chooseBall = (value: number) => {
-        form.setData((data) => ({ ...data, ball_value: value, image: null, remove_image: pond?.has_custom_image ?? false }));
+    const chooseBall = (key: string) => {
+        form.setData((data) => ({ ...data, ball_art: key, image: null, remove_image: pond?.has_custom_image ?? false }));
         showPreview(null);
     };
 
@@ -135,12 +136,12 @@ export default function AdminPondForm({ pond, categories, ballValues, currency }
 
                         <fieldset className="pd-ball-picker">
                             <legend>Pond picture</legend>
-                            <p className="pd-hint">Choose a Quantum Ball, or upload your own image (up to 4 MB).</p>
+                            <p className="pd-hint">Choose a golf ball or a marble, or upload your own image (up to 4 MB).</p>
                             <div>
                                 {customImageUrl ? (
                                     <div className="pd-ball-custom is-selected">
                                         <img src={customImageUrl} alt="Uploaded pond" />
-                                        <button type="button" onClick={() => chooseBall(form.data.ball_value)} aria-label="Remove uploaded image">
+                                        <button type="button" onClick={() => chooseBall(form.data.ball_art)} aria-label="Remove uploaded image">
                                             <X size={13} />
                                         </button>
                                     </div>
@@ -159,17 +160,17 @@ export default function AdminPondForm({ pond, categories, ballValues, currency }
                                         />
                                     </label>
                                 )}
-                                {ballValues.map((value) => {
-                                    const isSelected = !customImageUrl && form.data.ball_value === value;
+                                {Object.entries(artwork).map(([key, url]) => {
+                                    const isSelected = !customImageUrl && form.data.ball_art === key;
 
                                     return (
-                                        <button type="button" key={value} className={`pd-ball-option ${isSelected ? 'is-selected' : ''}`} onClick={() => chooseBall(value)} aria-pressed={isSelected} aria-label={`$${value.toLocaleString()} ball`}>
-                                            <img src={`/quantum/images/ball-${value}.png`} alt="" />
+                                        <button type="button" key={key} className={`pd-ball-option ${isSelected ? 'is-selected' : ''}`} onClick={() => chooseBall(key)} aria-pressed={isSelected} aria-label={key.replace('-', ' ')}>
+                                            <img src={url} alt="" />
                                         </button>
                                     );
                                 })}
                             </div>
-                            <FieldError message={form.errors.ball_value} />
+                            <FieldError message={form.errors.ball_art} />
                             <FieldError message={form.errors.image} />
                         </fieldset>
                     </section>

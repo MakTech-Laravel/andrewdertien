@@ -1,181 +1,148 @@
-import { Head, Link } from '@inertiajs/react';
-import { ArrowRight, ArrowUpRight } from 'lucide-react';
+import { Head, Link, usePage } from '@inertiajs/react';
+import { ArrowRight, ArrowUpRight, Play } from 'lucide-react';
 import type { PondCard } from '@/components/pond/commerce';
-import { PondLandscape } from '@/components/pond/pond-landscape';
 import { PublicPondGrid } from '@/components/pond/public-pond-grid';
 import { PublicNavActions } from '@/components/pond/public-shell';
 import { Brand, PondMark } from '@/components/pond/ui';
+import { dashboard, register } from '@/routes';
 import { index as pondsIndex } from '@/routes/ponds';
 
-const giveWays = [
-    {
-        title: 'Dreams',
-        tone: 'dreams',
-        lead: 'Help me make something possible.',
-        detail: 'Dreams, goals, and aspirations, whether big or small.',
-        ball: '/quantum/images/ball-100.png',
-    },
-    {
-        title: 'Fun',
-        tone: 'fun',
-        lead: 'Help support me in enjoying an experience.',
-        detail: 'Hobbies, interests, activities, and experiences you would love to have.',
-        ball: '/quantum/images/ball-10.png',
-    },
-    {
-        title: 'Treats',
-        tone: 'treats',
-        lead: 'Perhaps a coffee, lunch, or something small.',
-        detail: 'Everyday little pleasures, such as coffee, a meal, or a gallon of gas.',
-        ball: '/quantum/images/ball-50.png',
-    },
-    {
-        title: 'Boost',
-        tone: 'boost',
-        lead: 'I get by with a little help from my friends.',
-        detail: 'Where a little help would make a difference: groceries, transportation, bills.',
-        ball: '/quantum/images/ball-20.png',
-    },
-    {
-        title: 'Support a Creator',
-        tone: 'creator',
-        lead: 'Show some love to a creator.',
-        detail: 'Support a YouTuber, streamer, podcaster, artist, or independent creator you enjoy.',
-        ball: '/quantum/images/ball-5.png',
-    },
-    {
-        title: 'Flirt',
-        tone: 'flirt',
-        lead: 'Give and receive!',
-        detail: 'Enable flirtation and find out.',
-        ball: '/quantum/images/ball-500.png',
-    },
+const tiles = [
+    { title: 'Dreams', tone: 'dreams', ball: 'blue' },
+    { title: 'Fun', tone: 'fun', ball: 'purple' },
+    { title: 'Treats', tone: 'treats', ball: 'gold' },
+    { title: 'Boost', tone: 'boost', ball: 'white' },
+    { title: 'Support a Creator', tone: 'creator', ball: 'red' },
+    { title: 'Flirt', tone: 'flirt', ball: 'green' },
 ];
 
 const steps = [
-    {
-        number: '01',
-        title: 'Show up as yourself',
-        body: 'Create a profile around your Dreams, Fun, and the things that make you, you.',
-        ball: '/quantum/images/ball-100.png',
-    },
-    {
-        number: '02',
-        title: 'Discover your people',
-        body: 'Explore stories, celebrate someone, make connections.',
-        ball: '/quantum/images/ball-10.png',
-    },
-    {
-        number: '03',
-        title: 'Keep the balls rolling',
-        body: 'Give a ball. Get a ball. Pass one along. See what happens.',
-        ball: '/quantum/images/ball-20.png',
-    },
+    { number: '01', title: 'Show up as yourself', body: 'Create a profile around your Dreams, Fun, and whatever makes you, you.', ball: 'blue' },
+    { number: '02', title: 'Discover your people', body: 'Explore stories, celebrate others, and make connections.', ball: 'purple' },
+    { number: '03', title: 'Trust & Flow', body: 'Give. Receive. Pay it forward. See where it goes.', ball: 'gold' },
 ];
 
-const faqs = [
-    { q: 'Is it social media?', a: 'Kind of!' },
-    { q: 'Is it crowdfunding?', a: 'You bet!' },
-    { q: 'Is it a dating site?', a: 'Enable flirtation and find out!' },
-    { q: 'Is it like Venmo or PayPal?', a: 'Yep! Send someone money through the Pond!' },
+const ways = [
+    { title: 'Dreams', tone: 'dreams', ball: 'violet', lead: 'Help me make something possible.', detail: 'Dreams, goals, and aspirations, whether big or small.' },
+    { title: 'Fun', tone: 'fun', ball: 'sky', lead: 'Help support me in enjoying an experience.', detail: 'Hobbies, interests, activities, and experiences you would love to have.' },
+    { title: 'Treats', tone: 'treats', ball: 'orange', lead: 'Perhaps a coffee, lunch, or something small.', detail: 'Everyday little pleasures, such as coffee, a meal, or a gallon of gas.' },
+    { title: 'Boost', tone: 'boost', ball: 'lime', lead: 'I get by with a little help from my friends.', detail: 'Where a little help would make a difference: groceries, transportation, bills.' },
+    { title: 'Support a Creator', tone: 'creator', ball: 'pink', lead: 'Show some love to a creator.', detail: 'Support a YouTuber, streamer, podcaster, artist, or independent creator you enjoy.' },
+    { title: 'Flirt', tone: 'flirt', ball: 'rainbow', lead: 'Give and receive!', detail: 'Enable flirtation and find out.' },
 ];
+
+function golfBall(color: string): string {
+    return `/askupon/balls/golf-${color}.png`;
+}
 
 export default function Welcome({ ponds = [] }: { ponds?: PondCard[] }) {
+    const { auth } = usePage().props;
+    const joinHref = auth?.user ? dashboard() : register();
+
     return (
-        <div className="pond-home askupon-home">
+        <div className="pond-home askupon-home ln-page">
             <Head title="Ask Upon A Pond — Toss a ball in the Pond" />
 
-            <div className="askupon-hero">
-                <div className="askupon-hero-sky" aria-hidden="true" />
-                <div className="askupon-hero-grain" aria-hidden="true" />
-
+            <header className="ln-nav">
                 <nav className="askupon-nav">
                     <Brand dark />
                     <div className="askupon-nav-actions">
                         <PublicNavActions />
                     </div>
                 </nav>
+            </header>
 
-                <div className="askupon-hero-main">
-                    <p className="askupon-script">Balls, Balls, Balls!</p>
-                    <h1>
-                        <span className="askupon-brush">Toss a ball in the Pond!</span>
-                    </h1>
-                    <p className="askupon-hero-tag">
-                        Give one to a friend, a stranger, or even a flirt!
-                    </p>
+            <section className="ln-hero">
+                <p className="ln-kicker">ASK UPON A POND</p>
+                <h1>Balls, Balls, Balls!</h1>
+                <p className="ln-marbles">And marvelous marbles, too!</p>
+                <img className="ln-scene" src="/askupon/scene-sunrise.jpg" alt="Colorful golf balls and marbles floating on a pond at sunrise" />
+                <h2>Collect. Give. Dream.</h2>
+                <p className="ln-possibilities">A pond full of possibilities.</p>
+                <a href="#how-it-works" className="ln-btn ln-btn-deep ln-btn-wide">
+                    <span className="ln-play">
+                        <Play size={16} fill="currentColor" />
+                    </span>
+                    See How It Works
+                </a>
+            </section>
 
-                    <div className="askupon-pond-stage askupon-pond-stage-live">
-                        <PondLandscape />
+            <section className="ln-sunset" id="explore">
+                <div className="ln-sunset-inner">
+                    <div className="ln-wordmark" aria-label="Ask Upon a Pond">
+                        <span>
+                            Ask Upon a Pond<sup>™</sup>
+                        </span>
+                        <svg viewBox="0 0 640 86" fill="none" aria-hidden="true">
+                            <path d="M0 62C130 22 270 22 366 42c88 18 170 12 250 2-70 22-160 32-250 18C258 46 132 42 0 62Z" fill="#00D8FD" />
+                            <ellipse cx="548" cy="68" rx="76" ry="13" stroke="#00D8FD" strokeWidth="5" />
+                            <ellipse cx="548" cy="68" rx="36" ry="5" fill="#00D8FD" />
+                            <path d="M544 66 566 2" stroke="#fff" strokeWidth="4" strokeLinecap="round" />
+                            <path d="M566 2l44 15-49 14Z" fill="#FB0343" />
+                        </svg>
                     </div>
+                    <p className="ln-sunset-tag">A simple way to share dreams, fun, support, and a little help along the way.</p>
 
-                    <p className="askupon-three-hint">Colorful balls floating in the pond</p>
-
-                    <div className="askupon-faq-strip">
-                        {faqs.map((item) => (
-                            <div key={item.q}>
-                                <strong>{item.q}</strong>
-                                <em>{item.a}</em>
+                    <div className="ln-tiles">
+                        {tiles.map((tile) => (
+                            <div key={tile.title} className={`ln-tile ln-tile-${tile.tone}`}>
+                                <img src={golfBall(tile.ball)} alt="" />
+                                <strong>{tile.title}</strong>
                             </div>
                         ))}
                     </div>
 
-                    <div className="askupon-hero-ctas">
-                        <Link href="/register" className="askupon-btn askupon-btn-pink askupon-btn-lg">
-                            Join the Pond <ArrowRight size={18} />
-                        </Link>
-                        <Link href="/login" className="askupon-btn askupon-btn-ghost askupon-btn-lg">
-                            Explore the Balls <ArrowUpRight size={18} />
-                        </Link>
-                    </div>
-
-                    <p className="askupon-room">
-                        <PondMark small /> There&apos;s room for everyone in this Pond.
-                    </p>
-                </div>
-            </div>
-
-            <section className="askupon-imagine">
-                <div className="askupon-imagine-copy">
-                    <h2>Imagine your asks have already been answered.</h2>
-                    <p>And sign up while feeling that feeling.</p>
-                    <Link href="/register" className="askupon-come-in">
-                        Come on in!
+                    <Link href={pondsIndex()} className="ln-btn ln-btn-toss">
+                        Toss a Ball in the Pond!
                     </Link>
-                </div>
-                <div className="askupon-pie-wrap" aria-hidden="true">
-                    <div className="askupon-pie">
-                        <span className="askupon-pie-crust" />
-                        <span className="askupon-pie-lattice" />
-                        <span className="askupon-pie-slice" />
-                    </div>
-                </div>
-            </section>
 
-            <section className="askupon-motto" id="how-it-works">
-                <h2>
-                    <span className="askupon-brush askupon-brush-light">
-                        The pond as pie, pie as pond.
-                    </span>
-                </h2>
-                <p>
-                    Together, we can expand the pond, the pie, and all have a swim or a
-                    slice—however you want to say it!
-                </p>
-            </section>
-
-            <section className="askupon-steps">
-                {steps.map((step) => (
-                    <article key={step.number} className="askupon-step">
-                        <img src={step.ball} alt="" />
+                    <article className="ln-story">
+                        <img src="/askupon/golf-ball-grass.jpg" alt="A white golf ball in the grass beside a pond at sunset" />
                         <div>
-                            <h3>
-                                <span>{step.number}</span> {step.title}
-                            </h3>
-                            <p>{step.body}</p>
+                            <h2>It started with three ten-year-olds and a pond.</h2>
+                            <p>They&rsquo;d sneak out at night, collect golf balls from the water, and sell them back to golfers.</p>
+                            <p>Decades and a few life lessons later, one of those boys had a bigger idea:</p>
+                            <p className="ln-story-idea">Let&rsquo;s make giving, receiving, and even money a little more fun.</p>
+                            <a href="#how-it-works" className="ln-btn ln-btn-story">
+                                Read the Founder&rsquo;s Story <ArrowRight size={18} />
+                            </a>
                         </div>
                     </article>
-                ))}
+                </div>
+            </section>
+
+            <section className="ln-sky">
+                <div className="ln-imagine">
+                    <h2>Imagine your asks have already been answered.</h2>
+                    <p>And sign up while feeling that feeling.</p>
+                    <Link href={joinHref} className="ln-btn ln-btn-come">
+                        Come on in!
+                    </Link>
+                    <h3 className="ln-brushed">
+                        <span>The pond as pie, pie as pond.</span>
+                    </h3>
+                </div>
+
+                <img className="ln-strip ln-strip-coins" src="/askupon/coins-on-rocks.jpg" alt="Coins from around the world and two marbles resting on rocks in the water" />
+
+                <div className="ln-grow" id="how-it-works">
+                    <p className="ln-grow-copy">Together, we can grow the pond, expand the pie, and make room for everyone to enjoy a swim or a slice&mdash;however you want to dice it!</p>
+                    <div className="ln-steps">
+                        {steps.map((step) => (
+                            <article key={step.number} className="ln-step">
+                                <img src={golfBall(step.ball)} alt="" />
+                                <div>
+                                    <h3>
+                                        <span>{step.number}</span> {step.title}
+                                    </h3>
+                                    <p>{step.body}</p>
+                                </div>
+                            </article>
+                        ))}
+                    </div>
+                </div>
+
+                <img className="ln-strip ln-strip-shore" src="/askupon/balls-on-shore.jpg" alt="Blue, purple, yellow, white and red golf balls on rocks at the water's edge" />
             </section>
 
             {ponds.length > 0 && (
@@ -186,71 +153,49 @@ export default function Welcome({ ponds = [] }: { ponds?: PondCard[] }) {
                     </div>
                     <PublicPondGrid ponds={ponds} />
                     <div className="askupon-ways-ctas">
-                        <Link href={pondsIndex()} className="askupon-btn askupon-btn-navy askupon-btn-lg">
+                        <Link href={pondsIndex()} className="ln-btn ln-btn-join">
                             See all the ponds <ArrowUpRight size={18} />
                         </Link>
                     </div>
                 </section>
             )}
 
-            <section className="askupon-ways" id="explore">
-                <div className="askupon-ways-pond" aria-hidden="true">
-                    <img
-                        src="/askupon/ways-pond-realistic.jpg"
-                        alt=""
-                        className="askupon-ways-pond-img"
-                    />
-                    <div className="askupon-ways-pond-veil" />
-                </div>
-                <div className="askupon-ways-content">
-                    <div className="askupon-ways-head">
-                        <h2>There&apos;s more than one way to make someone&apos;s day.</h2>
-                        <p>Six simple ways to give a little support, fun, or love.</p>
-                    </div>
-                    <div className="askupon-ways-grid">
-                        {giveWays.map((way) => (
-                            <article key={way.title} className={`askupon-way way-${way.tone}`}>
-                                <div className="askupon-way-ball">
-                                    <span className="askupon-way-ripple" />
-                                    <img src={way.ball} alt="" />
-                                </div>
-                                <div>
-                                    <h3>{way.title}</h3>
-                                    <strong>{way.lead}</strong>
-                                    <p>{way.detail}</p>
-                                </div>
-                            </article>
-                        ))}
-                    </div>
-                    <div className="askupon-ways-ctas">
-                        <Link href="/register" className="askupon-btn askupon-btn-pink askupon-btn-lg">
-                            Join the Pond <ArrowRight size={18} />
-                        </Link>
-                        <Link href="/login" className="askupon-btn askupon-btn-navy askupon-btn-lg">
-                            Explore the Balls <ArrowUpRight size={18} />
-                        </Link>
-                    </div>
+            <section className="ln-ways">
+                <div className="ln-ways-card">
+                    {ways.map((way) => (
+                        <article key={way.title} className="ln-way">
+                            <img src={golfBall(way.ball)} alt="" />
+                            <div>
+                                <span className={`ln-way-tag ln-way-tag-${way.tone}`}>{way.title}</span>
+                                <strong>{way.lead}</strong>
+                                <p>{way.detail}</p>
+                            </div>
+                        </article>
+                    ))}
                 </div>
             </section>
 
-            <section className="askupon-final">
-                <PondMark />
-                <h2>Come on in. The Pond&apos;s waiting.</h2>
-                <p>Show up as yourself. Toss a ball. Find your people.</p>
-                <Link href="/register" className="askupon-btn askupon-btn-pink askupon-btn-lg">
-                    Join the Pond <ArrowRight size={18} />
+            <section className="ln-cta-panel">
+                <Link href={joinHref} className="ln-btn ln-btn-join ln-btn-wide">
+                    Join the Pond <ArrowRight size={20} />
+                </Link>
+                <Link href={pondsIndex()} className="ln-btn ln-btn-explore ln-btn-wide">
+                    Explore the Pond <ArrowUpRight size={20} />
                 </Link>
             </section>
 
-            <footer className="askupon-footer">
+            <section className="ln-final">
+                <PondMark />
+                <h2>Come on in. The Pond&rsquo;s waiting.</h2>
+                <p>Show up as yourself. Toss a ball. Find your people.</p>
+                <Link href={joinHref} className="ln-btn ln-btn-join ln-btn-wide">
+                    Join the Pond <ArrowRight size={20} />
+                </Link>
+            </section>
+
+            <footer className="ln-footer">
                 <Brand />
                 <span>© 2026 Ask Upon A Pond · askuponapond.com</span>
-                <div>
-                    <Link href="/login">The Pond</Link>
-                    <Link href="/login">The Balls</Link>
-                    <Link href="/login">Log in</Link>
-                    <Link href="/dashboard">Dashboard</Link>
-                </div>
             </footer>
         </div>
     );

@@ -4,6 +4,7 @@
 @import './pond.css';
 @import './pond-auth.css';
 @import './pond-dashboard.css';
+@import './pond-landing.css';
 
 @source '../views';
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';

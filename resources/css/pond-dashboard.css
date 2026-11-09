@@ -232,7 +232,7 @@
 
 .pd-role-admin {
     background: #e7f0fb;
-    color: #154872
+    color: #0041a7
 }
 
 .pd-pond-count {
@@ -358,7 +358,7 @@
 
 .pd-status-refunded {
     background: #e7f0fb;
-    color: #154872
+    color: #0041a7
 }
 
 /* ── Switches ───────────────────────────────────────────────────────────── */
@@ -652,7 +652,7 @@
     padding: 3px 10px;
     border-radius: 999px;
     background: #eaf2fb;
-    color: #154872
+    color: #0041a7
 }
 
 .pd-category-fun {
@@ -846,7 +846,7 @@
 .pd-ball-custom.is-selected {
     border-color: var(--qp-purple);
     background: #e7f0fb;
-    box-shadow: 0 0 0 3px #1f5f9a22
+    box-shadow: 0 0 0 3px #0062ef22
 }
 
 .pd-ball-option img {
@@ -948,9 +948,9 @@
 .pd-access-page {
     width: 100%;
     margin-top: 4px;
-    --primary: #1f5f9a;
+    --primary: #0062ef;
     --primary-foreground: #fff;
-    --ring: #1f5f9a
+    --ring: #0062ef
 }
 
 .pd-access-page>div {

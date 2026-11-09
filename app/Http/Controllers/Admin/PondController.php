@@ -65,7 +65,7 @@ class PondController extends Controller
             ...$this->formProps(),
             'pond' => [
                 ...$pond->toCard(),
-                'ball_value' => $pond->ball_value,
+                'ball_art' => $pond->ball_art,
                 'has_custom_image' => $pond->image !== null,
                 'is_published' => $pond->is_published,
                 'show_on_frontend' => $pond->show_on_frontend,
@@ -133,7 +133,7 @@ class PondController extends Controller
     }
 
     /**
-     * @return array{categories: array<int, array{value: string, label: string}>, ballValues: list<int>, currency: string}
+     * @return array{categories: array<int, array{value: string, label: string}>, artwork: array<string, string>, defaultArtwork: string, currency: string}
      */
     private function formProps(): array
     {
@@ -142,7 +142,8 @@ class PondController extends Controller
                 fn (PondCategory $category): array => ['value' => $category->value, 'label' => $category->label()],
                 PondCategory::cases(),
             ),
-            'ballValues' => Pond::BALL_VALUES,
+            'artwork' => Pond::artwork(),
+            'defaultArtwork' => Pond::DEFAULT_ARTWORK,
             'currency' => config('payments.currency'),
         ];
     }

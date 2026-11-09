@@ -1,7 +1,7 @@
 .pond-auth {
     --qp-ink: #1d2342;
     --qp-muted: #7b839b;
-    --qp-purple: #1f5f9a;
+    --qp-purple: #0062ef;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -38,7 +38,7 @@
     position: absolute;
     height: auto;
     animation: pondFloat 8s ease-in-out infinite;
-    filter: drop-shadow(0 20px 40px #7a5cf240);
+    filter: drop-shadow(0 20px 40px #5c98f240);
     pointer-events: none;
 }
 
@@ -114,7 +114,7 @@
     font-weight: 400;
     font-size: 1.07em;
     letter-spacing: -0.07em;
-    background: linear-gradient(90deg, #c5f8ff, #e7c2ff 65%, #fce9c0);
+    background: linear-gradient(90deg, #c5f8ff, #c2daff 65%, #fce9c0);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -161,30 +161,30 @@
 }
 
 .pond-auth input[data-slot='input']:focus-visible {
-    border-color: #a99bdb;
+    border-color: #9bb5db;
     outline: none;
-    box-shadow: 0 0 0 3px #a6a2ee55;
+    box-shadow: 0 0 0 3px #a2c0ee55;
 }
 
 .pond-auth [data-slot='checkbox'] {
-    border-color: #cfd0e0;
+    border-color: #cfd6e0;
     border-radius: 6px;
 }
 
 .pond-auth [data-slot='checkbox'][data-state='checked'] {
-    border-color: #7254c8;
-    background: #7254c8;
+    border-color: #0062ef;
+    background: #0062ef;
     color: #fff;
 }
 
 .pond-auth a:not(.pond-brand):not(.pond-btn) {
-    color: #6b4bc2;
+    color: #0062ef;
     font-weight: 600;
     text-decoration: none;
 }
 
 .pond-auth a:not(.pond-brand):not(.pond-btn):hover {
-    color: #5c40b5;
+    color: #406fb5;
     text-decoration: underline;
     text-underline-offset: 4px;
 }
@@ -194,14 +194,14 @@
     border-radius: 12px;
     font-size: 13px;
     font-weight: 700;
-    background: #7254c8;
+    background: #0062ef;
     color: #fff;
-    box-shadow: 0 5px 16px #7055c51e;
+    box-shadow: 0 5px 16px #5582c51e;
     transition: all 0.18s;
 }
 
 .pond-auth [data-slot='button']:hover:not(:disabled) {
-    background: #6445b9;
+    background: #0041a7;
     transform: translateY(-1px);
 }
 
@@ -210,11 +210,11 @@
 }
 
 .pond-auth [data-slot='button'][class*='bg-secondary'] {
-    background: #f4f0ff;
-    color: #6b4bc2;
+    background: #f0f6ff;
+    color: #0062ef;
     box-shadow: none;
 }
 
 .pond-auth [data-slot='button'][class*='bg-secondary']:hover:not(:disabled) {
-    background: #e9e0ff;
+    background: #e0ecff;
 }

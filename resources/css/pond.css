@@ -1,11 +1,11 @@
 /* Quantum Pond design system · CSS scoped to .pond-home / .pond-app */
 .pond-home,
 .pond-app {
-    --qp-ink: #13294b;
-    --qp-muted: #6f7d93;
-    --qp-purple: #1f5f9a;
-    --qp-purple-dark: #154872;
-    --qp-pink: #f23a8c;
+    --qp-ink: #03195c;
+    --qp-muted: #576e8f;
+    --qp-purple: #0062ef;
+    --qp-purple-dark: #0041a7;
+    --qp-pink: #fc036c;
     --qp-line: #e4ebf3;
     --qp-soft: #f5f8fc;
     font-family: 'DM Sans', 'Instrument Sans', sans-serif;
@@ -32,7 +32,7 @@
 .pond-app a:focus-visible,
 .pond-app input:focus-visible,
 .pond-app textarea:focus-visible {
-    outline: 3px solid #a6a2ee;
+    outline: 3px solid #a2c0ee;
     outline-offset: 2px
 }
 
@@ -86,13 +86,13 @@
 }
 
 .pond-btn-primary {
-    background: #1f5f9a;
+    background: #0062ef;
     color: #fff;
-    box-shadow: 0 5px 16px #1f5f9a1e
+    box-shadow: 0 5px 16px #0062ef1e
 }
 
 .pond-btn-primary:hover {
-    background: #154872
+    background: #0041a7
 }
 
 .pond-btn-light {
@@ -101,29 +101,29 @@
 }
 
 .pond-btn-glow {
-    background: linear-gradient(115deg, #ff7eb6, #ffd54a);
+    background: linear-gradient(115deg, #7eb2ff, #ffd54a);
     color: #13294b;
-    box-shadow: 0 13px 40px #f23a8c3d
+    box-shadow: 0 13px 40px #3a84f23d
 }
 
 .pond-btn-outline-dark {
-    border-color: #dcdcea;
-    color: #474273;
+    border-color: #dce2ea;
+    color: #425673;
     background: #fff
 }
 
 .pond-btn-outline-dark:hover {
-    border-color: #a99bdb;
-    background: #f5f1ff
+    border-color: #9bb5db;
+    background: #f1f7ff
 }
 
 .pond-btn-soft {
-    background: #f4f0ff;
-    color: #6b4bc2
+    background: #f0f6ff;
+    color: #0062ef
 }
 
 .pond-btn-soft:hover {
-    background: #e9e0ff
+    background: #e0ecff
 }
 
 .pond-wide {
@@ -143,8 +143,8 @@
 }
 
 .pond-icon-btn:hover {
-    background: #f1eff9;
-    color: #6953b1
+    background: #eff3f9;
+    color: #5379b1
 }
 
 .pond-muted {
@@ -164,7 +164,7 @@
 .pond-mark svg {
     width: 100%;
     height: 100%;
-    filter: drop-shadow(0 2px 7px #1f5f9a36)
+    filter: drop-shadow(0 2px 7px #0062ef36)
 }
 
 .pond-mark-small {
@@ -195,7 +195,7 @@
 }
 
 .pond-brand .pond-brand-dot {
-    color: #f23a8c
+    color: #3a84f2
 }
 
 .pond-brand-light {
@@ -217,7 +217,7 @@
     font-size: 12px;
     font-weight: 800;
     border: 3px solid #fff;
-    box-shadow: 0 3px 12px #25214c08
+    box-shadow: 0 3px 12px #21324c08
 }
 
 .avatar-small {
@@ -238,7 +238,7 @@
     height: 102px;
     font-size: 28px;
     border: 5px solid white;
-    box-shadow: 0 5px 18px #38255515
+    box-shadow: 0 5px 18px #25385515
 }
 
 .avatar-person {
@@ -249,8 +249,8 @@
 }
 
 .avatar-lilac {
-    background: #eae3ff;
-    color: #7254bd
+    background: #e3eeff;
+    color: #547ebd
 }
 
 .avatar-sky {
@@ -269,8 +269,8 @@
 }
 
 .avatar-pink {
-    background: #ffe1ec;
-    color: #c65d93
+    background: #e1edff;
+    color: #5d87c6
 }
 
 .avatar-blue {
@@ -286,8 +286,8 @@
     font-size: 10px;
     font-weight: 800;
     letter-spacing: .01em;
-    background: #efe9ff;
-    color: #8062ce
+    background: #e9f2ff;
+    color: #628dce
 }
 
 .tag-fun {
@@ -307,7 +307,7 @@
 
 .pond-progress {
     height: 8px;
-    background: #efedf5;
+    background: #edf0f5;
     border-radius: 99px;
     overflow: hidden
 }
@@ -315,7 +315,7 @@
 .pond-progress-inner {
     height: 100%;
     border-radius: 99px;
-    background: linear-gradient(90deg, #a78bec, #7658ca)
+    background: linear-gradient(90deg, #8bb2ec, #5886ca)
 }
 
 .progress-blue {
@@ -324,10 +324,10 @@
 
 .pond-panel {
     background: white;
-    border: 1px solid #eae9f0;
+    border: 1px solid #e9ecf0;
     border-radius: 20px;
     padding: 24px;
-    box-shadow: 0 5px 22px #31305d06
+    box-shadow: 0 5px 22px #30425d06
 }
 
 .pond-panel-header {
@@ -353,7 +353,7 @@
 .pond-panel-header>a {
     font-size: 12px;
     font-weight: 800;
-    color: #765acb;
+    color: #5a87cb;
     display: inline-flex;
     align-items: center;
     gap: 7px;
@@ -364,7 +364,7 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    color: #1f5f9a;
+    color: #0062ef;
     font-size: 11px;
     letter-spacing: .16em;
     font-weight: 800;
@@ -377,7 +377,7 @@
 }
 
 .pond-home-hero-wrap {
-    background: radial-gradient(ellipse 40% 40% at 85% 40%, #302469 0%, transparent 70%), radial-gradient(ellipse 50% 55% at 65% 100%, #113555 0%, transparent 80%), #0b1231;
+    background: radial-gradient(ellipse 40% 40% at 85% 40%, #244069 0%, transparent 70%), radial-gradient(ellipse 50% 55% at 65% 100%, #113555 0%, transparent 80%), #0b1231;
     color: #fff;
     position: relative;
     overflow: hidden
@@ -418,7 +418,7 @@
 .pond-nav-login {
     font-size: 13px;
     font-weight: 600;
-    color: #c3c5dc
+    color: #c3cddc
 }
 
 .pond-public-links a:hover,
@@ -455,7 +455,7 @@
     gap: 9px;
     border: 1px solid #ffffff30;
     background: #ffffff0f;
-    color: #d6d3fa;
+    color: #d3e3fa;
     font-weight: 700;
     letter-spacing: .12em;
     font-size: 10px;
@@ -481,7 +481,7 @@
 
 .pond-hero-left h1 em {
     display: inline-block;
-    background: linear-gradient(90deg, #c5f8ff, #e7c2ff 65%, #fce9c0);
+    background: linear-gradient(90deg, #c5f8ff, #c2daff 65%, #fce9c0);
     color: transparent;
     background-clip: text;
     font-size: 1.07em
@@ -502,7 +502,7 @@
 }
 
 .pond-hero-outline {
-    color: #e8e6ff;
+    color: #e6f0ff;
     display: inline-flex;
     align-items: center;
     gap: 10px;
@@ -550,7 +550,7 @@
     border: 1px solid #aed0f230;
     width: 470px;
     height: 470px;
-    box-shadow: inset 0 0 65px #5a5fd023, 0 0 45px #7e61cc12
+    box-shadow: inset 0 0 65px #5a89d023, 0 0 45px #618ccc12
 }
 
 .orbit-two {
@@ -564,7 +564,7 @@
 .pond-home-orb {
     position: absolute;
     object-fit: contain;
-    filter: drop-shadow(0 20px 34px #22136c80);
+    filter: drop-shadow(0 20px 34px #13376c80);
     animation: pondFloat 8s ease-in-out infinite
 }
 
@@ -615,8 +615,8 @@
 .glass-sparkle {
     display: grid;
     place-items: center;
-    background: #e2d2ff;
-    color: #6745af;
+    background: #d2e4ff;
+    color: #456faf;
     border-radius: 12px;
     width: 36px;
     height: 36px
@@ -640,7 +640,7 @@
     position: absolute;
     top: 17px;
     right: 2%;
-    color: #c1b8d8aa
+    color: #b8c5d8aa
 }
 
 .pond-hero-bottom {
@@ -712,7 +712,7 @@
 .pond-intro-top h2 em,
 .pond-center-intro h2 em,
 .pond-community-section h2 em {
-    color: #8862d7
+    color: #6291d7
 }
 
 .pond-intro-top>p {
@@ -729,18 +729,18 @@
 
 .pond-step {
     background: #fff;
-    border: 1px solid #e9e9f1;
+    border: 1px solid #e9ecf1;
     border-radius: 22px;
     padding: 26px 28px 31px;
     position: relative;
-    box-shadow: 0 7px 24px #3f3b7307
+    box-shadow: 0 7px 24px #3b517307
 }
 
 .step-number {
     position: absolute;
     top: 29px;
     right: 28px;
-    color: #a8a4b9;
+    color: #a4acb9;
     font-size: 11px;
     font-weight: 700
 }
@@ -755,8 +755,8 @@
 }
 
 .step-symbol-purple {
-    background: #ece4ff;
-    color: #9166d7
+    background: #e4efff;
+    color: #6693d7
 }
 
 .step-symbol-blue {
@@ -765,8 +765,8 @@
 }
 
 .step-symbol-pink {
-    background: #ffe8f1;
-    color: #c77aa0
+    background: #e8f1ff;
+    color: #7a99c7
 }
 
 .pond-step h3 {
@@ -781,7 +781,7 @@
 }
 
 .pond-category-section {
-    background: #fbfafe;
+    background: #fafcfe;
     border-radius: 32px
 }
 
@@ -812,8 +812,8 @@
 }
 
 .category-lavender {
-    background: #f0eaff;
-    color: #765ac0
+    background: #eaf2ff;
+    color: #5a83c0
 }
 
 .category-blue {
@@ -893,7 +893,7 @@
 }
 
 .pond-home-visual h2 em {
-    color: #8865d2
+    color: #6591d2
 }
 
 .pond-feature-point {
@@ -907,7 +907,7 @@
 }
 
 .pond-feature-point svg {
-    color: #7d66d3
+    color: #6692d3
 }
 
 .pond-home-visual-text .pond-btn {
@@ -915,10 +915,10 @@
 }
 
 .pond-home-visual-panel {
-    background: radial-gradient(circle at 50% 55%, #2d2b65, #17173d 65%, #11152f);
+    background: radial-gradient(circle at 50% 55%, #2b4265, #17263d 65%, #11152f);
     border-radius: 28px;
     padding: 25px;
-    box-shadow: 0 20px 50px #1c1d5430;
+    box-shadow: 0 20px 50px #1c325430;
     color: #fff
 }
 
@@ -928,13 +928,13 @@
     font-size: 10px;
     font-weight: 800;
     letter-spacing: .12em;
-    color: #b6b3d8
+    color: #b3c2d8
 }
 
 .pond-visual-header span+span {
     letter-spacing: 0;
     font-weight: 600;
-    color: #a39fc5
+    color: #9faec5
 }
 
 .pond-ball-feature-grid {
@@ -973,12 +973,12 @@
 
 .pond-home-visual-panel>p {
     text-align: center;
-    color: #bcb9d0;
+    color: #b9c2d0;
     font-size: 11px
 }
 
 .pond-community-section {
-    background: #f9f9fd;
+    background: #f9fbfd;
     display: grid;
     grid-template-columns: .9fr 1.1fr;
     gap: 90px;
@@ -1002,8 +1002,8 @@
 .pond-member-mini {
     padding: 18px 20px;
     background: #fff;
-    border: 1px solid #eeeef5;
-    box-shadow: 0 8px 20px #44426e08;
+    border: 1px solid #eef1f5;
+    box-shadow: 0 8px 20px #42546e08;
     border-radius: 17px
 }
 
@@ -1043,7 +1043,7 @@
 }
 
 .pond-member-mini-bottom span+span {
-    color: #8061c8;
+    color: #618ac8;
     font-weight: 800
 }
 
@@ -1051,7 +1051,7 @@
     margin: 0 32px 100px;
     border-radius: 30px;
     min-height: 420px;
-    background: radial-gradient(circle at 10% 100%, #39416b 0, transparent 42%), radial-gradient(circle at 100% 0%, #4c327e 0, transparent 50%), #121631;
+    background: radial-gradient(circle at 10% 100%, #39416b 0, transparent 42%), radial-gradient(circle at 100% 0%, #32507e 0, transparent 50%), #121631;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1074,11 +1074,11 @@
 }
 
 .pond-final-cta h2 em {
-    color: #d6bafd
+    color: #bad5fd
 }
 
 .pond-final-cta p {
-    color: #c2c0d9;
+    color: #c0cad9;
     max-width: 460px;
     font-size: 14px;
     margin-bottom: 22px
@@ -1089,7 +1089,7 @@
     right: 10%;
     top: 20%;
     font-size: 32px;
-    color: #decaff55
+    color: #cadfff55
 }
 
 .pond-public-footer {
@@ -1100,11 +1100,11 @@
     align-items: center;
     justify-content: space-between;
     gap: 20px;
-    border-top: 1px solid #eeeef4
+    border-top: 1px solid #eef0f4
 }
 
 .pond-public-footer .pond-brand {
-    color: #29284f
+    color: #28384f
 }
 
 .pond-public-footer>span {
@@ -1140,7 +1140,7 @@
     display: flex;
     flex-direction: column;
     background: #fff;
-    border-right: 1px solid #edeaf3;
+    border-right: 1px solid #eaeef3;
     padding: 25px 16px 17px;
     z-index: 40
 }
@@ -1180,27 +1180,27 @@
 }
 
 .pond-side-link:hover {
-    color: #7154ba;
-    background: #f9f7ff
+    color: #547dba;
+    background: #f7faff
 }
 
 .pond-side-link.active {
-    color: #7354c4;
-    background: #f1edfc
+    color: #5481c4;
+    background: #edf3fc
 }
 
 .pond-side-link.active:before {
     content: '';
     height: 22px;
     width: 3px;
-    background: #7d59d2;
+    background: #0062ef;
     border-radius: 4px;
     margin-left: -15px;
     margin-right: 12px
 }
 
 .pond-unread {
-    background: #8162d5;
+    background: #6290d5;
     color: #fff;
     font-size: 10px;
     border-radius: 50%;
@@ -1219,11 +1219,11 @@
 }
 
 .pond-side-quote {
-    background: linear-gradient(135deg, #f4efff, #f0f7ff);
+    background: linear-gradient(135deg, #eff5ff, #f0f7ff);
     border-radius: 16px;
     padding: 19px;
     margin-bottom: 14px;
-    color: #38335d
+    color: #33445d
 }
 
 .pond-side-quote-star {
@@ -1231,8 +1231,8 @@
     height: 34px;
     display: grid;
     place-items: center;
-    background: #dcd0fb;
-    color: #7450c7;
+    background: #d0e1fb;
+    color: #5080c7;
     border-radius: 11px;
     margin-bottom: 13px
 }
@@ -1245,14 +1245,14 @@
 
 .pond-side-quote p {
     font-size: 11px;
-    color: #8a87a4;
+    color: #8793a4;
     margin: 7px 0 12px
 }
 
 .pond-side-quote a {
     font-size: 11px;
     font-weight: 800;
-    color: #7354c6;
+    color: #5482c6;
     display: inline-flex;
     align-items: center;
     gap: 5px
@@ -1272,7 +1272,7 @@
     justify-content: space-between;
     padding: 0 38px;
     background: #fff;
-    border-bottom: 1px solid #eeedf5
+    border-bottom: 1px solid #edf0f5
 }
 
 .pond-breadcrumb {
@@ -1305,8 +1305,8 @@
     width: 250px;
     height: 37px;
     border-radius: 10px;
-    background: #f8f8fc;
-    border: 1px solid #eeeef3;
+    background: #f8fafc;
+    border: 1px solid #eef0f3;
     color: #a8acbf;
     padding: 0 10px;
     font-size: 11px
@@ -1331,7 +1331,7 @@
     width: 7px;
     height: 7px;
     border-radius: 50%;
-    background: #f6a3b9;
+    background: #a3c4f6;
     right: 6px;
     top: 5px;
     border: 1.5px solid white
@@ -1346,11 +1346,11 @@
     right: 0;
     top: 40px;
     width: 270px;
-    border: 1px solid #e8e6f1;
+    border: 1px solid #e6eaf1;
     background: #fff;
     padding: 20px;
     border-radius: 15px;
-    box-shadow: 0 18px 40px #29204b20;
+    box-shadow: 0 18px 40px #20314b20;
     z-index: 5
 }
 
@@ -1361,7 +1361,7 @@
 .pond-popover p {
     font-size: 11px;
     color: #778097;
-    border-top: 1px solid #f2f0f5;
+    border-top: 1px solid #f0f2f5;
     padding-top: 10px;
     margin-top: 10px
 }
@@ -1374,9 +1374,9 @@
     gap: 8px;
     font-size: 10px;
     font-weight: 700;
-    color: #746290;
-    background: #f0ecfa;
-    border-bottom: 1px solid #e7dff7
+    color: #627490;
+    background: #ecf2fa;
+    border-bottom: 1px solid #dfe9f7
 }
 
 .pond-demo-banner sup {
@@ -1386,7 +1386,7 @@
 .demo-pulse {
     width: 6px;
     height: 6px;
-    background: #8a60e6;
+    background: #6096e6;
     border-radius: 50%
 }
 
@@ -1443,7 +1443,7 @@
 
 /* dashboard */
 .pond-dashboard-hero {
-    background: radial-gradient(circle at 88% 80%, #6d5095 0%, transparent 43%), linear-gradient(108deg, #222344, #39336d 85%);
+    background: radial-gradient(circle at 88% 80%, #506c95 0%, transparent 43%), linear-gradient(108deg, #223044, #334a6d 85%);
     height: 248px;
     border-radius: 20px;
     position: relative;
@@ -1461,7 +1461,7 @@
 
 .pond-hero-label {
     letter-spacing: .16em;
-    color: #d2c1ff;
+    color: #c1daff;
     font-weight: 800;
     font-size: 9px
 }
@@ -1475,13 +1475,13 @@
 }
 
 .pond-dashboard-hero h2 em {
-    color: #d0b6fb
+    color: #b6d2fb
 }
 
 .pond-dashboard-hero p {
     font-size: 11px;
     line-height: 1.75;
-    color: #c8c6df;
+    color: #c6d0df;
     max-width: 450px;
     margin-bottom: 17px
 }
@@ -1499,7 +1499,7 @@
 
 .pond-btn-ghost-white {
     font-size: 11px;
-    color: #eae6ff;
+    color: #e6f0ff;
     display: inline-flex;
     align-items: center;
     gap: 7px;
@@ -1509,7 +1509,7 @@
 .pond-dashboard-hero-ball {
     position: absolute;
     object-fit: contain;
-    filter: drop-shadow(0 0 40px #a282ff80)
+    filter: drop-shadow(0 0 40px #82b4ff80)
 }
 
 .hero-ball-main {
@@ -1545,7 +1545,7 @@
     padding: 19px;
     background: #fff;
     border-radius: 17px;
-    border: 1px solid #ebeaf2;
+    border: 1px solid #eaedf2;
     display: flex;
     align-items: center;
     gap: 16px;
@@ -1561,13 +1561,13 @@
 }
 
 .stat-purple {
-    color: #8562d5;
-    background: #f0eafd
+    color: #6290d5;
+    background: #eaf2fd
 }
 
 .stat-pink {
-    color: #db7d9d;
-    background: #fff0f5
+    color: #7da3db;
+    background: #f0f6ff
 }
 
 .stat-green {
@@ -1610,7 +1610,7 @@
 }
 
 .pond-daily-quote {
-    background: #faf9ff;
+    background: #f9fbff;
     border-radius: 16px;
     padding: 25px;
     text-align: center;
@@ -1620,7 +1620,7 @@
 .pond-daily-quote .quote-icon {
     font-size: 50px;
     font-family: Georgia, serif;
-    color: #a88fe4;
+    color: #8fb1e4;
     line-height: .7
 }
 
@@ -1628,7 +1628,7 @@
     font-family: Georgia, serif;
     font-weight: 400;
     letter-spacing: -.035em;
-    color: #4d4278;
+    color: #425878;
     font-size: 23px;
     margin: 12px 0
 }
@@ -1640,7 +1640,7 @@
 
 .pond-daily-quote>span:last-child {
     font-size: 9px;
-    color: #967ac8;
+    color: #7a99c8;
     font-weight: 800;
     letter-spacing: .13em
 }
@@ -1657,7 +1657,7 @@
     font-size: 11px;
     color: #7d8299;
     padding: 11px 0;
-    border-bottom: 1px solid #f0eff5
+    border-bottom: 1px solid #eff1f5
 }
 
 .pond-mini-activity-row:last-child {
@@ -1670,7 +1670,7 @@
 }
 
 .pond-mini-activity-row strong {
-    color: #3b3c58
+    color: #3b4758
 }
 
 .pond-mini-activity-row small {
@@ -1701,8 +1701,8 @@
 }
 
 .pond-profile-completeness {
-    background: #fbfaff;
-    border: 1px solid #f3effd;
+    background: #fafcff;
+    border: 1px solid #eff5fd;
     border-radius: 13px;
     padding: 15px;
     margin: 20px 0
@@ -1721,7 +1721,7 @@
 
 .pond-profile-completeness span {
     font-size: 10px;
-    color: #8d7aba
+    color: #7a94ba
 }
 
 .pond-profile-completeness p {
@@ -1732,8 +1732,8 @@
 
 .pond-quick-give {
     padding: 24px;
-    background: linear-gradient(145deg, #ebf7fb, #f3eefe);
-    border: 1px solid #e8e9f4;
+    background: linear-gradient(145deg, #ebf7fb, #eef4fe);
+    border: 1px solid #e8edf4;
     border-radius: 19px;
     display: flex;
     flex-direction: column;
@@ -1793,8 +1793,8 @@
 .pond-composer-input {
     flex: 1;
     text-align: left;
-    background: #f7f7fb;
-    border: 1px solid #ededf3;
+    background: #f7f9fb;
+    border: 1px solid #edeff3;
     border-radius: 30px;
     color: #9ca0b2;
     padding: 12px 18px;
@@ -1807,8 +1807,8 @@
     border-radius: 50%;
     width: 35px;
     height: 35px;
-    background: #eee8fb;
-    color: #7658cc;
+    background: #e8f0fb;
+    color: #5886cc;
     border: 0
 }
 
@@ -1833,7 +1833,7 @@
 }
 
 .pond-tab-group button.active {
-    color: #6e51b9
+    color: #517bb9
 }
 
 .pond-tab-group button.active:after {
@@ -1843,13 +1843,13 @@
     left: 0;
     right: 0;
     height: 3px;
-    background: #8d65de;
+    background: #6595de;
     border-radius: 4px
 }
 
 .pond-filter-select {
     padding: 9px 11px;
-    border: 1px solid #e8e5f0;
+    border: 1px solid #e5e9f0;
     border-radius: 9px;
     font-size: 11px;
     color: #777f98;
@@ -1857,10 +1857,10 @@
 }
 
 .pond-feed-card {
-    border: 1px solid #eae9f1;
+    border: 1px solid #e9ecf1;
     border-radius: 19px;
     background: #fff;
-    box-shadow: 0 6px 20px #29265306;
+    box-shadow: 0 6px 20px #26385306;
     padding: 22px 24px
 }
 
@@ -1899,7 +1899,7 @@
 }
 
 .pond-earth {
-    color: #8c81b8
+    color: #8197b8
 }
 
 .pond-feed-copy {
@@ -1918,7 +1918,7 @@
 
 .pond-sent-note {
     font-size: 10px;
-    color: #896fbd;
+    color: #6f8ebd;
     display: inline-flex;
     align-items: center;
     gap: 5px
@@ -1934,7 +1934,7 @@
 }
 
 .pond-amount-row b {
-    color: #3c3c5d
+    color: #3c495d
 }
 
 .pond-amount-row strong {
@@ -1952,7 +1952,7 @@
 }
 
 .pond-post-actions {
-    border-top: 1px solid #f0eef5;
+    border-top: 1px solid #eef1f5;
     padding-top: 12px;
     display: flex;
     align-items: center;
@@ -1972,20 +1972,20 @@
 }
 
 .pond-post-actions button:hover {
-    background: #faf8ff;
-    color: #7857c7
+    background: #f8fbff;
+    color: #5784c7
 }
 
 .pond-post-actions button.liked {
-    color: #bd5e9a
+    color: #5e84bd
 }
 
 .pond-post-actions button.post-give {
-    color: #7857c7
+    color: #5784c7
 }
 
 .pond-comments {
-    border-top: 1px solid #f2f0f6;
+    border-top: 1px solid #f0f2f6;
     margin-top: 13px;
     padding-top: 12px
 }
@@ -1995,7 +1995,7 @@
     gap: 8px;
     align-items: center;
     font-size: 11px;
-    background: #faf9ff;
+    background: #f9fbff;
     border-radius: 13px;
     padding: 8px;
     margin: 8px 0
@@ -2004,7 +2004,7 @@
 .pond-comment-input {
     display: flex;
     align-items: center;
-    background: #f8f8fc;
+    background: #f8fafc;
     border-radius: 10px;
     padding: 7px
 }
@@ -2018,7 +2018,7 @@
 }
 
 .pond-comment-input button {
-    color: #7757c8;
+    color: #5784c8;
     padding: 7px
 }
 
@@ -2044,8 +2044,8 @@
     border-radius: 10px;
     width: 29px;
     height: 29px;
-    background: #f0e8ff;
-    color: #8667d1
+    background: #e8f1ff;
+    color: #6791d1
 }
 
 .pond-aside-title h3 {
@@ -2060,7 +2060,7 @@
 }
 
 .pond-aside-link {
-    color: #7556c1;
+    color: #5681c1;
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -2096,18 +2096,18 @@
 }
 
 .pond-side-people a {
-    color: #9a82cd
+    color: #82a0cd
 }
 
 .pond-aside-art {
-    background: linear-gradient(145deg, #ece8fa, #e2f3fc);
+    background: linear-gradient(145deg, #e8effa, #e2f3fc);
     border-radius: 16px;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     padding: 10px 20px 26px;
-    color: #5c5886;
+    color: #586a86;
     font-weight: 800;
     font-size: 13px
 }
@@ -2120,7 +2120,7 @@
     text-align: center;
     border-radius: 19px;
     background: #fff;
-    border: 1px solid #eeeaf5;
+    border: 1px solid #eaeef5;
     padding: 55px 25px
 }
 
@@ -2130,8 +2130,8 @@
     display: grid;
     place-items: center;
     border-radius: 20px;
-    background: #f1ebff;
-    color: #7859cd;
+    background: #ebf3ff;
+    color: #5987cd;
     margin: 0 auto 20px
 }
 
@@ -2149,7 +2149,7 @@
 .pond-explore-highlight {
     min-height: 188px;
     border-radius: 19px;
-    background: linear-gradient(115deg, #f0eafd, #e8f7f9);
+    background: linear-gradient(115deg, #eaf2fd, #e8f7f9);
     padding: 30px 38px;
     display: flex;
     position: relative;
@@ -2200,7 +2200,7 @@
     align-items: center;
     gap: 9px;
     background: #fff;
-    border: 1px solid #e9e8ef;
+    border: 1px solid #e8ebef;
     padding: 0 13px;
     border-radius: 11px;
     color: #9c9dac;
@@ -2225,7 +2225,7 @@
 }
 
 .pond-filter-chips button {
-    border: 1px solid #e7e5f0;
+    border: 1px solid #e5e9f0;
     border-radius: 30px;
     padding: 8px 13px;
     color: #888da3;
@@ -2235,8 +2235,8 @@
 }
 
 .pond-filter-chips button.active {
-    border-color: #7252be;
-    background: #7658c8;
+    border-color: #0041a7;
+    background: #0062ef;
     color: white
 }
 
@@ -2248,15 +2248,15 @@
 
 .pond-person-card {
     background: #fff;
-    border: 1px solid #e9e7f0;
+    border: 1px solid #e7ebf0;
     border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 5px 18px #29295005
+    box-shadow: 0 5px 18px #29395005
 }
 
 .pond-person-gradient {
     height: 110px;
-    background: linear-gradient(135deg, #ece2ff, #dff6f7);
+    background: linear-gradient(135deg, #e2eeff, #dff6f7);
     position: relative
 }
 
@@ -2329,7 +2329,7 @@
 .pond-profile-cover {
     height: 115px;
     border-radius: 20px 20px 0 0;
-    background: linear-gradient(115deg, #a78eda, #c6b5f2 60%, #b0dfe8);
+    background: linear-gradient(115deg, #8eacda, #b5cdf2 60%, #b0dfe8);
     position: relative;
     overflow: hidden;
     margin-bottom: -41px
@@ -2349,7 +2349,7 @@
     background: #fff;
     padding: 0 22px 21px;
     border-radius: 0 0 20px 20px;
-    border: 1px solid #eae8f0;
+    border: 1px solid #e8ebf0;
     border-top: 0
 }
 
@@ -2396,7 +2396,7 @@
 }
 
 .pond-profile-data {
-    border-top: 1px solid #efeef5;
+    border-top: 1px solid #eef1f5;
     padding-top: 16px;
     display: flex;
     justify-content: space-around;
@@ -2429,8 +2429,8 @@
     height: 39px;
     display: grid;
     place-items: center;
-    color: #c05d9e;
-    background: #fff0f6;
+    color: #5d85c0;
+    background: #f0f6ff;
     border-radius: 12px
 }
 
@@ -2453,7 +2453,7 @@
     display: flex;
     align-items: center;
     gap: 12px;
-    background: #faf9fd;
+    background: #f9fbfd;
     border-radius: 12px;
     padding: 14px;
     font-size: 11px;
@@ -2474,7 +2474,7 @@
     width: 33px;
     height: 19px;
     border-radius: 20px;
-    background: #c7c8d5;
+    background: #c7cdd5;
     position: relative
 }
 
@@ -2491,7 +2491,7 @@
 }
 
 .pond-toggle-line input:checked+.pond-toggle-ui {
-    background: #8b6acb
+    background: #6a91cb
 }
 
 .pond-toggle-line input:checked+.pond-toggle-ui:after {
@@ -2501,16 +2501,16 @@
 .pond-form-note {
     margin: 13px 0;
     padding: 12px;
-    background: #f8f7fd;
-    color: #9a98af;
+    background: #f7f9fd;
+    color: #98a1af;
     font-size: 11px;
     line-height: 1.7;
     border-radius: 10px
 }
 
 .pond-verified-pill {
-    color: #a56b9b;
-    background: #fff1f8;
+    color: #6b82a5;
+    background: #f1f7ff;
     border-radius: 20px;
     font-size: 10px;
     padding: 7px 10px;
@@ -2522,7 +2522,7 @@
 .pond-story-item {
     display: flex;
     gap: 15px;
-    border-top: 1px solid #efedf5;
+    border-top: 1px solid #edf0f5;
     padding: 20px 0
 }
 
@@ -2558,7 +2558,7 @@
     display: flex;
     align-items: center;
     gap: 4px;
-    color: #886acb;
+    color: #6a91cb;
     font-size: 11px;
     font-weight: 800
 }
@@ -2575,11 +2575,11 @@
 }
 
 .pond-profile-tip {
-    background: #f3edff
+    background: #edf4ff
 }
 
 .pond-profile-tip>span {
-    color: #9472cf;
+    color: #7297cf;
     letter-spacing: .15em;
     font-size: 10px;
     font-weight: 800
@@ -2591,11 +2591,11 @@
     font-size: 22px;
     letter-spacing: -.03em;
     margin-top: 10px;
-    color: #625382
+    color: #536682
 }
 
 .pond-profile-tip p {
-    color: #9a8eae;
+    color: #8e9bae;
     font-size: 11px;
     margin-top: 6px
 }
@@ -2605,21 +2605,21 @@
     align-items: center;
     gap: 10px;
     font-size: 12px;
-    color: #7c7796;
+    color: #778396;
     margin: 15px 0
 }
 
 .pond-ack input {
-    accent-color: #7455c6
+    accent-color: #5582c6
 }
 
 .pond-safety-illustration {
-    background: #f7f2ff;
+    background: #f2f7ff;
     border-radius: 14px;
     text-align: center;
     padding: 25px 19px;
     margin-top: 20px;
-    color: #8c68cc
+    color: #6890cc
 }
 
 .pond-safety-illustration svg {
@@ -2634,7 +2634,7 @@
 
 /* balls */
 .pond-balls-hero {
-    background: radial-gradient(circle at 100% 100%, #53498d, #252349 52%, #1b2145);
+    background: radial-gradient(circle at 100% 100%, #49648d, #233249 52%, #1b2145);
     border-radius: 22px;
     min-height: 248px;
     position: relative;
@@ -2655,12 +2655,12 @@
 
 .pond-balls-hero h2 em,
 .pond-connections-banner h2 em {
-    color: #d3b7ff
+    color: #b7d4ff
 }
 
 .pond-balls-hero p,
 .pond-connections-banner p {
-    color: #c5c2dc;
+    color: #c2ccdc;
     max-width: 430px;
     font-size: 12px;
     margin: 9px 0 18px
@@ -2681,7 +2681,7 @@
     gap: 5px;
     align-items: center;
     font-size: 10px;
-    color: #d7d0ed
+    color: #d0dced
 }
 
 .pond-balls-hero>div:first-child>div svg {
@@ -2698,7 +2698,7 @@
     position: absolute;
     top: -25px;
     right: 40px;
-    filter: drop-shadow(0 0 30px #c2b4ff45)
+    filter: drop-shadow(0 0 30px #b4d2ff45)
 }
 
 .pond-balls-hero-art img+img {
@@ -2735,14 +2735,14 @@
 .pond-ball-card {
     background: #fff;
     border-radius: 18px;
-    border: 1px solid #ebe9f1;
+    border: 1px solid #e9ecf1;
     overflow: hidden;
-    box-shadow: 0 6px 19px #2e275006
+    box-shadow: 0 6px 19px #27375006
 }
 
 .pond-ball-image {
     height: 155px;
-    background: radial-gradient(circle at 50% 55%, color-mix(in srgb, var(--ball-color), #fff 86%), #f9f9fc 80%);
+    background: radial-gradient(circle at 50% 55%, color-mix(in srgb, var(--ball-color), #fff 86%), #f9fafc 80%);
     display: grid;
     place-items: center
 }
@@ -2792,11 +2792,11 @@
     justify-content: space-between;
     gap: 4px;
     align-items: center;
-    color: #7252be;
+    color: #0041a7;
     font-size: 11px;
     font-weight: 800;
     width: 100%;
-    border-top: 1px solid #f1eff4;
+    border-top: 1px solid #eff1f4;
     padding-top: 13px
 }
 
@@ -2825,7 +2825,7 @@
 
 /* connection */
 .pond-connections-banner {
-    background: radial-gradient(circle at 90% 50%, #ab6caa, #46336d 48%, #272349);
+    background: radial-gradient(circle at 90% 50%, #6c85ab, #334a6d 48%, #233249);
     border-radius: 20px;
     display: flex;
     justify-content: space-between;
@@ -2850,7 +2850,7 @@
     top: 20px;
     width: 260px;
     height: 260px;
-    color: #f1b5e8
+    color: #b5cdf1
 }
 
 .pond-connection-hearts>svg:first-child {
@@ -2858,8 +2858,8 @@
     top: 35px;
     left: 40px;
     stroke-width: 1;
-    fill: #a74e9d44;
-    filter: drop-shadow(0 0 24px #ffbae578)
+    fill: #4e72a744;
+    filter: drop-shadow(0 0 24px #bad6ff78)
 }
 
 .pond-connection-hearts>svg:nth-child(2) {
@@ -2884,14 +2884,14 @@
 
 .pond-spark-card {
     background: #fff;
-    border: 1px solid #e8e5ee;
+    border: 1px solid #e5e9ee;
     border-radius: 20px;
     overflow: hidden
 }
 
 .pond-spark-art {
     height: 180px;
-    background: linear-gradient(145deg, color-mix(in srgb, var(--spark-color), #fff 68%), #faf9ff);
+    background: linear-gradient(145deg, color-mix(in srgb, var(--spark-color), #fff 68%), #f9fbff);
     display: grid;
     place-items: center;
     position: relative
@@ -2905,7 +2905,7 @@
     place-items: center;
     color: #fff;
     background: radial-gradient(circle at 35% 30%, #ffffffaa, transparent 43%), var(--spark-color);
-    box-shadow: inset -14px -13px 27px #4e236a2b, 0 17px 35px color-mix(in srgb, var(--spark-color), transparent 55%)
+    box-shadow: inset -14px -13px 27px #233f6a2b, 0 17px 35px color-mix(in srgb, var(--spark-color), transparent 55%)
 }
 
 .pond-spark-art>span {
@@ -2914,7 +2914,7 @@
     top: 18px;
     font-size: 11px;
     font-weight: 800;
-    color: #8a88a7
+    color: #8894a7
 }
 
 .pond-spark-description {
@@ -2925,7 +2925,7 @@
 .pond-spark-price {
     font-size: 27px;
     font-weight: 800;
-    color: #3d305a
+    color: #30415a
 }
 
 .pond-spark-description h3 {
@@ -2943,7 +2943,7 @@
     font-family: Georgia, serif;
     font-size: 17px;
     line-height: 1.4;
-    color: #7b668f;
+    color: #66768f;
     margin: 23px auto;
     min-height: 53px
 }
@@ -2958,14 +2958,14 @@
     align-items: flex-start;
     gap: 13px;
     background: #fff;
-    border: 1px solid #e9e8f1;
+    border: 1px solid #e8ecf1;
     border-radius: 16px;
     padding: 22px;
-    color: #8266be
+    color: #6689be
 }
 
 .pond-connections-safety strong {
-    color: #393659;
+    color: #364459;
     font-size: 13px
 }
 
@@ -2980,7 +2980,7 @@
     display: grid;
     grid-template-columns: 300px minmax(0, 1fr);
     min-height: 530px;
-    border: 1px solid #e7e6f1;
+    border: 1px solid #e6eaf1;
     border-radius: 19px;
     background: #fff;
     overflow: hidden
@@ -2988,7 +2988,7 @@
 
 .pond-message-threads {
     padding: 21px;
-    border-right: 1px solid #eeecf4
+    border-right: 1px solid #eceff4
 }
 
 .pond-message-threads h2 {
@@ -3012,7 +3012,7 @@
 }
 
 .pond-thread.active {
-    background: #f3effb
+    background: #eff4fb
 }
 
 .pond-thread>span:nth-child(2) {
@@ -3025,7 +3025,7 @@
 
 .pond-thread strong {
     font-size: 12px;
-    color: #41405a
+    color: #404a5a
 }
 
 .pond-thread small {
@@ -3039,7 +3039,7 @@
 .pond-thread-indicator {
     height: 7px;
     width: 7px;
-    background: #987ad9;
+    background: #7aa0d9;
     border-radius: 50%
 }
 
@@ -3054,7 +3054,7 @@
     align-items: center;
     gap: 12px;
     padding: 15px 25px;
-    border-bottom: 1px solid #f0eff6
+    border-bottom: 1px solid #eff2f6
 }
 
 .pond-chat-header>div {
@@ -3091,14 +3091,14 @@
 }
 
 .pond-chat-bubble.theirs {
-    background: #f3f1f9;
-    color: #625d77;
+    background: #f1f4f9;
+    color: #5d6777;
     align-self: flex-start;
     border-bottom-left-radius: 4px
 }
 
 .pond-chat-bubble.mine {
-    background: #7960c5;
+    background: #6088c5;
     color: white;
     align-self: flex-end;
     border-bottom-right-radius: 4px
@@ -3109,7 +3109,7 @@
     align-items: center;
     gap: 12px;
     padding: 10px 14px;
-    background: #f9f8fd;
+    background: #f8fafd;
     border-radius: 12px;
     margin: 0 20px
 }
@@ -3122,7 +3122,7 @@
 }
 
 .pond-chat-send button {
-    background: #7858c6;
+    background: #5884c6;
     color: white;
     border-radius: 10px;
     padding: 9px
@@ -3179,14 +3179,14 @@
     font-size: 10px;
     letter-spacing: .06em;
     padding: 14px;
-    border-bottom: 1px solid #efedf4
+    border-bottom: 1px solid #edf0f4
 }
 
 .pond-admin-table td {
     font-size: 11px;
     color: #777f93;
     padding: 14px;
-    border-bottom: 1px solid #f4f3f7
+    border-bottom: 1px solid #f3f5f7
 }
 
 .pond-admin-table td:first-child {
@@ -3212,7 +3212,7 @@
     display: flex;
     align-items: center;
     gap: 15px;
-    border-top: 1px solid #f0eff5;
+    border-top: 1px solid #eff1f5;
     padding: 15px 0
 }
 
@@ -3239,8 +3239,8 @@
     height: 44px;
     display: grid;
     place-items: center;
-    background: #eeeafa;
-    color: #785ac7;
+    background: #eaf0fa;
+    color: #5a86c7;
     border-radius: 12px
 }
 
@@ -3248,7 +3248,7 @@
 .pond-modal-backdrop {
     position: fixed;
     inset: 0;
-    background: #11132d88;
+    background: #111c2d88;
     backdrop-filter: blur(5px);
     z-index: 100;
     display: flex;
@@ -3264,7 +3264,7 @@
     background: #fff;
     border-radius: 24px;
     padding: 29px;
-    box-shadow: 0 20px 80px #14132940;
+    box-shadow: 0 20px 80px #131c2940;
     position: relative
 }
 
@@ -3293,10 +3293,10 @@
 }
 
 .pond-give-choice {
-    border: 1px solid #e9e7f0;
+    border: 1px solid #e7ebf0;
     border-radius: 14px;
     padding: 7px;
-    background: #fafafd;
+    background: #fafbfd;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -3304,9 +3304,9 @@
 }
 
 .pond-give-choice.selected {
-    border-color: #9b76e2;
-    background: #f3edff;
-    box-shadow: inset 0 0 0 1px #9b76e2
+    border-color: #76a1e2;
+    background: #edf4ff;
+    box-shadow: inset 0 0 0 1px #76a1e2
 }
 
 .pond-give-choice img {
@@ -3330,10 +3330,10 @@
 .pond-input {
     width: 100%;
     margin-top: 8px;
-    border: 1px solid #e7e5f0;
+    border: 1px solid #e5e9f0;
     border-radius: 11px;
-    background: #fbfaff;
-    color: #45415d;
+    background: #fafcff;
+    color: #414c5d;
     font-size: 12px;
     padding: 12px;
     outline: none
@@ -3358,11 +3358,11 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    border: 1px solid #dddbea;
-    background: #f9f8fd;
+    border: 1px solid #dbe1ea;
+    background: #f8fafd;
     padding: 10px 14px;
     border-radius: 11px;
-    color: #8a7eb1
+    color: #7e92b1
 }
 
 .pond-search-field input {
@@ -3380,10 +3380,10 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    border-bottom: 1px solid #f1eef7;
+    border-bottom: 1px solid #eef2f7;
     padding: 12px 7px;
     font-size: 12px;
-    color: #675b89
+    color: #5b6d89
 }
 
 .pond-search-results a svg:last-child {
@@ -3435,7 +3435,7 @@
         top: 0;
         transform: translateX(-101%);
         transition: transform .2s;
-        box-shadow: 10px 0 30px #29224115
+        box-shadow: 10px 0 30px #222e4115
     }
 
     .pond-sidebar.is-open {
@@ -3451,7 +3451,7 @@
         display: block;
         position: fixed;
         inset: 0;
-        background: #12132b77;
+        background: #121c2b77;
         z-index: 30
     }
 
@@ -4002,8 +4002,8 @@
 }
 
 .pond-app button.pond-side-logout:hover {
-    background: #f4f0ff;
-    color: #6b4bc2
+    background: #f0f6ff;
+    color: #0062ef
 }
 
 /* ── Member profiles (live data) ─────────────────────────────────────────── */
@@ -4020,7 +4020,7 @@
 }
 
 .pond-field-error {
-    color: #c2416b;
+    color: #4175c2;
     font-size: 11px;
     font-weight: 600;
     margin-top: 6px
@@ -4061,7 +4061,7 @@
     align-items: center;
     gap: 5px;
     margin-top: 8px;
-    color: #a36b8b;
+    color: #6b81a3;
     font-size: 11px;
     font-weight: 700
 }
@@ -4072,7 +4072,7 @@
 }
 
 .pond-story-field small strong {
-    color: #7a62b8;
+    color: #6284b8;
     font-weight: 800
 }
 
@@ -4099,7 +4099,7 @@
     bottom: 12px;
     background: #ffffffe6;
     backdrop-filter: blur(6px);
-    border: 1px solid #ebe8f4;
+    border: 1px solid #e8edf4;
     border-radius: 16px;
     padding: 12px 14px
 }
@@ -4119,8 +4119,8 @@
     width: 22px;
     height: 22px;
     border-radius: 50%;
-    background: #fff0f6;
-    color: #d4508f;
+    background: #f0f6ff;
+    color: #5085d4;
     vertical-align: middle;
     margin-left: 4px
 }
@@ -4149,7 +4149,7 @@
 
 .pond-person-link:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 26px #2a295012
+    box-shadow: 0 10px 26px #29395012
 }
 
 .pond-person-gradient>span {
@@ -4181,7 +4181,7 @@
 
 .pond-pagination a {
     font-weight: 800;
-    color: #1f5f9a
+    color: #0062ef
 }
 
 /* ── Ask Upon A Pond landing (client direction) ─────────────────────────── */
@@ -4227,13 +4227,13 @@
 }
 
 .askupon-btn-pink {
-    background: #f23a8c;
+    background: #3a84f2;
     color: #fff;
-    box-shadow: 0 12px 28px #f23a8c44
+    box-shadow: 0 12px 28px #3a84f244
 }
 
 .askupon-btn-pink:hover {
-    background: #db2f7b;
+    background: #2f74db;
     color: #fff
 }
 
@@ -4489,7 +4489,7 @@
 }
 
 .pl-ripple-purple {
-    color: #c9b6ff
+    color: #b6d3ff
 }
 
 .pl-ripple-blue {
@@ -4509,7 +4509,7 @@
 }
 
 .pl-ripple-pink {
-    color: #ff9ac8
+    color: #9ac2ff
 }
 
 .pl-ball-1 {
@@ -4792,11 +4792,11 @@
     font-size: 42px;
     font-weight: 700;
     color: #fff;
-    background: #f23a8c;
+    background: #3a84f2;
     padding: 4px 28px 10px;
     border-radius: 999px;
     transform: rotate(-2deg);
-    box-shadow: 0 14px 30px #f23a8c33;
+    box-shadow: 0 14px 30px #3a84f233;
     animation: askuponWiggle 4s ease-in-out infinite
 }
 
@@ -4906,7 +4906,7 @@
 .askupon-step h3 span {
     display: inline-block;
     min-width: 1.5em;
-    color: #f23a8c
+    color: #3a84f2
 }
 
 .askupon-step p {
@@ -5083,7 +5083,7 @@
 }
 
 .askupon-way.way-dreams h3 {
-    background: #c9b6ff
+    background: #b6d3ff
 }
 
 .askupon-way.way-fun h3 {
@@ -5103,7 +5103,7 @@
 }
 
 .askupon-way.way-flirt h3 {
-    background: #ff9ac8
+    background: #9ac2ff
 }
 
 .askupon-way strong {
@@ -5784,7 +5784,7 @@
 .pond-app .pond-hero-label,
 .pond-app .pond-eyebrow {
     letter-spacing: .08em;
-    color: #1f5f9a;
+    color: #0062ef;
     opacity: 1
 }
 
@@ -5794,7 +5794,7 @@
 }
 
 .pond-app .pond-side-link.active {
-    color: #154872;
+    color: #0041a7;
     background: #e8f2fb
 }
 

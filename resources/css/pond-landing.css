@@ -1,0 +1,822 @@
+/* Public website and brand colours, sampled from the client's artwork */
+
+/* ── Shared buttons ─────────────────────────────────────────────────────── */
+.ln-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    border-radius: 999px;
+    font-weight: 800;
+    transition: transform .15s, filter .15s
+}
+
+.ln-btn:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.08)
+}
+
+.ln-btn-wide {
+    width: min(100%, 560px)
+}
+
+.ln-btn-deep {
+    background: #0041a7;
+    color: #fff;
+    font-size: clamp(18px, 2.4vw, 24px);
+    padding: 18px 28px
+}
+
+.ln-play {
+    width: 36px;
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #fff;
+    color: #0041a7
+}
+
+.ln-btn-join {
+    background: #0062ef;
+    color: #fff;
+    font-size: 19px;
+    padding: 18px 30px;
+    box-shadow: 0 14px 28px #0062ef33
+}
+
+.ln-btn-explore {
+    background: #074488;
+    color: #fff;
+    border: 1px solid #1a5ca6;
+    font-size: 19px;
+    padding: 17px 30px
+}
+
+.ln-btn-toss,
+.ln-btn-come {
+    background: #fc036c;
+    color: #fff
+}
+
+.ln-btn-toss {
+    border: 3px solid #fff;
+    font-size: clamp(20px, 3vw, 30px);
+    font-style: italic;
+    padding: 14px 48px;
+    box-shadow: 0 10px 28px #00244633
+}
+
+.ln-btn-come {
+    font-family: 'Caveat', 'Fraunces', cursive;
+    font-size: 30px;
+    padding: 10px 46px;
+    box-shadow: 0 10px 24px #fc036c40
+}
+
+.ln-btn-story {
+    border: 2px solid #a7f0f4;
+    color: #a7f0f4;
+    font-size: 19px;
+    font-style: italic;
+    padding: 10px 28px
+}
+
+/* ── Navigation ─────────────────────────────────────────────────────────── */
+.ln-nav {
+    background: linear-gradient(90deg, #003776, #002965 50%, #003776)
+}
+
+.pond-brand-tm {
+    font-size: .55em;
+    font-style: normal;
+    margin-left: 1px
+}
+
+.pond-home .askupon-btn-pink {
+    background: #0062ef;
+    border-color: #0062ef;
+    color: #fff;
+    box-shadow: none
+}
+
+.pond-home .askupon-btn-pink:hover {
+    background: #0052cc;
+    border-color: #0052cc
+}
+
+.pond-home .askupon-btn-navy {
+    background: #0041a7;
+    border-color: #0041a7;
+    color: #fff
+}
+
+/* ── Hero: Balls, Balls, Balls! ─────────────────────────────────────────── */
+.ln-hero {
+    background: #fff;
+    text-align: center;
+    padding: 28px 20px 44px;
+    display: flex;
+    flex-direction: column;
+    align-items: center
+}
+
+.ln-kicker {
+    color: #576e8f;
+    font-size: clamp(16px, 2vw, 22px);
+    font-weight: 800;
+    letter-spacing: .02em;
+    margin: 0
+}
+
+.ln-hero h1 {
+    font-family: 'Manrope', 'DM Sans', sans-serif;
+    font-size: clamp(44px, 8vw, 92px);
+    font-style: italic;
+    font-weight: 800;
+    letter-spacing: -.03em;
+    line-height: 1.08;
+    color: #00165c;
+    margin: 6px 0 0
+}
+
+.ln-marbles {
+    font-size: clamp(24px, 4vw, 44px);
+    font-style: italic;
+    font-weight: 800;
+    letter-spacing: -.02em;
+    color: #5a14b8;
+    margin: 0 0 26px
+}
+
+.ln-scene {
+    width: min(100%, 1080px);
+    border-radius: 28px;
+    display: block
+}
+
+.ln-hero h2 {
+    font-family: 'Manrope', 'DM Sans', sans-serif;
+    font-size: clamp(32px, 5vw, 58px);
+    font-weight: 800;
+    letter-spacing: -.03em;
+    color: #00165c;
+    margin: 28px 0 0
+}
+
+.ln-possibilities {
+    font-size: clamp(20px, 3vw, 36px);
+    font-weight: 700;
+    color: #576e8f;
+    margin: 4px 0 26px
+}
+
+/* ── Sunset: the six balls and the founder's story ──────────────────────── */
+.ln-sunset {
+    position: relative;
+    padding: 42px 20px 40px;
+    background:
+        linear-gradient(180deg, #002446cc 0%, #00244680 24%, #f28a2c70 52%, #ffb54a59 62%, #0041a780 80%, #002446d9 100%),
+        url('/askupon/ways-pond-realistic.jpg') center / cover no-repeat
+}
+
+.ln-sunset-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center
+}
+
+.ln-wordmark {
+    width: min(100%, 700px);
+    color: #fff
+}
+
+.ln-wordmark span {
+    display: block;
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: clamp(40px, 8vw, 82px);
+    font-style: italic;
+    font-weight: 600;
+    letter-spacing: -.03em;
+    line-height: 1.05
+}
+
+.ln-wordmark sup {
+    font-size: .22em;
+    font-style: normal;
+    vertical-align: super
+}
+
+.ln-wordmark svg {
+    display: block;
+    width: 90%;
+    margin: -22px auto 0
+}
+
+.ln-sunset-tag {
+    color: #fff;
+    font-size: clamp(19px, 2.6vw, 30px);
+    font-weight: 700;
+    line-height: 1.25;
+    max-width: 780px;
+    margin: 14px 0 26px;
+    text-shadow: 0 2px 10px #00244699
+}
+
+.ln-tiles {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 26px 28px;
+    width: min(100%, 900px)
+}
+
+.ln-tile {
+    position: relative;
+    padding-top: 74px;
+    display: flex
+}
+
+.ln-tile img {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    z-index: 1;
+    width: 128px;
+    height: 128px;
+    transform: translateX(-50%);
+    filter: drop-shadow(0 6px 8px #00244659)
+}
+
+.ln-tile strong {
+    width: 100%;
+    min-height: 108px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 58px 14px 12px;
+    border: 3px solid;
+    border-radius: 54px;
+    font-family: 'Manrope', 'DM Sans', sans-serif;
+    font-size: clamp(20px, 3vw, 30px);
+    font-style: italic;
+    font-weight: 800;
+    letter-spacing: -.02em;
+    line-height: 1;
+    color: #000731
+}
+
+.ln-tile-dreams strong {
+    background: #a0d7fc;
+    border-color: #0062ef
+}
+
+.ln-tile-fun strong {
+    background: #d5b8fc;
+    border-color: #5a14b8
+}
+
+.ln-tile-treats strong {
+    background: #fddf99;
+    border-color: #fac034
+}
+
+.ln-tile-boost strong {
+    background: #d8e8fa;
+    border-color: #83c1f7
+}
+
+.ln-tile-creator strong {
+    background: #fcb9c6;
+    border-color: #f9467b
+}
+
+.ln-tile-flirt strong {
+    background: #adf9d0;
+    border-color: #48d984
+}
+
+.ln-sunset .ln-btn-toss {
+    margin: 28px 0
+}
+
+.ln-story {
+    display: grid;
+    grid-template-columns: minmax(0, 330px) minmax(0, 1fr);
+    width: 100%;
+    overflow: hidden;
+    border: 3px solid #fff;
+    border-radius: 24px;
+    background: #002446;
+    color: #fff;
+    text-align: left
+}
+
+.ln-story>img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-right: 2px solid #a7f0f4
+}
+
+.ln-story>div {
+    padding: 22px 34px 26px
+}
+
+.ln-story h2 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: clamp(28px, 4vw, 46px);
+    font-style: italic;
+    font-weight: 600;
+    line-height: 1.04;
+    color: #fff;
+    margin: 0 0 12px
+}
+
+.ln-story p {
+    font-size: clamp(16px, 2vw, 20px);
+    line-height: 1.3;
+    color: #fff;
+    margin: 0 0 8px
+}
+
+.ln-story .ln-story-idea {
+    font-size: clamp(20px, 2.8vw, 30px);
+    font-style: italic;
+    font-weight: 800;
+    line-height: 1.1;
+    color: #a7f0f4;
+    margin: 12px 0 18px
+}
+
+/* ── Sky: imagine, pie, steps ───────────────────────────────────────────── */
+.ln-sky {
+    background: linear-gradient(180deg, #77cbfd 0, #99d7fd 240px, #def0fd 520px, #f5f9fd 70%, #def0fd 100%);
+    text-align: center;
+    overflow: hidden
+}
+
+.ln-imagine {
+    padding: 36px 20px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center
+}
+
+.ln-imagine h2 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: clamp(36px, 6vw, 70px);
+    font-style: italic;
+    font-weight: 700;
+    letter-spacing: -.02em;
+    line-height: 1.04;
+    color: #00165c;
+    max-width: 800px;
+    margin: 0
+}
+
+.ln-imagine p {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: clamp(20px, 2.6vw, 30px);
+    font-style: italic;
+    font-weight: 600;
+    color: #00165c;
+    margin: 8px 0 20px
+}
+
+.ln-brushed {
+    margin: 22px 0 0;
+    width: min(100%, 900px);
+    padding: 6px 20px;
+    background: #a0d9fc;
+    clip-path: polygon(1% 12%, 99% 0, 100% 40%, 98% 92%, 2% 100%, 0 54%);
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: clamp(26px, 5vw, 58px);
+    font-style: italic;
+    font-weight: 700;
+    letter-spacing: -.02em;
+    color: #00165c
+}
+
+.ln-strip {
+    display: block;
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover
+}
+
+.ln-grow {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 24px 20px
+}
+
+.ln-grow-copy {
+    font-size: clamp(18px, 2.2vw, 25px);
+    line-height: 1.32;
+    color: #101f47;
+    margin: 0 auto 26px;
+    max-width: 920px
+}
+
+.ln-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    text-align: left
+}
+
+.ln-step {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    padding: 10px 42px;
+    background: #fcfdfd;
+    border: 2px solid #d4e4fc;
+    border-radius: 26px
+}
+
+.ln-step img {
+    width: 118px;
+    height: 118px;
+    flex-shrink: 0;
+    filter: drop-shadow(0 6px 8px #00244633)
+}
+
+.ln-step h3 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: clamp(23px, 3vw, 36px);
+    font-style: italic;
+    font-weight: 700;
+    color: #00165c;
+    margin: 0
+}
+
+.ln-step h3 span {
+    color: #fc036c;
+    margin-right: 6px
+}
+
+.ln-step p {
+    font-size: clamp(16px, 2vw, 24px);
+    line-height: 1.25;
+    color: #101f47;
+    margin: 2px 0 0
+}
+
+/* ── Admin-chosen ponds ─────────────────────────────────────────────────── */
+.ln-page .pd-home-ponds {
+    text-align: center
+}
+
+.ln-page .pd-home-ponds .pd-pond-grid {
+    text-align: left
+}
+
+.ln-page .pd-home-ponds .askupon-ways-head h2 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-style: italic;
+    font-size: clamp(32px, 5vw, 56px);
+    color: #00165c
+}
+
+/* ── Six ways, on the dusk pond ─────────────────────────────────────────── */
+.ln-ways {
+    padding: 44px 20px;
+    background:
+        linear-gradient(180deg, #062a4de6, #103d68cc 45%, #062a4de6),
+        url('/askupon/ways-pond-realistic.jpg') center / cover no-repeat
+}
+
+.ln-ways-card {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 26px 36px;
+    padding: 34px;
+    border: 1px solid #ffffff2e;
+    border-radius: 34px;
+    background: #103d6899;
+    color: #fff
+}
+
+.ln-way {
+    display: flex;
+    align-items: center;
+    gap: 22px
+}
+
+.ln-way>img {
+    width: 118px;
+    height: 118px;
+    flex-shrink: 0;
+    filter: drop-shadow(0 8px 10px #00000059)
+}
+
+.ln-way strong {
+    display: block;
+    font-size: 21px;
+    line-height: 1.2;
+    margin-top: 8px;
+    color: #fff
+}
+
+.ln-way p {
+    font-size: 17px;
+    line-height: 1.3;
+    color: #eaf2fb;
+    margin: 4px 0 0
+}
+
+.ln-way-tag {
+    display: inline-block;
+    padding: 3px 14px;
+    border-radius: 12px;
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 23px;
+    font-style: italic;
+    font-weight: 700;
+    color: #071452
+}
+
+.ln-way-tag-dreams,
+.pd-category.pd-category-dreams {
+    background: #d0b4fc
+}
+
+.ln-way-tag-fun,
+.pd-category.pd-category-fun {
+    background: #9cd4fd
+}
+
+.ln-way-tag-treats,
+.pd-category.pd-category-treats {
+    background: #fcbe7a
+}
+
+.ln-way-tag-boost,
+.pd-category.pd-category-boost {
+    background: #98bffd
+}
+
+.ln-way-tag-creator,
+.pd-category.pd-category-creator {
+    background: #91f6bc
+}
+
+.ln-way-tag-flirt,
+.pd-category.pd-category-flirt {
+    background: #fc89c3
+}
+
+.pd-category {
+    color: #071452 !important
+}
+
+/* ── Final call to action ───────────────────────────────────────────────── */
+.ln-cta-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 22px;
+    padding: 56px 20px;
+    background: radial-gradient(ellipse at 50% 30%, #013b76, #012956 75%)
+}
+
+
+
+
+.ln-final {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 36px 20px 40px
+}
+
+.ln-final .pond-mark {
+    width: 110px;
+    height: 110px
+}
+
+.ln-final h2 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: clamp(38px, 6vw, 70px);
+    font-style: italic;
+    font-weight: 700;
+    letter-spacing: -.03em;
+    line-height: 1.05;
+    color: #03295f;
+    max-width: 700px;
+    margin: 10px 0 0
+}
+
+.ln-final p {
+    font-size: clamp(18px, 2.2vw, 24px);
+    color: #213657;
+    margin: 16px 0 28px
+}
+
+.ln-footer {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 26px 20px 44px;
+    border-top: 1px solid #e8effa;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    font-size: 15px;
+    color: #576e8f;
+    text-align: center
+}
+
+.ln-page {
+    background: #f5f9fd
+}
+
+/* ── Inner pages take the same colours ──────────────────────────────────── */
+.pd-public-header {
+    background: linear-gradient(90deg, #003776, #002965 50%, #003776)
+}
+
+.pond-dashboard-hero {
+    background: radial-gradient(circle at 88% 80%, #0062ef 0%, transparent 43%), linear-gradient(108deg, #002446, #003776 85%)
+}
+
+.pond-mark img {
+    object-fit: contain
+}
+
+/* ── Small screens ──────────────────────────────────────────────────────── */
+@media (max-width: 860px) {
+    .ln-story {
+        grid-template-columns: minmax(0, 1fr)
+    }
+
+    .ln-story>img {
+        height: 260px;
+        border-right: 0;
+        border-bottom: 2px solid #a7f0f4
+    }
+
+    .ln-ways-card {
+        grid-template-columns: minmax(0, 1fr);
+        padding: 22px 18px
+    }
+
+}
+
+@media (max-width: 600px) {
+    .ln-tiles {
+        gap: 18px 12px;
+        grid-template-columns: repeat(2, minmax(0, 1fr))
+    }
+
+    .ln-tile {
+        padding-top: 58px
+    }
+
+    .ln-tile img {
+        width: 100px;
+        height: 100px
+    }
+
+    .ln-tile strong {
+        min-height: 92px;
+        padding: 48px 8px 10px;
+        border-radius: 42px
+    }
+
+    .ln-story>div {
+        padding: 20px
+    }
+
+    .ln-step {
+        gap: 14px;
+        padding: 10px 14px
+    }
+
+    .ln-step img {
+        width: 76px;
+        height: 76px
+    }
+
+    .ln-way {
+        gap: 14px;
+        align-items: flex-start
+    }
+
+    .ln-way>img {
+        width: 76px;
+        height: 76px
+    }
+
+    .ln-way strong {
+        font-size: 18px
+    }
+
+    .ln-way p {
+        font-size: 15px
+    }
+
+    .ln-btn-toss {
+        padding: 12px 24px
+    }
+
+}
+
+/* Inherited landing styles that do not belong on these headings */
+h3.ln-brushed {
+    font-family: 'Fraunces', Georgia, serif;
+    font-style: italic;
+    font-weight: 700
+}
+
+.ln-page .pd-home-ponds .askupon-ways-head h2,
+.ln-page .pd-home-ponds .askupon-ways-head p {
+    text-shadow: none
+}
+
+.ln-page .pd-home-ponds .askupon-ways-head p {
+    color: #576e8f;
+    font-size: 18px
+}
+
+/* ── Closer to the client's sunset and dusk artwork ─────────────────────── */
+.ln-sunset {
+    background:
+        radial-gradient(circle at 96% 37%, #fff3c4 0, #ffc85a 3%, #ff9d2e40 13%, transparent 30%),
+        linear-gradient(180deg, #001f46e6 0%, #00295c99 26%, #f0882e8c 40%, #ff9e3a80 47%, #0a4a8c99 58%, #0041a7b3 78%, #002446e6 100%),
+        url('/askupon/ways-pond-realistic.jpg') center / cover no-repeat
+}
+
+.ln-ways {
+    background:
+        radial-gradient(circle at 88% 40%, #ffb76b73 0, transparent 22%),
+        linear-gradient(180deg, #062a4de6, #103d68c7 45%, #062a4de6),
+        url('/askupon/ways-pond-realistic.jpg') center / cover no-repeat
+}
+
+/* ── The same look through the signed-in pages ──────────────────────────── */
+.pond-app .pond-btn {
+    border-radius: 999px
+}
+
+.pond-app .pond-page-heading h1 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 34px;
+    font-style: italic;
+    font-weight: 700;
+    color: #00165c
+}
+
+.pond-app .pond-page-kicker {
+    color: #576e8f
+}
+
+.pond-app .pd-category,
+.pd-public .pd-category,
+.ln-page .pd-category {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 14px;
+    font-style: italic;
+    border-radius: 9px
+}
+
+.pond-app .pond-filter-chips button.active {
+    background: #0062ef;
+    border-color: #0062ef
+}
+
+.pond-app .pond-sidebar {
+    border-right-color: #e4ebf3
+}
+
+.pond-app .pond-side-link.active {
+    background: #e5effd;
+    color: #00165c
+}
+
+.pd-pond-art {
+    background: radial-gradient(circle at 50% 30%, #f5f9fd, #a0d7fc)
+}
+
+.pond-dashboard-hero .pond-hero-label {
+    color: #a7f0f4
+}
+
+.pond-dashboard-hero h2 em {
+    color: #fecd04
+}
+
+/* Tailwind resolves --color-primary at the root, so it needs overriding here too */
+.pd-access-page {
+    --color-primary: #0062ef;
+    --color-primary-foreground: #fff;
+    --color-ring: #0062ef
+}

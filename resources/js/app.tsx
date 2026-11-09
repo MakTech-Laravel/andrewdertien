@@ -26,7 +26,7 @@ createInertiaApp({
             case name.startsWith('admin/'):
                 return PondAdminLayout;
             case name.startsWith('settings/'):
-                return [AppLayout, SettingsLayout];
+                return [PondAdminLayout, SettingsLayout];
             default:
                 return AppLayout;
         }
