@@ -1,5 +1,5 @@
 import { Head, Link, usePage } from '@inertiajs/react';
-import { ArrowRight, Gift, HandHeart, Play, UsersRound } from 'lucide-react';
+import { ArrowRight, Gift, HandHeart, Play, Sprout, UsersRound } from 'lucide-react';
 import type { PondCard } from '@/components/pond/commerce';
 import { DuskPondScene, FriendswoodSign } from '@/components/pond/dusk-scene';
 import { useScrollReveal } from '@/components/pond/pond-motion';
@@ -68,7 +68,13 @@ const actions = [
     { title: 'Play', ball: 'green', body: 'Hold onto your balls, send them to someone, or save them for something special. It’s your Pond.' },
 ];
 
-const actionIcons = { Collect: UsersRound, Give: Gift, Receive: HandHeart, Play: Play };
+const everyoneOptions = [
+    { title: 'Make Someone’s Day', body: 'Surprise someone with a coffee, a treat, or a ball just because.', icon: Gift },
+    { title: 'Support a Dream', body: 'Find someone working toward something and toss a ball their way.', icon: Sprout },
+    { title: 'Find Your People', body: 'Discover people with shared interests, ideas, and adventures.', icon: UsersRound },
+];
+
+const actionIcons ={ Collect: UsersRound, Give: Gift, Receive: HandHeart, Play: Play };
 
 function golfBall(color: string): string {
     return `/askupon/balls/golf-${color}.svg`;
@@ -78,7 +84,7 @@ export default function Welcome({ ponds = [] }: { ponds?: PondCard[] }) {
     const { auth } = usePage().props;
     const joinHref = auth?.user ? dashboard() : register();
 
-    useScrollReveal('.hm-tile, .hm-story-card, .hm-muddy-copy, .hm-action, .pd-home-ponds .pd-pond-card, .hm-final h2');
+    useScrollReveal('.hm-tile, .hm-story-card, .hm-muddy-copy, .hm-action, .hm-imagine h2, .hm-option, .hm-joe,.pd-home-ponds .pd-pond-card, .hm-final h2');
 
     return (
         <div className="pond-home askupon-home hm-page">
@@ -187,6 +193,51 @@ export default function Welcome({ ponds = [] }: { ponds?: PondCard[] }) {
                         );
                     })}
                 </div>
+            </section>
+
+            <section className="hm-imagine" id="come-on-in">
+                <h2>Imagine your asks have already been answered.</h2>
+                <Link href={joinHref} className="hm-btn hm-btn-purple">
+                    Come on in!
+                </Link>
+            </section>
+
+            <section className="hm-something" aria-labelledby="hm-something-title">
+                <h2 id="hm-something-title" className="hm-heading">
+                    <span>A Little Something for Everyone</span>
+                </h2>
+                <div className="hm-options">
+                    {everyoneOptions.map(({ title, body, icon: Icon }) => (
+                        <article key={title} className="hm-option">
+                            <span className="hm-option-icon">
+                                <Icon size={24} aria-hidden="true" />
+                            </span>
+                            <div>
+                                <h3>{title}</h3>
+                                <p>{body}</p>
+                            </div>
+                        </article>
+                    ))}
+                </div>
+
+                <article className="hm-joe" aria-label="Sample member profile">
+                    <img src="/askupon/pond-reeds-sunset.jpg" alt="A quiet pond at sunset, standing in for Joe’s photo" loading="lazy" />
+                    <div className="hm-joe-body">
+                        <span className="hm-joe-tag">Meet Joe</span>
+                        <h3>Joe&rsquo;s Dream Life</h3>
+                        <p>&ldquo;A piece of land outside the city where I can raise dogs, grow food, and enjoy a simpler life.&rdquo;</p>
+                        <h3>Something Small That Would Make My Day</h3>
+                        <p>&ldquo;A good cup of coffee!&rdquo;</p>
+                        <div className="hm-joe-buttons">
+                            <Link href={joinHref} className="hm-btn hm-btn-purple">
+                                Buy Joe a Ball Toward His Dream <ArrowRight size={16} />
+                            </Link>
+                            <Link href={joinHref} className="hm-btn hm-btn-outline">
+                                Surprise Joe with a Coffee <ArrowRight size={16} />
+                            </Link>
+                        </div>
+                    </div>
+                </article>
             </section>
 
             {ponds.length > 0 && (

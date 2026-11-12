@@ -615,3 +615,167 @@
         animation: none;
     }
 }
+
+/* ── Imagine your asks, A Little Something for Everyone and the sample profile ─ */
+.hm-btn-purple {
+    background: linear-gradient(135deg, #7a45ff, #5b2bd6);
+    color: #fff;
+    box-shadow: 0 12px 28px #5b2bd64d;
+}
+
+.hm-btn-outline {
+    border-color: #5b2bd6;
+    background: #fff;
+    color: #3b1a8f;
+}
+
+.hm-btn-outline:hover {
+    background: #f1ecff;
+}
+
+.hm-imagine {
+    display: grid;
+    justify-items: center;
+    gap: 22px;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 56px 24px 24px;
+    text-align: center;
+}
+
+.hm-imagine h2 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: clamp(30px, 5vw, 54px);
+    line-height: 1.12;
+    color: #2a1480;
+}
+
+.hm-something {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 40px 24px 64px;
+}
+
+.hm-options {
+    display: grid;
+    gap: 14px;
+    margin-top: 30px;
+}
+
+.hm-option {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 18px;
+    align-items: center;
+    padding: 18px 22px;
+    border: 1px solid #ffffffd0;
+    border-radius: 20px;
+    background: #fff;
+    box-shadow: 0 10px 28px #2a1a7a1a;
+}
+
+.hm-option-icon {
+    display: inline-grid;
+    place-items: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 16px;
+    background: #ece6ff;
+    color: #5b2bd6;
+}
+
+.hm-option h3 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #2a1480;
+}
+
+.hm-option p {
+    margin-top: 2px;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #2a2866;
+}
+
+.hm-joe {
+    display: grid;
+    grid-template-columns: minmax(200px, 0.8fr) 1.4fr;
+    gap: 26px;
+    align-items: stretch;
+    margin-top: 26px;
+    padding: 18px;
+    border: 1px solid #d8ccff;
+    border-radius: 26px;
+    background: linear-gradient(135deg, #f4efff, #e6edff);
+    box-shadow: 0 16px 40px #2a1a7a24;
+}
+
+.hm-joe img {
+    width: 100%;
+    height: 100%;
+    min-height: 220px;
+    border-radius: 18px;
+    object-fit: cover;
+}
+
+.hm-joe-body {
+    display: grid;
+    align-content: center;
+    gap: 6px;
+    padding: 6px 8px;
+}
+
+.hm-joe-tag {
+    justify-self: start;
+    padding: 4px 14px;
+    border-radius: 999px;
+    background: #5b2bd6;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.hm-joe-body h3 {
+    margin-top: 8px;
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 21px;
+    font-weight: 700;
+    color: #2a1480;
+}
+
+.hm-joe-body p {
+    font-size: 16px;
+    font-style: italic;
+    line-height: 1.5;
+    color: #2a2866;
+}
+
+.hm-joe-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.hm-joe-buttons .hm-btn {
+    padding: 12px 22px;
+    font-size: 15px;
+}
+
+@media (max-width: 780px) {
+    .hm-joe {
+        grid-template-columns: 1fr;
+    }
+
+    .hm-joe img {
+        min-height: 180px;
+        max-height: 240px;
+    }
+
+    .hm-joe-buttons .hm-btn {
+        flex: 1 1 100%;
+    }
+}
