@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Enums\GuardEnum;
+use App\Enums\Interest;
 use App\Enums\PurchaseStatus;
 use App\Enums\RoleEnum;
 use Database\Factories\UserFactory;
@@ -21,7 +22,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 #[Fillable([
     'name', 'username', 'email', 'password', 'avatar', 'location', 'date_of_birth',
-    'dreams', 'fun', 'treats', 'boost', 'open_to_romance',
+    'dreams', 'fun', 'treats', 'boost', 'interests', 'about', 'open_to_romance',
 ])]
 #[Hidden(['password', 'two_factor_secret', 'two_factor_recovery_codes', 'remember_token'])]
 class User extends Authenticatable
@@ -59,6 +60,21 @@ class User extends Authenticatable
     }
 
     /**
+     * The member's chosen interests as display labels, in the order they were picked.
+     *
+     * @return list<array{value: string, label: string}>
+     */
+    public function interestLabels(): array
+    {
+        return collect($this->interests ?? [])
+            ->map(fn (string $value): ?Interest => Interest::tryFrom($value))
+            ->filter()
+            ->map(fn (Interest $interest): array => ['value' => $interest->value, 'label' => $interest->label()])
+            ->values()
+            ->all();
+    }
+
+    /**
      * Public URL of the profile picture, if one has been uploaded.
      */
     public function avatarUrl(): ?string
@@ -90,6 +106,9 @@ class User extends Authenticatable
             'fun' => $this->fun,
             'treats' => $this->treats,
             'boost' => $this->boost,
+            'about' => $this->about,
+            'interests' => $this->interestLabels(),
+            'interest_values' => $this->interests ?? [],
             'open_to_romance' => $this->isOpenToRomance(),
             'member_since' => $this->created_at?->format('F Y') ?? '',
         ];
@@ -152,6 +171,7 @@ class User extends Authenticatable
             'password' => 'hashed',
             'two_factor_confirmed_at' => 'datetime',
             'date_of_birth' => 'date',
+            'interests' => 'array',
             'open_to_romance' => 'boolean',
         ];
     }

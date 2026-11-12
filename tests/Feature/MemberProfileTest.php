@@ -266,3 +266,53 @@ test('explore rejects unknown section filters', function () {
         ->get(route('members.index', ['category' => 'secrets']))
         ->assertSessionHasErrors('category');
 });
+
+test('members can choose their interests and share more about themselves', function () {
+    $user = User::factory()->create();
+
+    $this->actingAs($user)
+        ->patch(route('member-profile.update'), profilePayload($user, [
+            'interests' => ['gaming', 'music', 'giving-back'],
+            'about' => 'Collector of golf balls.',
+        ]))
+        ->assertSessionHasNoErrors();
+
+    expect($user->refresh())
+        ->interests->toBe(['gaming', 'music', 'giving-back'])
+        ->about->toBe('Collector of golf balls.');
+});
+
+test('interests can be cleared and unknown ones are rejected', function () {
+    $user = User::factory()->withProfile()->create();
+
+    $this->actingAs($user)
+        ->patch(route('member-profile.update'), profilePayload($user, ['interests' => ['made-up']]))
+        ->assertSessionHasErrors('interests.0');
+
+    $this->actingAs($user)
+        ->patch(route('member-profile.update'), profilePayload($user))
+        ->assertSessionHasNoErrors();
+
+    expect($user->refresh()->interests)->toBe([]);
+});
+
+test('the profile editor and public profile expose interests with their labels', function () {
+    $member = User::factory()->create(['interests' => ['food-and-coffee', 'nature-and-outdoors'], 'about' => 'Hello pond.']);
+
+    $this->actingAs($member)
+        ->get(route('member-profile.edit'))
+        ->assertInertia(fn (Assert $page) => $page
+            ->component('pond/profile-edit')
+            ->has('interestOptions', 10)
+            ->where('profile.interest_values', ['food-and-coffee', 'nature-and-outdoors'])
+            ->where('profile.about', 'Hello pond.'));
+
+    $this->actingAs(User::factory()->create())
+        ->get(route('members.show', $member->username))
+        ->assertInertia(fn (Assert $page) => $page
+            ->where('member.interests', [
+                ['value' => 'food-and-coffee', 'label' => 'Food & Coffee'],
+                ['value' => 'nature-and-outdoors', 'label' => 'Nature & Outdoors'],
+            ])
+            ->where('member.about', 'Hello pond.'));
+});

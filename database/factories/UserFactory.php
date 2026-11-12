@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\Interest;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
@@ -58,6 +59,8 @@ class UserFactory extends Factory
             'fun' => fake()->sentence(10),
             'treats' => fake()->sentence(8),
             'boost' => fake()->sentence(10),
+            'about' => fake()->sentence(14),
+            'interests' => [Interest::ANIMALS->value, Interest::NATURE_AND_OUTDOORS->value],
         ]);
     }
 

@@ -17,6 +17,7 @@ use App\Http\Controllers\MemberDirectoryController;
 use App\Http\Controllers\MemberProfileController;
 use App\Http\Controllers\PondCatalogController;
 use App\Http\Controllers\PostAttachmentController;
+use App\Http\Controllers\SplashController;
 use App\Http\Controllers\StripeWebhookController;
 use Illuminate\Foundation\Http\Middleware\HandlePrecognitiveRequests;
 use Illuminate\Support\Facades\Route;
@@ -24,6 +25,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [PondCatalogController::class, 'home'])->name('home');
 Route::get('ponds', [PondCatalogController::class, 'index'])->name('ponds.index');
 Route::get('ponds/{pond:slug}', [PondCatalogController::class, 'show'])->name('ponds.show');
+
+// Step 2 of sign-up ("Make a Splash!"): new members land here straight after registering.
+Route::middleware('auth')->prefix('welcome')->name('splash.')->controller(SplashController::class)->group(function () {
+    Route::get('splash', 'show')->name('show');
+    Route::post('splash', 'store')->name('store');
+});
 
 // Authenticated by its signature, not a session.
 Route::post('webhooks/stripe', StripeWebhookController::class)->name('webhooks.stripe');

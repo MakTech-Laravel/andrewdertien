@@ -18,4 +18,8 @@ export type AuthLayoutProps = {
     name?: string;
     title?: string;
     description?: string;
+    /** Sign-up progress pill shown above the title, e.g. "Step 1 of 2". */
+    step?: string;
+    /** Use the wider card, for forms with more content. */
+    wide?: boolean;
 };

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\Interest;
 use App\Http\Requests\MemberProfile\UpdateAvatarRequest;
 use App\Http\Requests\MemberProfile\UpdateMemberProfileRequest;
 use App\Models\User;
@@ -36,6 +37,7 @@ class MemberProfileController extends Controller
         $user = $request->user();
 
         return Inertia::render('pond/profile-edit', [
+            'interestOptions' => Interest::options(),
             'profile' => [
                 ...$user->toPublicProfile(),
                 'open_to_romance' => $user->open_to_romance,
@@ -56,6 +58,8 @@ class MemberProfileController extends Controller
         if ($user->date_of_birth !== null || empty($data['date_of_birth'])) {
             unset($data['date_of_birth']);
         }
+
+        $data['interests'] = array_values($data['interests'] ?? []);
 
         $user->update($data);
 

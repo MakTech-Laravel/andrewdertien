@@ -1,4 +1,5 @@
 import { Form, Head } from '@inertiajs/react';
+import { ArrowRight } from 'lucide-react';
 import { useState } from 'react';
 import InputError from '@/components/input-error';
 import PasswordInput from '@/components/password-input';
@@ -20,7 +21,7 @@ export default function Register({ passwordRules }: Props) {
 
     return (
         <>
-            <Head title="Register" />
+            <Head title="Create your account" />
             <Form
                 {...store.form()}
                 resetOnSuccess={['password', 'password_confirmation']}
@@ -168,7 +169,8 @@ export default function Register({ passwordRules }: Props) {
                                 data-test="register-user-button"
                             >
                                 {processing && <Spinner />}
-                                Create account
+                                Create Account
+                                {!processing && <ArrowRight size={16} />}
                             </Button>
                         </div>
 
@@ -186,6 +188,7 @@ export default function Register({ passwordRules }: Props) {
 }
 
 Register.layout = {
-    title: 'Create an account',
-    description: 'Enter your details below to create your account',
+    step: 'Step 1 of 2',
+    title: 'Create Your Account',
+    description: 'Enter your details below to create your account.',
 };

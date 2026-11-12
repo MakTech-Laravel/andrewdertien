@@ -29,11 +29,17 @@ test('registration screen can be rendered', function () {
     $response->assertOk();
 });
 
+test('new members are sent to step 2 of sign-up straight after registering', function () {
+    $this->post(route('register.store'), registrationPayload())->assertRedirect(route('splash.show'));
+
+    $this->get(route('splash.show'))->assertOk();
+});
+
 test('new users can register', function () {
     $response = $this->post(route('register.store'), registrationPayload());
 
     $this->assertAuthenticated();
-    $response->assertRedirect(route('dashboard', absolute: false));
+    $response->assertRedirect(route('splash.show', absolute: false));
 
     expect(User::firstWhere('email', 'test@example.com')->getRoleNames()->all())->toBe(['user']);
 

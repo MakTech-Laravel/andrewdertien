@@ -5,6 +5,8 @@
 @import './pond-auth.css';
 @import './pond-dashboard.css';
 @import './pond-landing.css';
+@import './pond-home.css';
+@import './pond-profile.css';
 @import './pond-motion.css';
 
 @source '../views';

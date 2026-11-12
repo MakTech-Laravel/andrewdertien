@@ -12,7 +12,7 @@ export const categories: { key: CategoryKey; title: Category; subtitle: string; 
   { key: 'boost', title: 'Boost', subtitle: 'I get by with a little help from my friends.', description: 'Where a little help would make a difference: groceries, transportation, bills, everyday expenses.', placeholder: 'A little help with ... would mean a lot.', icon: Heart, tone: 'mint' },
 ];
 /** The fields every member profile exposes publicly (see User::toPublicProfile). */
-export type MemberProfile = { id: number; name: string; username: string | null; location: string | null; avatar_url: string | null; dreams: string | null; fun: string | null; treats: string | null; boost: string | null; open_to_romance: boolean; member_since: string };
+export type MemberProfile = { id: number; name: string; username: string | null; location: string | null; avatar_url: string | null; dreams: string | null; fun: string | null; treats: string | null; boost: string | null; about: string | null; interests: { value: string; label: string }[]; interest_values: string[]; open_to_romance: boolean; member_since: string };
 export const balls = [
   { value: 2, name: 'A little ripple', desc: 'A small gesture, a meaningful start.', color: '#42d9ee' },
   { value: 5, name: 'A kind thought', desc: 'Send some brightness their way.', color: '#e445c6' },

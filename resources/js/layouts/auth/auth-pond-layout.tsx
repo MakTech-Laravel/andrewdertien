@@ -5,6 +5,8 @@ export default function AuthPondLayout({
     children,
     title,
     description,
+    step,
+    wide = false,
 }: AuthLayoutProps) {
     return (
         <div className="pond-app pond-auth">
@@ -26,9 +28,13 @@ export default function AuthPondLayout({
 
             <Brand dark />
 
-            <div className="pond-auth-card">
+            <div className={`pond-auth-card ${wide ? 'pond-auth-card-wide' : ''}`}>
                 <div className="pond-auth-head">
-                    <SectionEyebrow>Ask Upon A Pond</SectionEyebrow>
+                    {step ? (
+                        <span className="pond-step-pill">{step}</span>
+                    ) : (
+                        <SectionEyebrow>Ask Upon A Pond</SectionEyebrow>
+                    )}
                     <h1>{title}</h1>
                     {description && <p>{description}</p>}
                 </div>

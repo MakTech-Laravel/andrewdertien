@@ -2,6 +2,7 @@
 
 namespace App\Concerns;
 
+use App\Enums\Interest;
 use App\Models\User;
 use Carbon\Exceptions\InvalidFormatException;
 use Closure;
@@ -41,10 +42,25 @@ trait ProfileValidationRules
             'fun' => $categoryRules,
             'treats' => $categoryRules,
             'boost' => $categoryRules,
+            'about' => $categoryRules,
+            ...$this->interestRules(),
             'date_of_birth' => $user->date_of_birth === null
                 ? $this->dateOfBirthRules()
                 : ['prohibited'],
             'open_to_romance' => $this->romanceRules($user->date_of_birth ?? $submittedDateOfBirth),
+        ];
+    }
+
+    /**
+     * Interests must come from the fixed list members choose from.
+     *
+     * @return array<string, array<int, ValidationRule|array<mixed>|string>>
+     */
+    protected function interestRules(): array
+    {
+        return [
+            'interests' => ['nullable', 'array', 'max:'.count(Interest::cases())],
+            'interests.*' => ['string', 'distinct', Rule::enum(Interest::class)],
         ];
     }
 

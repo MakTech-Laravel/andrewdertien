@@ -4,6 +4,8 @@ import { useState } from 'react';
 import MemberProfileController from '@/actions/App/Http/Controllers/MemberProfileController';
 import { categories } from '@/components/pond/data';
 import type { MemberProfile } from '@/components/pond/data';
+import { InterestIcon, interestTone } from '@/components/pond/interests';
+import type { InterestOption } from '@/components/pond/interests';
 import { Avatar, hueFor, PondShell } from '@/components/pond/ui';
 import { show } from '@/routes/members';
 
@@ -16,8 +18,10 @@ function FieldError({ message }: { message?: string }) {
     return message ? <p className="pond-field-error">{message}</p> : null;
 }
 
-export default function ProfileEdit({ profile }: { profile: EditableProfile }) {
+export default function ProfileEdit({ profile, interestOptions }: { profile: EditableProfile; interestOptions: InterestOption[] }) {
     const [openToRomance, setOpenToRomance] = useState(profile.open_to_romance);
+    const [interests, setInterests] = useState<string[]>(profile.interest_values);
+    const toggleInterest = (value: string) => setInterests((current) => (current.includes(value) ? current.filter((item) => item !== value) : [...current, value]));
     const romanceLocked = profile.has_date_of_birth && !profile.is_adult;
 
     return (
@@ -169,6 +173,33 @@ export default function ProfileEdit({ profile }: { profile: EditableProfile }) {
                                             </div>
                                         ))}
                                     </div>
+                                </div>
+
+                                <div className="pond-panel">
+                                    <div className="pond-panel-header">
+                                        <div>
+                                            <h2>What are you into?</h2>
+                                            <p>Choose as many as you like. They appear on your profile.</p>
+                                        </div>
+                                    </div>
+                                    <div className="pond-chip-grid">
+                                        {interestOptions.map((option) => (
+                                            <label
+                                                key={option.value}
+                                                className={`pond-chip pond-chip-${interestTone(option.value)} ${interests.includes(option.value) ? 'is-selected' : ''}`}
+                                            >
+                                                <input type="checkbox" name="interests[]" value={option.value} checked={interests.includes(option.value)} onChange={() => toggleInterest(option.value)} />
+                                                <InterestIcon value={option.value} size={15} />
+                                                {option.label}
+                                            </label>
+                                        ))}
+                                    </div>
+                                    <FieldError message={errors.interests} />
+                                    <label className="pond-form-label">
+                                        Anything else you’d like people to know? <span className="pond-optional">(optional)</span>
+                                        <textarea className="pond-textarea" name="about" rows={3} maxLength={1000} defaultValue={profile.about ?? ''} placeholder="A little something about yourself..." />
+                                        <FieldError message={errors.about} />
+                                    </label>
                                 </div>
 
                                 <div className="pond-panel pond-profile-romance">

@@ -218,3 +218,175 @@
 .pond-auth [data-slot='button'][class*='bg-secondary']:hover:not(:disabled) {
     background: #e0ecff;
 }
+
+/* ── Sign-up flow: step pill, wide card and the "Make a Splash!" form ───── */
+.pond-step-pill {
+    display: inline-flex;
+    padding: 5px 14px;
+    border-radius: 999px;
+    background: #d6f5ea;
+    color: #0b6b53;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+}
+
+.pond-auth-card-wide {
+    max-width: 640px;
+}
+
+.pond-splash {
+    display: grid;
+    gap: 22px;
+}
+
+.pond-splash-block h2 {
+    font-family: 'Manrope', 'DM Sans', sans-serif;
+    font-size: 19px;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+}
+
+.pond-splash-block>p {
+    margin-top: 2px;
+    color: var(--qp-muted);
+    font-size: 13px;
+}
+
+.pond-chip-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 14px;
+}
+
+.pond-chip {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    padding: 9px 16px;
+    border: 1.5px solid #cfe0f5;
+    border-radius: 999px;
+    background: #f4f9ff;
+    color: #1d3b6b !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.pond-chip input {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.pond-chip:hover {
+    border-color: #0062ef;
+}
+
+.pond-chip:focus-within {
+    outline: 3px solid #a2c0ee88;
+    outline-offset: 2px;
+}
+
+.pond-chip.is-selected {
+    border-color: #0062ef;
+    background: #0062ef;
+    color: #fff !important;
+}
+
+.pond-splash-question {
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    column-gap: 12px;
+    row-gap: 8px;
+    align-items: center;
+}
+
+.pond-splash-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #fff3d6;
+    color: #c87a00;
+}
+
+.pond-splash-prompt {
+    font-family: 'Manrope', 'DM Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--qp-ink);
+}
+
+.pond-splash-question textarea,
+.pond-splash-question input[type='text'] {
+    grid-column: 1 / -1;
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #e3e4ee;
+    border-radius: 12px;
+    background: #fff;
+    color: var(--qp-ink);
+    font-size: 14px;
+    resize: vertical;
+}
+
+.pond-splash-question textarea:focus-visible,
+.pond-splash-question input[type='text']:focus-visible {
+    border-color: #9bb5db;
+    outline: none;
+    box-shadow: 0 0 0 3px #a2c0ee55;
+}
+
+.pond-splash-question>p {
+    grid-column: 1 / -1;
+}
+
+.pond-splash-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.pond-splash-actions [data-slot='button'] {
+    flex: 1 1 260px;
+    height: 50px;
+    gap: 10px;
+    border-radius: 999px;
+    font-size: 16px;
+}
+
+.pond-splash-skip {
+    display: inline-flex;
+    flex: 1 1 140px;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    border: 1.5px solid #cfe0f5;
+    border-radius: 999px;
+    font-size: 15px;
+}
+
+.pond-splash-note {
+    text-align: center;
+    color: var(--qp-muted);
+    font-size: 12px;
+}
+
+.pond-chip svg {
+    margin-right: 7px;
+}
+
+.pond-chip.pond-chip-orange:not(.is-selected) { background: #fff1e0; border-color: #f6cf9f; color: #8a4a00 !important; }
+.pond-chip.pond-chip-brown:not(.is-selected) { background: #f6ece3; border-color: #e1c8b0; color: #6b3f1c !important; }
+.pond-chip.pond-chip-green:not(.is-selected) { background: #e3f7ea; border-color: #b7e4c6; color: #14633a !important; }
+.pond-chip.pond-chip-violet:not(.is-selected) { background: #efe9ff; border-color: #d2c4f7; color: #4a2b9a !important; }
+.pond-chip.pond-chip-teal:not(.is-selected) { background: #e0f6f6; border-color: #aee3e3; color: #0b5f66 !important; }
+.pond-chip.pond-chip-pink:not(.is-selected) { background: #ffe8f1; border-color: #f7bdd5; color: #9b1c58 !important; }
+.pond-chip.pond-chip-sky:not(.is-selected) { background: #e1f3ff; border-color: #b3dcf7; color: #0a4f85 !important; }

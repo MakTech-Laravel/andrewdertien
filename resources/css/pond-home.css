@@ -1,0 +1,617 @@
+/* Public homepage, following the client's "Connect. Share your world. Give and receive." mockups */
+
+.hm-page {
+    --hm-ink: #1a1560;
+    --hm-violet: #5b2bd6;
+    --hm-lilac: #f1ecff;
+    min-height: 100svh;
+    background: linear-gradient(180deg, #f6f2ff 0%, #ece6ff 100%);
+    color: var(--hm-ink);
+    font-family: 'DM Sans', 'Instrument Sans', sans-serif;
+}
+
+.hm-page h1,
+.hm-page h2,
+.hm-page h3 {
+    letter-spacing: -0.03em;
+}
+
+/* ── Buttons ────────────────────────────────────────────────────────────── */
+.hm-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px 28px;
+    border: 2px solid transparent;
+    border-radius: 999px;
+    font-size: 17px;
+    font-weight: 800;
+    transition: transform 0.15s, filter 0.15s, background 0.15s;
+}
+
+.hm-btn:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.08);
+}
+
+.hm-btn-explore {
+    background: linear-gradient(135deg, #7a45ff, #5b2bd6);
+    color: #fff;
+    box-shadow: 0 12px 28px #5b2bd655;
+}
+
+.hm-btn-join {
+    border-color: #ffffffcc;
+    background: #ffffff1a;
+    color: #fff;
+    backdrop-filter: blur(4px);
+}
+
+.hm-btn-dark {
+    border-color: transparent;
+}
+
+/* ── Hero ───────────────────────────────────────────────────────────────── */
+.hm-hero {
+    position: relative;
+    min-height: clamp(560px, 82vh, 720px);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    background: #1a1670;
+    color: #fff;
+}
+
+.hm-scene {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.hm-hero::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 0;
+    height: 140px;
+    background: linear-gradient(180deg, transparent, #f6f2ff);
+    pointer-events: none;
+}
+
+/* Keeps the copy readable where it sits over the skyline on narrow screens */
+.hm-hero-copy::before {
+    content: '';
+    position: absolute;
+    inset: -40px 0 0;
+    z-index: -1;
+    background: linear-gradient(180deg, #1a1670d9 0%, #1a1670a6 60%, transparent 100%);
+    pointer-events: none;
+}
+
+@media (min-width: 900px) {
+    .hm-hero-copy::before {
+        display: none;
+    }
+}
+
+.hm-nav {
+    position: relative;
+    z-index: 5;
+    background: linear-gradient(180deg, #0c0a4acc, transparent);
+}
+
+.hm-nav .askupon-nav {
+    padding-block: 18px;
+}
+
+.hm-nav-links {
+    display: none;
+    align-items: center;
+    gap: 30px;
+    margin-left: auto;
+    margin-right: 10px;
+}
+
+.hm-nav-links a {
+    color: #e8e4ff;
+    font-weight: 700;
+    font-size: 15px;
+}
+
+.hm-nav-links a:hover {
+    color: #fff;
+}
+
+@media (min-width: 1000px) {
+    .hm-nav-links {
+        display: flex;
+    }
+}
+
+.hm-hero-copy {
+    position: relative;
+    z-index: 4;
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: clamp(28px, 6vh, 64px) 28px 150px;
+}
+
+.hm-hero-copy h1 {
+    max-width: 640px;
+    font-family: 'Fraunces', Georgia, 'Times New Roman', serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: clamp(38px, 6.4vw, 72px);
+    line-height: 1.04;
+    text-shadow: 0 6px 30px #0b0840aa;
+}
+
+.hm-hero-copy h1 span {
+    display: inline-block;
+    padding-bottom: 12px;
+    background: linear-gradient(90deg, #35c8ff, #35c8ff) no-repeat 0 100% / 100% 4px;
+}
+
+.hm-hero-copy p {
+    max-width: 560px;
+    margin-top: 26px;
+    font-size: clamp(16px, 2vw, 20px);
+    line-height: 1.55;
+    color: #f0ecff;
+    text-shadow: 0 2px 14px #0b0840cc;
+}
+
+.hm-hero-copy p em {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 700;
+}
+
+.hm-hero-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 28px;
+}
+
+/* ── Six kinds of ball ──────────────────────────────────────────────────── */
+.hm-tiles-wrap {
+    position: relative;
+    z-index: 6;
+    max-width: 1180px;
+    margin: -96px auto 0;
+    padding: 0 20px;
+}
+
+.hm-tiles {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 10px;
+    padding: 18px 16px 16px;
+    border: 1px solid #ffffffcc;
+    border-radius: 28px;
+    background: #ffffffd9;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 24px 60px #2a1a7a2e;
+}
+
+.hm-tile {
+    display: grid;
+    justify-items: center;
+    gap: 6px;
+}
+
+.hm-tile img {
+    width: clamp(54px, 7.4vw, 92px);
+    height: auto;
+    filter: drop-shadow(0 8px 10px #1a156040);
+    transition: scale 0.3s cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+
+.hm-tile:hover img {
+    scale: 1.1;
+}
+
+.hm-tile strong {
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-family: 'Fraunces', Georgia, serif;
+    font-style: italic;
+    font-size: clamp(13px, 1.5vw, 17px);
+    line-height: 1.1;
+    text-align: center;
+}
+
+.hm-tile-dreams strong { background: #cde8ff; color: #0c2d6b; }
+.hm-tile-fun strong { background: #e4d6ff; color: #3b1a8f; }
+.hm-tile-treats strong { background: #ffe5bd; color: #7a3d00; }
+.hm-tile-boost strong { background: #dbe9ff; color: #10305f; }
+.hm-tile-creator strong { background: #ffd0dc; color: #8a1238; }
+.hm-tile-flirt strong { background: #cdf5dc; color: #0d5a2c; }
+
+@media (max-width: 780px) {
+    .hm-tiles {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        row-gap: 16px;
+    }
+
+    .hm-tiles-wrap {
+        margin-top: -70px;
+    }
+}
+
+/* ── Headings shared by the story sections ──────────────────────────────── */
+.hm-heading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    font-family: 'Fraunces', Georgia, serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: clamp(30px, 4.6vw, 52px);
+    line-height: 1.1;
+    color: #2a1480;
+    text-align: center;
+}
+
+.hm-heading::before,
+.hm-heading::after {
+    content: '';
+    flex: 1 1 40px;
+    max-width: 180px;
+    height: 2px;
+    background: #2a148066;
+}
+
+.hm-heading-left {
+    justify-content: flex-start;
+    text-align: left;
+}
+
+.hm-heading-left::before,
+.hm-heading-left::after {
+    display: none;
+}
+
+.hm-subheading {
+    margin-top: 8px;
+    text-align: center;
+    font-size: 19px;
+    color: #4b4590;
+}
+
+/* ── Once Upon a Pond ───────────────────────────────────────────────────── */
+.hm-once {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 72px 24px 24px;
+}
+
+.hm-stories {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+    margin-top: 34px;
+}
+
+.hm-story-card {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid #ffffffd0;
+    border-radius: 22px;
+    background: #fff;
+    box-shadow: 0 14px 36px #2a1a7a1f;
+}
+
+.hm-story-media {
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: #ddd;
+}
+
+.hm-story-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hm-story-media-pond {
+    display: grid;
+    place-items: center;
+    background:
+        radial-gradient(ellipse 50% 28% at 50% 66%, #5cc8ff66, transparent 70%),
+        linear-gradient(180deg, #2b1f8f, #1a6bc9 70%, #0d3a8a);
+}
+
+.hm-story-media-pond .pond-mark {
+    width: 120px;
+    height: 120px;
+    filter: drop-shadow(0 0 22px #6fd6ff);
+}
+
+.hm-story-media-pond .pond-mark img {
+    width: 100%;
+    height: 100%;
+}
+
+.hm-story-body {
+    display: grid;
+    align-content: start;
+    gap: 8px;
+    padding: 18px 18px 22px;
+}
+
+.hm-story-body h3 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: #2a1480;
+}
+
+.hm-story-body h3 span {
+    color: #7a45ff;
+}
+
+.hm-story-body p {
+    font-size: 15.5px;
+    line-height: 1.5;
+    color: #2a2866;
+}
+
+@media (max-width: 1100px) {
+    .hm-stories {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 640px) {
+    .hm-stories {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ── Let's Talk Muddy Bottoms ───────────────────────────────────────────── */
+.hm-muddy {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 40px 24px 72px;
+}
+
+.hm-muddy-card {
+    display: grid;
+    grid-template-columns: minmax(240px, 0.8fr) 1.4fr;
+    gap: 36px;
+    align-items: center;
+    padding: 28px;
+    border: 1px solid #ffffffd0;
+    border-radius: 28px;
+    background: linear-gradient(135deg, #ffffff, #f4efff);
+    box-shadow: 0 18px 44px #2a1a7a24;
+}
+
+.hm-sign {
+    width: 100%;
+    height: auto;
+    border-radius: 18px;
+    box-shadow: 0 10px 28px #2a1a7a33;
+}
+
+.hm-muddy-copy {
+    display: grid;
+    gap: 10px;
+    font-size: 18px;
+    line-height: 1.55;
+    color: #2a2866;
+}
+
+.hm-chaching {
+    font-family: 'Fraunces', Georgia, serif;
+    font-style: italic;
+    font-weight: 800;
+    font-size: clamp(30px, 4.4vw, 46px);
+    letter-spacing: -0.03em;
+    color: #5b2bd6;
+}
+
+.hm-quantum {
+    font-family: 'Fraunces', Georgia, serif;
+    font-style: italic;
+    font-weight: 700;
+    color: #3b1a8f;
+}
+
+@media (max-width: 860px) {
+    .hm-muddy-card {
+        grid-template-columns: 1fr;
+        padding: 20px;
+    }
+}
+
+.hm-actions {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0;
+    margin-top: 36px;
+}
+
+.hm-action {
+    display: grid;
+    justify-items: center;
+    align-content: start;
+    gap: 8px;
+    padding: 6px 22px;
+    text-align: center;
+}
+
+.hm-action + .hm-action {
+    border-left: 1.5px solid #2a148033;
+}
+
+.hm-action-icon {
+    position: relative;
+    display: inline-grid;
+    place-items: center;
+    width: 76px;
+    height: 76px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 10px 24px #2a1a7a26;
+}
+
+.hm-action-icon img {
+    width: 54px;
+    height: 54px;
+}
+
+.hm-action-icon svg {
+    position: absolute;
+    right: -2px;
+    bottom: -2px;
+    padding: 5px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #5b2bd6;
+    color: #fff;
+}
+
+.hm-action h3 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 25px;
+    font-weight: 700;
+    color: #2a1480;
+}
+
+.hm-action p {
+    font-size: 15.5px;
+    line-height: 1.5;
+    color: #2a2866;
+}
+
+@media (max-width: 900px) {
+    .hm-actions {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        row-gap: 28px;
+    }
+
+    .hm-action:nth-child(odd) {
+        border-left: 0;
+    }
+}
+
+@media (max-width: 520px) {
+    .hm-actions {
+        grid-template-columns: 1fr;
+    }
+
+    .hm-action + .hm-action {
+        border-left: 0;
+    }
+}
+
+/* ── Ponds chosen by the admin (only when there are some) ───────────────── */
+.hm-page .pd-home-ponds {
+    text-align: center;
+}
+
+.hm-page .pd-home-ponds .pd-pond-grid {
+    text-align: left;
+}
+
+.hm-page .pd-home-ponds .askupon-ways-head h2 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-style: italic;
+    font-size: clamp(32px, 5vw, 52px);
+    color: #2a1480;
+}
+
+.hm-page .pd-home-ponds .askupon-ways-head p {
+    color: #4b4590;
+    font-size: 18px;
+}
+
+/* ── Closing call to action ─────────────────────────────────────────────── */
+.hm-final {
+    position: relative;
+    display: grid;
+    justify-items: center;
+    gap: 14px;
+    padding: 90px 24px 80px;
+    overflow: hidden;
+    text-align: center;
+    color: #fff;
+    background:
+        radial-gradient(ellipse 60% 120% at 50% 130%, #c37bff66, transparent 70%),
+        repeating-radial-gradient(ellipse at 50% 130%, #ffffff12 0 2px, transparent 2px 28px),
+        linear-gradient(180deg, #4a2fc4, #2a1a8f);
+    clip-path: ellipse(120% 100% at 50% 100%);
+}
+
+.hm-final h2 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: clamp(32px, 5.2vw, 58px);
+    line-height: 1.1;
+}
+
+.hm-final p {
+    font-size: clamp(16px, 2vw, 21px);
+    color: #ece6ff;
+}
+
+.hm-btn-final {
+    margin-top: 12px;
+    border-color: transparent;
+    background: #f1ecff;
+    color: #2a1480;
+}
+
+.hm-footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 22px 28px;
+    background: #1a1060;
+    color: #cfc7ff;
+    font-size: 14px;
+}
+
+/* ── Gentle motion ──────────────────────────────────────────────────────── */
+.hm-ripple {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: hmRipple 5.5s ease-out infinite;
+}
+
+.hm-ripple-b { animation-delay: -1.8s; }
+.hm-ripple-c { animation-delay: -3.6s; }
+
+.hm-scene-ball {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: hmBob 5s ease-in-out infinite;
+}
+
+@keyframes hmRipple {
+    0% { opacity: 0.8; transform: scale(0.45); }
+    100% { opacity: 0; transform: scale(1.25); }
+}
+
+@keyframes hmBob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hm-ripple,
+    .hm-scene-ball {
+        animation: none;
+    }
+}
