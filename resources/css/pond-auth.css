@@ -390,3 +390,10 @@
 .pond-chip.pond-chip-teal:not(.is-selected) { background: #e0f6f6; border-color: #aee3e3; color: #0b5f66 !important; }
 .pond-chip.pond-chip-pink:not(.is-selected) { background: #ffe8f1; border-color: #f7bdd5; color: #9b1c58 !important; }
 .pond-chip.pond-chip-sky:not(.is-selected) { background: #e1f3ff; border-color: #b3dcf7; color: #0a4f85 !important; }
+
+/* Larger tap targets for inline links without changing the layout */
+.pond-auth-card a:not(.pond-splash-skip) {
+    display: inline-block;
+    padding-block: 8px;
+    margin-block: -8px;
+}

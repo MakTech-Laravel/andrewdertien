@@ -1107,6 +1107,14 @@
         grid-template-columns: minmax(0, 1fr)
     }
 
+    /* One compact row per stat instead of a tall card with empty space */
+    .pd-stat {
+        flex-direction: row;
+        align-items: center;
+        min-height: 0;
+        gap: 14px
+    }
+
     .pd-pond-detail {
         grid-template-columns: minmax(0, 1fr);
         gap: 18px;
@@ -1122,5 +1130,52 @@
 
     .pd-select {
         flex: 1 1 100%
+    }
+}
+
+/* ── App shell top bar: a long page title never wraps or pushes the icons ─ */
+@media (max-width: 1020px) {
+    .pond-topbar {
+        gap: 12px
+    }
+
+    .pond-top-left {
+        flex: 1 1 auto;
+        min-width: 0
+    }
+
+    .pond-menu-toggle {
+        flex: none
+    }
+
+    .pond-breadcrumb {
+        flex: 1 1 auto;
+        min-width: 0;
+        gap: 8px
+    }
+
+    .pond-breadcrumb>span {
+        flex: none;
+        white-space: nowrap
+    }
+
+    .pond-breadcrumb strong {
+        flex: 0 1 auto;
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap
+    }
+
+    .pond-header-actions {
+        flex: none
+    }
+}
+
+@media (max-width: 560px) {
+
+    /* On phones the page title is enough; the "Community /" crumb only costs space */
+    .pond-breadcrumb>span {
+        display: none
     }
 }
