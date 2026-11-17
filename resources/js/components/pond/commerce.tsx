@@ -29,6 +29,7 @@ export type PaymentRow = {
     currency: string;
     status: PaymentStatus;
     gateway: string;
+    is_test: boolean;
     failure_message: string | null;
     created_at: string | null;
     paid_at: string | null;
@@ -157,6 +158,7 @@ export function PaymentsTable({ rows, showBuyer = false, buyerHref, actions }: {
                             <tr key={row.reference}>
                                 <td>
                                     <strong>{row.pond_name}</strong>
+                                    {row.is_test && <span className="pond-mode-badge pond-mode-small" title="Made in test mode: no real money moved">Test</span>}
                                     <small className="pd-show-mobile">{formatDate(row.paid_at ?? row.created_at)}</small>
                                     {row.failure_message && <small>{row.failure_message}</small>}
                                 </td>

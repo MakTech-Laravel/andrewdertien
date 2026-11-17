@@ -12,9 +12,7 @@
 /resources/js/wayfinder
 /vendor
 .DS_Store
-.env
 .env.backup
-.env.production
 .phpactor.json
 .phpunit.result.cache
 Homestead.json
@@ -30,3 +28,4 @@ yarn-error.log
 /client-attachments
 /_extract.php
 /_make_icons.php
+config.bat

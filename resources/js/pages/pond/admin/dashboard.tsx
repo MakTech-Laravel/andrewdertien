@@ -2,9 +2,11 @@ import { Head, Link } from '@inertiajs/react';
 import { ArrowRight, CircleAlert, CircleCheck, CreditCard, FlaskConical, Plus, ShoppingBag, Users, Waves } from 'lucide-react';
 import { formatMoney, PaymentsTable, PondArt, StatTile } from '@/components/pond/commerce';
 import type { PaymentRow } from '@/components/pond/commerce';
+import type { PaymentMode } from '@/components/pond/payment-mode';
 import { EmptyState, PondShell } from '@/components/pond/ui';
 import adminPayments from '@/routes/admin/payments';
 import adminPonds from '@/routes/admin/ponds';
+import adminStripe from '@/routes/admin/stripe';
 import adminUsers from '@/routes/admin/users';
 
 type Props = {
@@ -13,7 +15,7 @@ type Props = {
     revenueByMonth: { month: string; revenue_cents: number }[];
     recentPayments: PaymentRow[];
     topPonds: { id: number; name: string; image_url: string; sales: number; revenue_cents: number }[];
-    gateway: { driver: string; is_test_mode: boolean; is_ready: boolean };
+    gateway: { driver: string; mode: PaymentMode; is_test_mode: boolean; is_ready: boolean };
 };
 
 function RevenueChart({ months, currency }: { months: Props['revenueByMonth']; currency: string }) {
@@ -35,36 +37,60 @@ function RevenueChart({ months, currency }: { months: Props['revenueByMonth']; c
 }
 
 function GatewayNotice({ gateway }: { gateway: Props['gateway'] }) {
-    if (gateway.is_test_mode) {
+    const settingsLink = (
+        <Link href={adminStripe.edit()} className="pd-link">
+            Open payment settings
+        </Link>
+    );
+
+    if (gateway.mode === 'sandbox') {
         return (
             <div className="pd-notice pd-notice-warn">
                 <FlaskConical size={19} />
                 <div>
                     <strong>Payments are in test mode</strong>
-                    <p>Checkouts are simulated and no money moves. Set PAYMENT_DRIVER=stripe with your Stripe keys to take real payments.</p>
+                    <p>
+                        Checkouts are simulated and no money moves. Connect Stripe to take real payments. {settingsLink}
+                    </p>
                 </div>
             </div>
         );
     }
 
-    if (!gateway.is_ready) {
+    if (gateway.mode === 'test') {
         return (
-            <div className="pd-notice pd-notice-error">
-                <CircleAlert size={19} />
+            <div className="pd-notice pd-notice-warn">
+                <FlaskConical size={19} />
                 <div>
-                    <strong>Stripe is not fully configured</strong>
-                    <p>Add STRIPE_SECRET and STRIPE_WEBHOOK_SECRET to your environment before members can pay.</p>
+                    <strong>Stripe is in test mode</strong>
+                    <p>
+                        Members can only pay with Stripe test cards and no real money moves. Add your live keys to go live. {settingsLink}
+                    </p>
+                </div>
+            </div>
+        );
+    }
+
+    if (gateway.mode === 'live' && gateway.is_ready) {
+        return (
+            <div className="pd-notice pd-notice-ok">
+                <CircleCheck size={19} />
+                <div>
+                    <strong>Stripe is live</strong>
+                    <p>Members pay on Stripe Checkout and payments are recorded automatically.</p>
                 </div>
             </div>
         );
     }
 
     return (
-        <div className="pd-notice pd-notice-ok">
-            <CircleCheck size={19} />
+        <div className="pd-notice pd-notice-error">
+            <CircleAlert size={19} />
             <div>
-                <strong>Stripe is connected</strong>
-                <p>Members pay on Stripe Checkout and payments are recorded automatically.</p>
+                <strong>Payments are not fully set up</strong>
+                <p>
+                    Add your Stripe secret key and webhook signing secret before members can pay. {settingsLink}
+                </p>
             </div>
         </div>
     );

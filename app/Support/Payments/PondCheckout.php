@@ -159,6 +159,7 @@ class PondCheckout
             'currency' => config('payments.currency'),
             'status' => PurchaseStatus::PENDING,
             'gateway' => $gateway->name(),
+            'is_test' => $this->gateways->isTestMode(),
         ]);
 
         try {

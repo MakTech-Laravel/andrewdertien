@@ -16,7 +16,7 @@ use Illuminate\Support\Str;
  */
 #[Fillable([
     'reference', 'user_id', 'pond_id', 'buyer_name', 'buyer_email', 'pond_name', 'amount_cents',
-    'currency', 'status', 'gateway', 'gateway_session_id', 'gateway_payment_id',
+    'currency', 'status', 'gateway', 'gateway_session_id', 'gateway_payment_id', 'is_test',
     'failure_message', 'paid_at', 'refunded_at',
 ])]
 class PondPurchase extends Model
@@ -65,7 +65,7 @@ class PondPurchase extends Model
     /**
      * The fields shown on a row of any purchase or payment history.
      *
-     * @return array{reference: string, user_id: int|null, buyer_name: string, buyer_email: string, pond_name: string, pond_slug: string|null, amount_cents: int, currency: string, status: string, gateway: string, failure_message: string|null, created_at: string|null, paid_at: string|null, refunded_at: string|null}
+     * @return array{reference: string, user_id: int|null, buyer_name: string, buyer_email: string, pond_name: string, pond_slug: string|null, amount_cents: int, currency: string, status: string, gateway: string, is_test: bool, failure_message: string|null, created_at: string|null, paid_at: string|null, refunded_at: string|null}
      */
     public function toHistoryRow(): array
     {
@@ -80,6 +80,7 @@ class PondPurchase extends Model
             'currency' => $this->currency,
             'status' => $this->status->value,
             'gateway' => $this->gateway,
+            'is_test' => $this->is_test,
             'failure_message' => $this->failure_message,
             'created_at' => $this->created_at?->toIso8601String(),
             'paid_at' => $this->paid_at?->toIso8601String(),
@@ -94,6 +95,7 @@ class PondPurchase extends Model
     {
         return [
             'amount_cents' => 'integer',
+            'is_test' => 'boolean',
             'status' => PurchaseStatus::class,
             'paid_at' => 'datetime',
             'refunded_at' => 'datetime',

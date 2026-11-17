@@ -1179,3 +1179,129 @@
         display: none
     }
 }
+
+/* ── Test / live mode badge and the payment settings page ──────────────── */
+.pond-mode-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border: 1px solid #f0cf7a;
+    border-radius: 999px;
+    background: #fff4d1;
+    color: #7a5200;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    white-space: nowrap
+}
+
+.pond-mode-small {
+    margin-left: 8px;
+    padding: 2px 8px;
+    font-size: 10px;
+    vertical-align: middle
+}
+
+.pond-mode-chip {
+    display: inline-block;
+    margin-top: 6px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase
+}
+
+.pond-mode-chip-test {
+    background: #fff4d1;
+    color: #7a5200
+}
+
+.pond-mode-chip-live {
+    background: #e2f6ea;
+    color: #1d6f49
+}
+
+.pd-settings-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+    gap: 16px;
+    margin-top: 16px;
+    align-items: start
+}
+
+.pd-settings-grid .pond-form-label {
+    margin-top: 14px
+}
+
+.pd-settings-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    margin-top: 20px
+}
+
+.pd-danger-text {
+    color: #a0263a
+}
+
+.pd-steps {
+    display: grid;
+    gap: 12px;
+    margin: 4px 0 16px;
+    padding-left: 20px;
+    font-size: 14px;
+    line-height: 1.5
+}
+
+.pd-copy-line {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 6px
+}
+
+.pd-copy-line code,
+.pd-event-list code {
+    padding: 3px 8px;
+    border-radius: 8px;
+    background: #f1f4f9;
+    font-size: 12px;
+    overflow-wrap: anywhere
+}
+
+.pd-event-list {
+    display: grid;
+    gap: 6px;
+    margin: 8px 0 0;
+    padding-left: 0;
+    list-style: none
+}
+
+@media (max-width: 1100px) {
+    .pd-settings-grid {
+        grid-template-columns: minmax(0, 1fr)
+    }
+}
+
+.pond-mode-short {
+    display: none
+}
+
+@media (max-width: 560px) {
+    .pond-mode-badge {
+        padding: 5px 9px;
+        font-size: 11px
+    }
+
+    .pond-mode-long {
+        display: none
+    }
+
+    .pond-mode-short {
+        display: inline
+    }
+}
