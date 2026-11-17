@@ -13,6 +13,7 @@ declare module '@inertiajs/core' {
             name: string;
             auth: Auth;
             sidebarOpen: boolean;
+            payments?: { mode: string; is_test_mode: boolean } | null;
             [key: string]: unknown;
         };
     }

@@ -10,10 +10,9 @@ type Props = {
     ownedPondIds: number[];
     categories: { value: string; label: string }[];
     filters: { category: string };
-    isTestMode: boolean;
 };
 
-export default function MemberPonds({ ponds, ownedPondIds, categories, filters, isTestMode }: Props) {
+export default function MemberPonds({ ponds, ownedPondIds, categories, filters }: Props) {
     const chooseCategory = (category: string) =>
         router.get(memberPonds.index.url({ query: { category: category || undefined } }), {}, { preserveState: true, preserveScroll: true });
 
@@ -35,7 +34,7 @@ export default function MemberPonds({ ponds, ownedPondIds, categories, filters, 
                 {ponds.length ? (
                     <div className="pd-pond-grid">
                         {ponds.map((pond) => (
-                            <PondChoiceCard key={pond.id} pond={pond} isOwned={ownedPondIds.includes(pond.id)} isTestMode={isTestMode} />
+                            <PondChoiceCard key={pond.id} pond={pond} isOwned={ownedPondIds.includes(pond.id)} />
                         ))}
                     </div>
                 ) : (

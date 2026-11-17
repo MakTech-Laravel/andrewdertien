@@ -7,7 +7,6 @@ use App\Enums\PurchaseStatus;
 use App\Http\Controllers\Controller;
 use App\Models\Pond;
 use App\Models\PondPurchase;
-use App\Support\Payments\PaymentGatewayManager;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -17,7 +16,7 @@ class PondController extends Controller
     /**
      * Every published pond a member can choose, including ones hidden from the public site.
      */
-    public function index(Request $request, PaymentGatewayManager $gateways): Response
+    public function index(Request $request): Response
     {
         $category = PondCategory::tryFrom((string) $request->query('category'));
 
@@ -32,7 +31,6 @@ class PondController extends Controller
             'categories' => collect(PondCategory::cases())
                 ->map(fn (PondCategory $option): array => ['value' => $option->value, 'label' => $option->label()]),
             'filters' => ['category' => $category?->value ?? ''],
-            'isTestMode' => $gateways->isTestMode(),
         ]);
     }
 

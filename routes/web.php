@@ -3,6 +3,7 @@
 use App\Enums\PermissionEnum;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\PaymentController as AdminPaymentController;
+use App\Http\Controllers\Admin\PaymentSettingsController as AdminPaymentSettingsController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\PondController as AdminPondController;
 use App\Http\Controllers\Admin\RoleController;
@@ -134,6 +135,18 @@ Route::middleware(['auth', 'verified'])->group(function () {
                 ->middleware('permission:'.PermissionEnum::PAYMENTS_INDEX->value);
             Route::post('payments/{purchase}/refund', 'refund')->name('payments.refund')
                 ->middleware('permission:'.PermissionEnum::PAYMENTS_REFUND->value);
+        });
+
+        // Stripe connection: keys, on/off and a connection check.
+        Route::controller(AdminPaymentSettingsController::class)->prefix('settings/stripe')->name('stripe.')->group(function () {
+            Route::get('/', 'edit')->name('edit')
+                ->middleware('permission:'.PermissionEnum::PAYMENT_SETTINGS_VIEW->value);
+            Route::put('/', 'update')->name('update')
+                ->middleware(['permission:'.PermissionEnum::PAYMENT_SETTINGS_EDIT->value, 'throttle:20,1']);
+            Route::post('test', 'test')->name('test')
+                ->middleware(['permission:'.PermissionEnum::PAYMENT_SETTINGS_EDIT->value, 'throttle:20,1']);
+            Route::delete('/', 'destroy')->name('destroy')
+                ->middleware('permission:'.PermissionEnum::PAYMENT_SETTINGS_EDIT->value);
         });
 
         // Roles — the two fixed roles and what each can do (read-only).

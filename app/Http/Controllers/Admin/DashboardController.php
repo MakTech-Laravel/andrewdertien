@@ -9,7 +9,6 @@ use App\Models\Pond;
 use App\Models\PondPurchase;
 use App\Models\User;
 use App\Support\Payments\PaymentGatewayManager;
-use App\Support\Payments\StripeGateway;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Collection;
 use Inertia\Inertia;
@@ -51,11 +50,10 @@ class DashboardController extends Controller
                     'revenue_cents' => (int) $pond->revenue_cents,
                 ]),
             'gateway' => [
-                'driver' => config('payments.driver'),
+                'driver' => $gateways->driver(),
+                'mode' => $gateways->mode(),
                 'is_test_mode' => $gateways->isTestMode(),
-                'is_ready' => $gateways->isTestMode()
-                    ? $gateways->allowsSandbox()
-                    : config('payments.driver') === StripeGateway::NAME && filled(config('services.stripe.secret')) && filled(config('services.stripe.webhook_secret')),
+                'is_ready' => $gateways->isReady(),
             ],
         ]);
     }

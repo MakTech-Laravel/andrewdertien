@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\PondPurchase;
 use App\Support\Payments\PondCheckout;
 use App\Support\Payments\StripeGateway;
+use App\Support\Payments\StripeSettings;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -19,9 +20,9 @@ class StripeWebhookController extends Controller
      */
     private const SIGNATURE_TOLERANCE = 300;
 
-    public function __invoke(Request $request, PondCheckout $checkout): Response
+    public function __invoke(Request $request, PondCheckout $checkout, StripeSettings $settings): Response
     {
-        abort_unless($this->hasValidSignature($request), 400);
+        abort_unless($this->hasValidSignature($request, $settings), 400);
 
         $event = $request->json()->all();
         $object = $event['data']['object'] ?? [];
@@ -96,9 +97,9 @@ class StripeWebhookController extends Controller
     /**
      * @see https://docs.stripe.com/webhooks#verify-manually
      */
-    private function hasValidSignature(Request $request): bool
+    private function hasValidSignature(Request $request, StripeSettings $settings): bool
     {
-        $secret = (string) config('services.stripe.webhook_secret');
+        $secret = (string) $settings->webhookSecret();
 
         if ($secret === '') {
             return false;

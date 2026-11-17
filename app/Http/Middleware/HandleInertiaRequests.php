@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Support\Payments\PaymentGatewayManager;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -50,6 +51,11 @@ class HandleInertiaRequests extends Middleware
                     'is_admin' => $user->isAdmin(),
                 ]) : null,
             ],
+            // What kind of payments the site is taking, so every signed-in screen can say so.
+            'payments' => fn (): ?array => $user ? [
+                'mode' => app(PaymentGatewayManager::class)->mode(),
+                'is_test_mode' => app(PaymentGatewayManager::class)->isTestMode(),
+            ] : null,
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
         ];
     }

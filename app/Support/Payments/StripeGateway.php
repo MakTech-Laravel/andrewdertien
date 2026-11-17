@@ -20,6 +20,8 @@ class StripeGateway implements PaymentGateway
 
     private const API = 'https://api.stripe.com/v1';
 
+    public function __construct(private StripeSettings $settings) {}
+
     public function name(): string
     {
         return self::NAME;
@@ -81,6 +83,32 @@ class StripeGateway implements PaymentGateway
     }
 
     /**
+     * Ask Stripe whether a secret key works, and which mode it belongs to.
+     *
+     * @return array{livemode: bool}
+     *
+     * @throws PaymentGatewayException
+     */
+    public function verifyKey(string $secret): array
+    {
+        try {
+            $response = Http::withToken($secret)->timeout(15)->get(self::API.'/balance');
+        } catch (ConnectionException $exception) {
+            throw new PaymentGatewayException('Stripe could not be reached to check this key. Please try again.', previous: $exception);
+        }
+
+        if ($response->status() === 401) {
+            throw new PaymentGatewayException('Stripe rejected this secret key. Check that you copied the whole key.');
+        }
+
+        if ($response->failed()) {
+            throw new PaymentGatewayException('Stripe could not confirm this key. Please try again.');
+        }
+
+        return ['livemode' => (bool) $response->json('livemode')];
+    }
+
+    /**
      * @param  callable(PendingRequest): Response  $call
      * @return array<string, mixed>
      *
@@ -88,7 +116,7 @@ class StripeGateway implements PaymentGateway
      */
     private function send(callable $call): array
     {
-        $secret = (string) config('services.stripe.secret');
+        $secret = (string) $this->settings->secretKey();
 
         if ($secret === '') {
             throw new PaymentGatewayException('Online payments are not configured yet.');

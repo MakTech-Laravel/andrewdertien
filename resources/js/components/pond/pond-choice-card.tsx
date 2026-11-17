@@ -3,6 +3,7 @@ import { ArrowRight, Check, CreditCard, FlaskConical } from 'lucide-react';
 import { useState } from 'react';
 import { formatMoney, PondArt } from '@/components/pond/commerce';
 import type { PondCard } from '@/components/pond/commerce';
+import { usePaymentMode } from '@/components/pond/payment-mode';
 import { Modal } from '@/components/pond/ui';
 import memberCheckout from '@/routes/member/checkout';
 
@@ -12,12 +13,11 @@ import memberCheckout from '@/routes/member/checkout';
 export function PondChoiceCard({
     pond,
     isOwned = false,
-    isTestMode = false,
 }: {
     pond: PondCard;
     isOwned?: boolean;
-    isTestMode?: boolean;
 }) {
+    const payments = usePaymentMode();
     const [isConfirming, setIsConfirming] = useState(false);
     const [isRedirecting, setIsRedirecting] = useState(false);
 
@@ -75,10 +75,17 @@ export function PondChoiceCard({
                             {formatMoney(pond.price_cents, pond.currency)}
                         </strong>
                     </div>
-                    {isTestMode && (
-                        <div className="pond-form-note pd-test-note">
-                            <FlaskConical size={15} /> Test mode: this checkout
-                            is simulated and you will not be charged.
+                    {payments?.isTestMode && (
+                        <div className="pond-form-note pd-test-note" data-test="checkout-test-note">
+                            <FlaskConical size={15} />
+                            {payments.mode === 'test' ? (
+                                <span>
+                                    Test mode: you will not be charged. On the payment page use the test card{' '}
+                                    <strong>4242 4242 4242 4242</strong> with any future expiry date and any 3-digit CVC.
+                                </span>
+                            ) : (
+                                <span>Test mode: this checkout is simulated and you will not be charged.</span>
+                            )}
                         </div>
                     )}
                     <button

@@ -40,6 +40,8 @@ enum PermissionEnum: string
     case PONDS_DELETE = 'ponds.delete';
     case PAYMENTS_INDEX = 'payments.index';
     case PAYMENTS_REFUND = 'payments.refund';
+    case PAYMENT_SETTINGS_VIEW = 'payment-settings.view';
+    case PAYMENT_SETTINGS_EDIT = 'payment-settings.edit';
 
     // MEMBER: CHOOSING AND BUYING PONDS
     case MEMBER_PONDS_VIEW = 'member-ponds.view';
@@ -97,7 +99,9 @@ enum PermissionEnum: string
             self::PONDS_DELETE => 'Ponds',
 
             self::PAYMENTS_INDEX,
-            self::PAYMENTS_REFUND => 'Payments',
+            self::PAYMENTS_REFUND,
+            self::PAYMENT_SETTINGS_VIEW,
+            self::PAYMENT_SETTINGS_EDIT => 'Payments',
 
             self::MEMBER_PONDS_VIEW,
             self::MEMBER_PONDS_PURCHASE,
